@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 
 class AddPost extends StatefulWidget {
   const AddPost({Key? key}) : super(key: key);
@@ -85,11 +86,14 @@ class _AddPostState extends State<AddPost> {
                 children: [
                   GestureDetector(
                     onTap: () {},
-                    child: Icon(
-                      Icons.arrow_circle_left_outlined,
-                      size: MediaQuery.of(context).size.width / 12,
-                      color: const Color(0xFF007AFF),
+                    child: SvgPicture.string(
+                      '''<svg xmlns="http://www.w3.org/2000/svg" width="13" height="27" viewBox="0 0 13 27">
+  <text id="_" data-name="􀆊" transform="translate(13 5) rotate(180)" fill="#00b1ff" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">􀆊</tspan></text>
+</svg>
+
+''',
                     ),
+                    //size: MediaQuery.of(context).size.width / 12,
                   ),
                   Container(
                     margin: EdgeInsets.only(
@@ -105,11 +109,15 @@ class _AddPostState extends State<AddPost> {
                       child: Column(
                         children: [
                           IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.add,
-                                size: MediaQuery.of(context).size.width / 15,
-                              )),
+                            onPressed: () {},
+                            icon: SvgPicture.string(
+                              '''<svg xmlns="http://www.w3.org/2000/svg" width="26" height="52" viewBox="0 0 26 52">
+  <text id="Symbol" transform="translate(13 42)" fill="#00b1ff" font-size="39" font-family="SegoeUI, Segoe UI"><tspan x="-12.587" y="0">􀁌</tspan></text>
+</svg>
+''',
+                            ),
+                            //size: MediaQuery.of(context).size.width / 15,
+                          ),
                           const AutoSizeText(
                             "Add",
                             style: TextStyle(
@@ -142,10 +150,15 @@ class _AddPostState extends State<AddPost> {
                       ),
                       Align(
                         alignment: Alignment.topRight,
-                        child: Icon(
-                          Icons.remove_circle_sharp,
-                          color: Colors.red,
-                          size: MediaQuery.of(context).size.width / 15,
+                        child: SvgPicture.string(
+                          '''<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <g id="Group_703" data-name="Group 703" transform="translate(-333 -164.699)">
+    <path id="Icon_ionic-ios-remove-circle" data-name="Icon ionic-ios-remove-circle" d="M13.375,3.375a10,10,0,1,0,10,10A10,10,0,0,0,13.375,3.375Z" transform="translate(329.625 161.324)" fill="#fff"/>
+    <path id="Icon_ionic-ios-remove-circle-2" data-name="Icon ionic-ios-remove-circle" d="M13.375,3.375a10,10,0,1,0,10,10A10,10,0,0,0,13.375,3.375Zm4.351,10.769h-8.7a.745.745,0,0,1-.769-.769.737.737,0,0,1,.769-.769h8.7a.769.769,0,0,1,0,1.538Z" transform="translate(329.625 161.324)" fill="#fd473e"/>
+  </g>
+</svg>
+
+''',
                         ),
                       )
                     ],
@@ -171,20 +184,29 @@ class _AddPostState extends State<AddPost> {
                       ),
                       Align(
                         alignment: Alignment.topRight,
-                        child: Icon(
-                          Icons.remove_circle,
-                          color: Colors.red,
-                          size: MediaQuery.of(context).size.width / 15,
+                        child: SvgPicture.string(
+                          '''<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <g id="Group_703" data-name="Group 703" transform="translate(-333 -164.699)">
+    <path id="Icon_ionic-ios-remove-circle" data-name="Icon ionic-ios-remove-circle" d="M13.375,3.375a10,10,0,1,0,10,10A10,10,0,0,0,13.375,3.375Z" transform="translate(329.625 161.324)" fill="#fff"/>
+    <path id="Icon_ionic-ios-remove-circle-2" data-name="Icon ionic-ios-remove-circle" d="M13.375,3.375a10,10,0,1,0,10,10A10,10,0,0,0,13.375,3.375Zm4.351,10.769h-8.7a.745.745,0,0,1-.769-.769.737.737,0,0,1,.769-.769h8.7a.769.769,0,0,1,0,1.538Z" transform="translate(329.625 161.324)" fill="#fd473e"/>
+  </g>
+</svg>
+
+''',
                         ),
+                        //  size: MediaQuery.of(context).size.width / 15,
                       )
                     ],
                   ),
                   GestureDetector(
                     onTap: () {},
-                    child: Icon(
-                      Icons.arrow_circle_right_outlined,
-                      size: MediaQuery.of(context).size.width / 12,
-                      color: const Color(0xFF007AFF),
+                    child: SvgPicture.string(
+                      '''<svg xmlns="http://www.w3.org/2000/svg" width="13" height="27" viewBox="0 0 13 27">
+  <text id="_" data-name="􀆊" transform="translate(0 22)" fill="#00b1ff" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">􀆊</tspan></text>
+</svg>
+
+
+''',
                     ),
                   ),
                 ],
@@ -352,106 +374,130 @@ class _AddPostState extends State<AddPost> {
               ),
               Stack(
                 children: [
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width / 7,
-                        ),
-                        Container(
-                          // width: 87.36,
-                          // height: 35,
-                          height: MediaQuery.of(context).size.height / 20,
-                          width: MediaQuery.of(context).size.height / 8.1,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: const Color(0xFF00B1FF),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 7,
                           ),
-                          child: const Center(
-                            child: AutoSizeText(
-                              "Mobiles",
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: Color(0xFFFFFFFF),
-                                fontSize: 14.0,
+                          Container(
+                            // width: 87.36,
+                            // height: 35,
+                            height: MediaQuery.of(context).size.height / 20,
+                            width: MediaQuery.of(context).size.height / 8.1,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              color: const Color(0xFF00B1FF),
+                            ),
+                            child: const Center(
+                              child: AutoSizeText(
+                                "Mobiles",
+                                maxLines: 1,
+                                style: TextStyle(
+                                  color: Color(0xFFFFFFFF),
+                                  fontSize: 14.0,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Icon(
-                          Icons.arrow_forward_ios_sharp,
-                          color: const Color(0xFF1EB1FC),
-                          size: MediaQuery.of(context).size.width / 15,
-                        ),
-                        Container(
-                          // width: 87.36,
-                          // height: 35,
-                          height: MediaQuery.of(context).size.height / 20,
-                          width: MediaQuery.of(context).size.height / 8.1,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: const Color(0xFF1EB1FC).withOpacity(0.15),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: SvgPicture.string(
+                              '''<svg xmlns="http://www.w3.org/2000/svg" width="6.905" height="15" viewBox="0 0 6.905 15">
+  <path id="Vector" d="M1.314,0,0,1.762,3.382,7.5,0,13.238,1.314,15,6.905,7.5Z" transform="matrix(1, 0, 0, 1, 0, 0)" fill="#1eb1fc"/>
+</svg>
+''',
+                            ),
                           ),
-                          child: const Center(
-                            child: AutoSizeText(
-                              "Samsung",
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: Color(0xFF555555),
-                                fontSize: 14.0,
+                          Container(
+                            // width: 87.36,
+                            // height: 35,
+                            height: MediaQuery.of(context).size.height / 20,
+                            width: MediaQuery.of(context).size.height / 8.1,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              color: const Color(0xFF1EB1FC).withOpacity(0.15),
+                            ),
+                            child: const Center(
+                              child: AutoSizeText(
+                                "Samsung",
+                                maxLines: 1,
+                                style: TextStyle(
+                                  color: Color(0xFF555555),
+                                  fontSize: 14.0,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Icon(
-                          Icons.arrow_forward_ios_sharp,
-                          color: const Color(0xFF1EB1FC),
-                          size: MediaQuery.of(context).size.width / 15,
-                        ),
-                        Container(
-                          // width: 87.36,
-                          // height: 35,
-                          height: MediaQuery.of(context).size.height / 20,
-                          width: MediaQuery.of(context).size.height / 8.1,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: const Color(0xFF1EB1FC).withOpacity(0.15),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: SvgPicture.string(
+                              '''<svg xmlns="http://www.w3.org/2000/svg" width="6.905" height="15" viewBox="0 0 6.905 15">
+  <path id="Vector" d="M1.314,0,0,1.762,3.382,7.5,0,13.238,1.314,15,6.905,7.5Z" transform="matrix(1, 0, 0, 1, 0, 0)" fill="#1eb1fc"/>
+</svg>
+''',
+                            ),
                           ),
-                          child: const Center(
-                            child: AutoSizeText(
-                              "A9 Pro",
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: Color(0xFF555555),
-                                fontSize: 14.0,
+                          Container(
+                            // width: 87.36,
+                            // height: 35,
+                            height: MediaQuery.of(context).size.height / 20,
+                            width: MediaQuery.of(context).size.height / 8.1,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              color: const Color(0xFF1EB1FC).withOpacity(0.15),
+                            ),
+                            child: const Center(
+                              child: AutoSizeText(
+                                "A9 Pro",
+                                maxLines: 1,
+                                style: TextStyle(
+                                  color: Color(0xFF555555),
+                                  fontSize: 14.0,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                  Container(
-                    // width: 40,
-                    // height: 40,
-                    height: MediaQuery.of(context).size.width / 9,
-                    width: MediaQuery.of(context).size.width / 9,
-                    decoration: BoxDecoration(
-                        color: const Color(0xFFF0F0F0),
-                        borderRadius: BorderRadius.circular(30),
-                        border: Border.all(
-                          color: const Color(0xFF007AFF),
-                        )),
-                    child: Center(
-                      child: IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.arrow_back_outlined,
-                            color: const Color(0xFF007AFF),
-                            size: MediaQuery.of(context).size.width / 16,
-                          )),
-                    ),
+                  SvgPicture.string(
+                    '''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="58" height="58" viewBox="0 0 58 58">
+  <defs>
+    <filter id="Rectangle_2" x="0" y="0" width="58" height="58" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_808" data-name="Group 808" transform="translate(-89.053 -346.647)">
+    <g id="Group_807" data-name="Group 807" transform="translate(98.053 352.647)">
+      <g transform="matrix(1, 0, 0, 1, -9, -6)" filter="url(#Rectangle_2)">
+        <g id="Rectangle_2-2" data-name="Rectangle 2" transform="translate(9 6)" fill="#f0f0f0" stroke="#007aff" stroke-width="1">
+          <rect width="40" height="40" rx="20" stroke="none"/>
+          <rect x="0.5" y="0.5" width="39" height="39" rx="19.5" fill="none"/>
+        </g>
+      </g>
+    </g>
+    <g id="Layer_2" data-name="Layer 2" transform="translate(116.463 364.639)">
+      <g id="invisible_box" data-name="invisible box">
+        <rect id="Rectangle_98" data-name="Rectangle 98" width="4" height="5" transform="translate(-0.41 0.224)" fill="rgba(0,0,0,0)"/>
+      </g>
+      <g id="Q3_icons" data-name="Q3 icons" transform="translate(-8.059 -0.991)">
+        <path id="Path_679" data-name="Path 679" d="M17.031,10.386,9.38,18.1a1.222,1.222,0,0,0,0,1.8l7.651,7.715a1.35,1.35,0,0,0,1.736.129,1.222,1.222,0,0,0,.129-1.929l-5.529-5.529H27a1.286,1.286,0,0,0,0-2.572H13.366L18.9,12.186a1.222,1.222,0,0,0-.129-1.929,1.35,1.35,0,0,0-1.736.129Z" transform="translate(-8.985 -10.001)" fill="#007aff"/>
+      </g>
+    </g>
+  </g>
+</svg>
+''',
                   ),
                 ],
               ),
@@ -575,9 +621,10 @@ class _AddPostState extends State<AddPost> {
                               children: [
                                 Container(
                                   margin: EdgeInsets.only(
-                                      top: 10.0,
+                                      top: MediaQuery.of(context).size.width /
+                                          27,
                                       left: MediaQuery.of(context).size.width /
-                                          58),
+                                          25),
                                   height:
                                       MediaQuery.of(context).size.height / 18,
                                   width:
@@ -586,7 +633,8 @@ class _AddPostState extends State<AddPost> {
                                       color: const Color(0xFFFFEFEF),
                                       borderRadius: BorderRadius.circular(12),
                                       border: Border.all(
-                                          color: const Color(0xFFF7817D))),
+                                          color: const Color(0xFFF7817D),
+                                          width: 0.7)),
                                   child: const Center(
                                     child: AutoSizeText(
                                       "Mobiles",
@@ -598,20 +646,27 @@ class _AddPostState extends State<AddPost> {
                                     ),
                                   ),
                                 ),
-                                Icon(
-                                  Icons.remove_circle_sharp,
-                                  color: Colors.red,
-                                  size: MediaQuery.of(context).size.width / 15,
-                                )
+                                SvgPicture.string(
+                                  '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <g id="Group_782" data-name="Group 782" transform="translate(-43.771 -321.131)">
+    <path id="Icon_ionic-ios-remove-circle" data-name="Icon ionic-ios-remove-circle" d="M18.375,3.375a15,15,0,1,0,15,15A15,15,0,0,0,18.375,3.375Z" transform="translate(41.396 318.756)" fill="#fd473e" stroke="#fff" stroke-width="2"/>
+    <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M11.143,6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H11.143A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(53.771 328.881)" fill="#fff"/>
+  </g>
+</svg>
+
+''',
+                                ),
+                                // size: MediaQuery.of(context).size.width / 15,
                               ],
                             ),
                             Stack(
                               children: [
                                 Container(
                                   margin: EdgeInsets.only(
-                                      top: 10.0,
+                                      top: MediaQuery.of(context).size.width /
+                                          27,
                                       left: MediaQuery.of(context).size.width /
-                                          58),
+                                          25),
                                   height:
                                       MediaQuery.of(context).size.height / 18,
                                   width:
@@ -620,7 +675,8 @@ class _AddPostState extends State<AddPost> {
                                       color: const Color(0xFFFFEFEF),
                                       borderRadius: BorderRadius.circular(12),
                                       border: Border.all(
-                                          color: const Color(0xFFF7817D))),
+                                          color: const Color(0xFFF7817D),
+                                          width: 0.7)),
                                   child: const Center(
                                     child: AutoSizeText(
                                       "Apple",
@@ -632,20 +688,26 @@ class _AddPostState extends State<AddPost> {
                                     ),
                                   ),
                                 ),
-                                Icon(
-                                  Icons.remove_circle_sharp,
-                                  color: Colors.red,
-                                  size: MediaQuery.of(context).size.width / 15,
-                                )
+                                SvgPicture.string(
+                                  '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <g id="Group_782" data-name="Group 782" transform="translate(-43.771 -321.131)">
+    <path id="Icon_ionic-ios-remove-circle" data-name="Icon ionic-ios-remove-circle" d="M18.375,3.375a15,15,0,1,0,15,15A15,15,0,0,0,18.375,3.375Z" transform="translate(41.396 318.756)" fill="#fd473e" stroke="#fff" stroke-width="2"/>
+    <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M11.143,6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H11.143A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(53.771 328.881)" fill="#fff"/>
+  </g>
+</svg>
+
+''',
+                                ),
                               ],
                             ),
                             Stack(
                               children: [
                                 Container(
                                   margin: EdgeInsets.only(
-                                      top: 10.0,
+                                      top: MediaQuery.of(context).size.width /
+                                          27,
                                       left: MediaQuery.of(context).size.width /
-                                          58),
+                                          25),
                                   height:
                                       MediaQuery.of(context).size.height / 18,
                                   width:
@@ -654,7 +716,8 @@ class _AddPostState extends State<AddPost> {
                                       color: const Color(0xFFFFEFEF),
                                       borderRadius: BorderRadius.circular(12),
                                       border: Border.all(
-                                          color: const Color(0xFFF7817D))),
+                                          color: const Color(0xFFF7817D),
+                                          width: 0.7)),
                                   child: const Center(
                                     child: AutoSizeText(
                                       "OPPO",
@@ -666,20 +729,26 @@ class _AddPostState extends State<AddPost> {
                                     ),
                                   ),
                                 ),
-                                Icon(
-                                  Icons.remove_circle_sharp,
-                                  color: Colors.red,
-                                  size: MediaQuery.of(context).size.width / 15,
-                                )
+                                SvgPicture.string(
+                                  '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <g id="Group_782" data-name="Group 782" transform="translate(-43.771 -321.131)">
+    <path id="Icon_ionic-ios-remove-circle" data-name="Icon ionic-ios-remove-circle" d="M18.375,3.375a15,15,0,1,0,15,15A15,15,0,0,0,18.375,3.375Z" transform="translate(41.396 318.756)" fill="#fd473e" stroke="#fff" stroke-width="2"/>
+    <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M11.143,6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H11.143A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(53.771 328.881)" fill="#fff"/>
+  </g>
+</svg>
+
+''',
+                                ),
                               ],
                             ),
                             Stack(
                               children: [
                                 Container(
                                   margin: EdgeInsets.only(
-                                      top: 10.0,
+                                      top: MediaQuery.of(context).size.width /
+                                          27,
                                       left: MediaQuery.of(context).size.width /
-                                          58),
+                                          25),
                                   height:
                                       MediaQuery.of(context).size.height / 18,
                                   width:
@@ -688,7 +757,8 @@ class _AddPostState extends State<AddPost> {
                                       color: const Color(0xFFFFEFEF),
                                       borderRadius: BorderRadius.circular(12),
                                       border: Border.all(
-                                          color: const Color(0xFFF7817D))),
+                                          color: const Color(0xFFF7817D),
+                                          width: 0.7)),
                                   child: const Center(
                                     child: AutoSizeText(
                                       "Panasonic",
@@ -700,20 +770,26 @@ class _AddPostState extends State<AddPost> {
                                     ),
                                   ),
                                 ),
-                                Icon(
-                                  Icons.remove_circle_sharp,
-                                  color: Colors.red,
-                                  size: MediaQuery.of(context).size.width / 15,
-                                )
+                                SvgPicture.string(
+                                  '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <g id="Group_782" data-name="Group 782" transform="translate(-43.771 -321.131)">
+    <path id="Icon_ionic-ios-remove-circle" data-name="Icon ionic-ios-remove-circle" d="M18.375,3.375a15,15,0,1,0,15,15A15,15,0,0,0,18.375,3.375Z" transform="translate(41.396 318.756)" fill="#fd473e" stroke="#fff" stroke-width="2"/>
+    <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M11.143,6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H11.143A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(53.771 328.881)" fill="#fff"/>
+  </g>
+</svg>
+
+''',
+                                ),
                               ],
                             ),
                             Stack(
                               children: [
                                 Container(
                                   margin: EdgeInsets.only(
-                                      top: 10.0,
+                                      top: MediaQuery.of(context).size.width /
+                                          27,
                                       left: MediaQuery.of(context).size.width /
-                                          58),
+                                          25),
                                   height:
                                       MediaQuery.of(context).size.height / 18,
                                   width:
@@ -722,7 +798,8 @@ class _AddPostState extends State<AddPost> {
                                       color: const Color(0xFFFFEFEF),
                                       borderRadius: BorderRadius.circular(12),
                                       border: Border.all(
-                                          color: const Color(0xFFF7817D))),
+                                          color: const Color(0xFFF7817D),
+                                          width: 0.7)),
                                   child: const Center(
                                     child: AutoSizeText(
                                       "HTC",
@@ -734,11 +811,16 @@ class _AddPostState extends State<AddPost> {
                                     ),
                                   ),
                                 ),
-                                Icon(
-                                  Icons.remove_circle_sharp,
-                                  color: Colors.red,
-                                  size: MediaQuery.of(context).size.width / 15,
-                                )
+                                SvgPicture.string(
+                                  '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <g id="Group_782" data-name="Group 782" transform="translate(-43.771 -321.131)">
+    <path id="Icon_ionic-ios-remove-circle" data-name="Icon ionic-ios-remove-circle" d="M18.375,3.375a15,15,0,1,0,15,15A15,15,0,0,0,18.375,3.375Z" transform="translate(41.396 318.756)" fill="#fd473e" stroke="#fff" stroke-width="2"/>
+    <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M11.143,6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H11.143A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(53.771 328.881)" fill="#fff"/>
+  </g>
+</svg>
+
+''',
+                                ),
                               ],
                             ),
                           ],
