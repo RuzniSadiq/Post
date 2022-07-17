@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,10 +14,74 @@ class AddPost extends StatefulWidget {
 
 class _AddPostState extends State<AddPost> {
   bool isBarter = false;
-  bool isDelivery = false;
+  String delivery = "No";
+
+  // list of images
+  List imgList = [
+    'https://img.freepik.com/free-photo/milford-sound-new-zealand-travel-destination-concept_53876-42945.jpg?w=2000',
+    'https://img.freepik.com/free-photo/milford-sound-new-zealand-travel-destination-concept_53876-42945.jpg?w=2000'
+  ];
+
+  List deliveryList = ["No", "Free", "Paid"];
+
+  List barterCategoryList = ["Mobiles", "Apple", "OPPO", "Panasonic", "HTC"];
+
+  List addCategoryList = [];
+
+  List currentValue = [];
+
+  bool mainItemCategoryChosen = false;
+  int indexCount = 0;
+
+  Map itemCategoryMap = {
+    //Vehicles
+    "Vehicles": [
+      "Cars For Sale",
+      "Cars For Rent",
+      "Vehicle Accessories",
+      "Vehicle Spare Parts",
+      "Number Plates",
+      "Motorcycles & ATV",
+    ],
+
+    //Properties
+    "Properties": [
+      "Real Estate For Sale",
+      "Apartments For Sale",
+      "Real Estate for Rent",
+    ],
+
+    //Mobile & Tablet
+    "Mobile & Tablet": [
+      "Mobiles",
+      "Tablets",
+    ],
+
+    //Furniture & Accessories
+    "Furniture & Accessories": [
+      "Furniture For Sale",
+      "Furniture for Rent",
+    ],
+
+    //Food & Nutrition
+    "Food & Nutrition": [
+      "Food Sale",
+      "Nutrition Sale",
+    ],
+
+    //Electronic Devices
+    "Electronic Devices": [
+      "Electronics",
+      "Devices For Sale",
+    ],
+
+    // testiing
+    "Testing": ["Bedspace", "Shared Room", "Studio", "1 Bedroom", "2 Bedrooms"]
+  };
 
   @override
   Widget build(BuildContext context) {
+    var entryList = itemCategoryMap.entries.toList();
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -70,7 +136,7 @@ class _AddPostState extends State<AddPost> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 23,
                 ),
                 Padding(
@@ -88,7 +154,7 @@ class _AddPostState extends State<AddPost> {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Stack(
@@ -99,14 +165,19 @@ class _AddPostState extends State<AddPost> {
                             // right 8
                             padding: EdgeInsets.only(
                                 left: MediaQuery.of(context).size.width / 23.0,
-                                right: 8),
+                                right:
+                                    MediaQuery.of(context).size.width / 23.0),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Container(
-                                    margin: EdgeInsets.only(top: 10, right: 25),
+                                    margin: EdgeInsets.only(
+                                        top: 10,
+                                        right:
+                                            MediaQuery.of(context).size.width /
+                                                14.5),
                                     height: 80,
                                     width: 80,
                                     decoration: BoxDecoration(
@@ -116,15 +187,26 @@ class _AddPostState extends State<AddPost> {
                                     child: Center(
                                       child: Column(
                                         children: [
-                                          IconButton(
-                                            onPressed: () {},
-                                            icon: SvgPicture.string(
-                                              '''<svg xmlns="http://www.w3.org/2000/svg" width="26" height="52" viewBox="0 0 26 52">
-  <text id="Symbol" transform="translate(13 42)" fill="#00b1ff" font-size="39" font-family="SegoeUI, Segoe UI"><tspan x="-12.587" y="0">􀁌</tspan></text>
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 8.0),
+                                            child: IconButton(
+                                              onPressed: () {},
+                                              icon: SvgPicture.string(
+                                                '''<svg xmlns="http://www.w3.org/2000/svg" width="38.763" height="38.763" viewBox="0 0 38.763 38.763">
+  <g id="Group_539" data-name="Group 539" transform="translate(-329 -324.631)">
+    <g id="Path_2492" data-name="Path 2492" transform="translate(329 324.631)" fill="#fff">
+      <path d="M 19.38165473937988 37.26331329345703 C 14.60529518127441 37.26331329345703 10.11481475830078 35.40329360961914 6.737414836883545 32.02589416503906 C 3.360024690628052 28.64849472045898 1.500004768371582 24.15801429748535 1.500004768371582 19.38165473937988 C 1.500004768371582 14.60529518127441 3.360024690628052 10.11481475830078 6.737414836883545 6.737414836883545 C 10.11481475830078 3.360024690628052 14.60529518127441 1.500004768371582 19.38165473937988 1.500004768371582 C 24.15801429748535 1.500004768371582 28.64849472045898 3.360024690628052 32.02589416503906 6.737414836883545 C 35.40329360961914 10.11481475830078 37.26331329345703 14.60529518127441 37.26331329345703 19.38165473937988 C 37.26331329345703 24.15801429748535 35.40329360961914 28.64849472045898 32.02589416503906 32.02589416503906 C 28.64849472045898 35.40329360961914 24.15801429748535 37.26331329345703 19.38165473937988 37.26331329345703 Z" stroke="none"/>
+      <path d="M 19.38165473937988 2.999996185302734 C 15.00595474243164 2.999996185302734 10.89216423034668 4.703983306884766 7.798074722290039 7.798074722290039 C 4.703983306884766 10.89216423034668 2.999996185302734 15.00595474243164 2.999996185302734 19.38165473937988 C 2.999996185302734 23.75735473632812 4.703983306884766 27.87114334106445 7.798074722290039 30.96523475646973 C 10.89216423034668 34.0593147277832 15.00595474243164 35.7633056640625 19.38165473937988 35.7633056640625 C 23.75735473632812 35.7633056640625 27.87114334106445 34.0593147277832 30.96523475646973 30.96523475646973 C 34.0593147277832 27.87114334106445 35.7633056640625 23.75735473632812 35.7633056640625 19.38165473937988 C 35.7633056640625 15.00595474243164 34.0593147277832 10.89216423034668 30.96523475646973 7.798074722290039 C 27.87114334106445 4.703983306884766 23.75735473632812 2.999996185302734 19.38165473937988 2.999996185302734 M 19.38165473937988 -3.814697265625e-06 C 30.08584594726562 -3.814697265625e-06 38.7633056640625 8.677465438842773 38.7633056640625 19.38165473937988 C 38.7633056640625 30.08584594726562 30.08584594726562 38.7633056640625 19.38165473937988 38.7633056640625 C 8.677465438842773 38.7633056640625 -3.814697265625e-06 30.08584594726562 -3.814697265625e-06 19.38165473937988 C -3.814697265625e-06 8.677465438842773 8.677465438842773 -3.814697265625e-06 19.38165473937988 -3.814697265625e-06 Z" stroke="none" fill="#00b1ff"/>
+    </g>
+    <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M14.4,8.341H9.414V3.358A1.108,1.108,0,0,0,8.306,2.25H7.2A1.108,1.108,0,0,0,6.091,3.358V8.341H1.108A1.108,1.108,0,0,0,0,9.449v1.108a1.108,1.108,0,0,0,1.108,1.108H6.091v4.984A1.108,1.108,0,0,0,7.2,17.755H8.306a1.108,1.108,0,0,0,1.108-1.108V11.664H14.4a1.108,1.108,0,0,0,1.108-1.108V9.449A1.108,1.108,0,0,0,14.4,8.341Z" transform="translate(340.629 334.01)" fill="#00b1ff"/>
+  </g>
 </svg>
+
 ''',
+                                              ),
+                                              //size: MediaQuery.of(context).size.width / 15,
                                             ),
-                                            //size: MediaQuery.of(context).size.width / 15,
                                           ),
                                           const AutoSizeText(
                                             "Add",
@@ -137,33 +219,48 @@ class _AddPostState extends State<AddPost> {
                                       ),
                                     ),
                                   ),
-                                  Container(
-                                    margin: EdgeInsets.only(right: 15),
-                                    height: 90,
-                                    width: 90,
-                                    child: Stack(
-                                      alignment: Alignment.topRight,
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                              top: 10.0, right: 10),
-                                          height: 80,
-                                          width: 80,
-                                          foregroundDecoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            // border: Border.all(color: Color(0xFFE5E5E5)),
-                                            image: const DecorationImage(
-                                              image: NetworkImage(
-                                                  'https://img.freepik.com/free-photo/milford-sound-new-zealand-travel-destination-concept_53876-42945.jpg?w=2000'),
-                                              fit: BoxFit.cover,
+                                  for (var item in imgList)
+                                    Container(
+                                      //15
+                                      margin: EdgeInsets.only(
+                                          right: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              23.5),
+                                      //w and h 90
+                                      height:
+                                          MediaQuery.of(context).size.width / 4,
+                                      width:
+                                          MediaQuery.of(context).size.width / 4,
+                                      child: Stack(
+                                        alignment: Alignment.topRight,
+                                        children: [
+                                          Container(
+                                            margin: const EdgeInsets.only(
+                                                top: 10.0, right: 10),
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                3.5,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                3.5,
+                                            foregroundDecoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              // border: Border.all(color: Color(0xFFE5E5E5)),
+                                              image: DecorationImage(
+                                                image: NetworkImage(
+                                                    item.toString()),
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        Align(
-                                          alignment: Alignment.topRight,
-                                          child: SvgPicture.string(
-                                            '''<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                                          Align(
+                                            alignment: Alignment.topRight,
+                                            child: SvgPicture.string(
+                                              '''<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
   <g id="Group_703" data-name="Group 703" transform="translate(-333 -164.699)">
       <path id="Icon_ionic-ios-remove-circle" data-name="Icon ionic-ios-remove-circle" d="M13.375,3.375a10,10,0,1,0,10,10A10,10,0,0,0,13.375,3.375Z" transform="translate(329.625 161.324)" fill="#fff"/>
       <path id="Icon_ionic-ios-remove-circle-2" data-name="Icon ionic-ios-remove-circle" d="M13.375,3.375a10,10,0,1,0,10,10A10,10,0,0,0,13.375,3.375Zm4.351,10.769h-8.7a.745.745,0,0,1-.769-.769.737.737,0,0,1,.769-.769h8.7a.769.769,0,0,1,0,1.538Z" transform="translate(329.625 161.324)" fill="#fd473e"/>
@@ -171,49 +268,11 @@ class _AddPostState extends State<AddPost> {
 </svg>
 
 ''',
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 90,
-                                    width: 90,
-                                    child: Stack(
-                                      alignment: Alignment.topRight,
-                                      children: [
-                                        Container(
-                                          margin: const EdgeInsets.only(
-                                              top: 10.0, right: 10),
-                                          height: 80,
-                                          width: 80,
-                                          foregroundDecoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            // border: Border.all(color: Color(0xFFE5E5E5)),
-                                            image: const DecorationImage(
-                                              image: NetworkImage(
-                                                  'https://img.freepik.com/free-photo/milford-sound-new-zealand-travel-destination-concept_53876-42945.jpg?w=2000'),
-                                              fit: BoxFit.cover,
                                             ),
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment: Alignment.topRight,
-                                          child: SvgPicture.string(
-                                            '''<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-  <g id="Group_703" data-name="Group 703" transform="translate(-333 -164.699)">
-      <path id="Icon_ionic-ios-remove-circle" data-name="Icon ionic-ios-remove-circle" d="M13.375,3.375a10,10,0,1,0,10,10A10,10,0,0,0,13.375,3.375Z" transform="translate(329.625 161.324)" fill="#fff"/>
-      <path id="Icon_ionic-ios-remove-circle-2" data-name="Icon ionic-ios-remove-circle" d="M13.375,3.375a10,10,0,1,0,10,10A10,10,0,0,0,13.375,3.375Zm4.351,10.769h-8.7a.745.745,0,0,1-.769-.769.737.737,0,0,1,.769-.769h8.7a.769.769,0,0,1,0,1.538Z" transform="translate(329.625 161.324)" fill="#fd473e"/>
-  </g>
-</svg>
-
-''',
-                                          ),
-                                        )
-                                      ],
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                  ),
                                 ],
                               ),
                             ),
@@ -221,8 +280,8 @@ class _AddPostState extends State<AddPost> {
                           Align(
                             alignment: Alignment.centerLeft,
                             child: SvgPicture.string(
-                              '''<svg xmlns="http://www.w3.org/2000/svg" width="13" height="27" viewBox="0 0 13 27">
-  <text id="_" data-name="􀆊" transform="translate(13 5) rotate(180)" fill="#00b1ff" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">􀆊</tspan></text>
+                              '''<svg id="Q3_icons" data-name="Q3 icons" xmlns="http://www.w3.org/2000/svg" width="10.323" height="18" viewBox="0 0 10.323 18">
+  <path id="Path_679" data-name="Path 679" d="M17.031,10.386,9.38,18.1a1.222,1.222,0,0,0,0,1.8l7.651,7.715a1.35,1.35,0,0,0,1.736.129,1.222,1.222,0,0,0,.129-1.929L12.22,18.854c-3.361-4.431-2.656,4.924,0,0L18.9,12.186a1.222,1.222,0,0,0-.129-1.929,1.35,1.35,0,0,0-1.736.129Z" transform="translate(-8.985 -10.001)" fill="#1eb1fc"/>
 </svg>
 
 ''',
@@ -231,16 +290,19 @@ class _AddPostState extends State<AddPost> {
                           Align(
                             alignment: Alignment.centerRight,
                             child: SvgPicture.string(
-                              '''<svg xmlns="http://www.w3.org/2000/svg" width="13" height="27" viewBox="0 0 13 27">
-  <text id="_" data-name="􀆊" transform="translate(13 5) rotate(180)" fill="#00b1ff" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">􀆊</tspan></text>
+                              '''<svg xmlns="http://www.w3.org/2000/svg" width="10.323" height="18" viewBox="0 0 10.323 18">
+  <g id="Q3_icons" data-name="Q3 icons" transform="translate(10.323 18) rotate(180)">
+    <path id="Path_679" data-name="Path 679" d="M17.031,10.386,9.38,18.1a1.222,1.222,0,0,0,0,1.8l7.651,7.715a1.35,1.35,0,0,0,1.736.129,1.222,1.222,0,0,0,.129-1.929L12.22,18.854c-3.361-4.431-2.656,4.924,0,0L18.9,12.186a1.222,1.222,0,0,0-.129-1.929,1.35,1.35,0,0,0-1.736.129Z" transform="translate(-8.985 -10.001)" fill="#1eb1fc"/>
+  </g>
 </svg>
+
 
 ''',
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 23.1,
                       ),
                       TextField(
@@ -249,8 +311,7 @@ class _AddPostState extends State<AddPost> {
                           fontWeight: FontWeight.w400,
                         ),
                         decoration: InputDecoration(
-                          labelText: "Name",
-                          hintText: "Product Name",
+                          hintText: "Samsung A9 Pro",
                           filled: true,
                           fillColor: const Color(0xFFF9F9F9),
                           enabledBorder: OutlineInputBorder(
@@ -267,7 +328,7 @@ class _AddPostState extends State<AddPost> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 11.8,
                       ),
                       TextField(
@@ -277,8 +338,9 @@ class _AddPostState extends State<AddPost> {
                           fontWeight: FontWeight.w400,
                         ),
                         decoration: InputDecoration(
-                          labelText: "Description",
-                          hintText: "Product Description",
+                          hintMaxLines: 10,
+                          hintText:
+                              "Description: The more you write, the better the chances are at finding…",
                           filled: true,
                           fillColor: const Color(0xFFF9F9F9),
                           enabledBorder: OutlineInputBorder(
@@ -295,20 +357,28 @@ class _AddPostState extends State<AddPost> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 11.8,
                       ),
                       Row(
                         children: [
                           Expanded(
                             child: TextField(
+                              maxLines: null,
                               style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                               ),
                               decoration: InputDecoration(
-                                labelText: "Location",
-                                hintText: "Type or Autolocate",
+                                // prefixIconConstraints:
+                                //     BoxConstraints(minWidth: 0, minHeight: 0),
+                                // prefixIcon: Padding(
+                                //     padding:
+                                //         EdgeInsets.only(bottom: 5, left: 5),
+                                //     child: Text(" Location: ")),
+                                // isDense: true,
+                                hintText: "Location: Type or Autolocate",
+                                hintMaxLines: 10,
                                 filled: true,
                                 fillColor: const Color(0xFFF9F9F9),
                                 enabledBorder: OutlineInputBorder(
@@ -351,7 +421,7 @@ class _AddPostState extends State<AddPost> {
                               ))
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 11.8,
                       ),
                       TextField(
@@ -360,15 +430,28 @@ class _AddPostState extends State<AddPost> {
                           fontWeight: FontWeight.w400,
                         ),
                         decoration: InputDecoration(
-                          prefixText: "Price ",
-                          prefixStyle: const TextStyle(
-                            color: Colors.black,
+                          prefixIcon: const Padding(
+                            padding: EdgeInsets.only(bottom: 3, left: 5),
+                            child: Text(" Price: "),
                           ),
-                          suffixText: "AED",
-                          suffixStyle: const TextStyle(
-                            color: Colors.black,
+                          prefixIconConstraints:
+                              const BoxConstraints(minWidth: 0, minHeight: 0),
+                          suffixIcon: const Padding(
+                            padding: EdgeInsets.only(bottom: 3, right: 5),
+                            child: Text(" AED "),
                           ),
-                          labelText: "Price",
+                          suffixIconConstraints:
+                              const BoxConstraints(minWidth: 0, minHeight: 0),
+                          isDense: true,
+                          // prefixText: "Price: ",
+                          // prefixStyle: const TextStyle(
+                          //   color: Colors.black,
+                          // ),
+                          // suffixText: "AED",
+                          // suffixStyle: const TextStyle(
+                          //   color: Colors.black,
+                          // ),
+                          // labelText: "Price",
                           hintText: "Enter Amount",
                           filled: true,
                           fillColor: const Color(0xFFF9F9F9),
@@ -389,14 +472,16 @@ class _AddPostState extends State<AddPost> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 23,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 22.8),
+                      //22.8
+                      padding: EdgeInsets.symmetric(
+                          horizontal: MediaQuery.of(context).size.width / 16.1),
                       child: const AutoSizeText(
                         "Select your item category:",
                         maxLines: 1,
@@ -407,124 +492,34 @@ class _AddPostState extends State<AddPost> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 22.4,
+                    const SizedBox(
+                      //22.4
+                      height: 16.4,
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 13.8),
-                      child: Stack(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: MediaQuery.of(context).size.width / 25.8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            margin: EdgeInsets.only(left: 62.6, top: 8.0),
-                            width: 279.81,
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    // width: 87.36,
-                                    // height: 35,
-                                    height:
-                                        MediaQuery.of(context).size.height / 20,
-                                    width: MediaQuery.of(context).size.height /
-                                        8.1,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      color: const Color(0xFF00B1FF),
-                                    ),
-                                    child: const Center(
-                                      child: AutoSizeText(
-                                        "Mobiles",
-                                        maxLines: 1,
-                                        style: TextStyle(
-                                          color: Color(0xFFFFFFFF),
-                                          fontSize: 14.0,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 9.8),
-                                    child: SvgPicture.string(
-                                      '''<svg xmlns="http://www.w3.org/2000/svg" width="6.905" height="15" viewBox="0 0 6.905 15">
-  <path id="Vector" d="M1.314,0,0,1.762,3.382,7.5,0,13.238,1.314,15,6.905,7.5Z" transform="matrix(1, 0, 0, 1, 0, 0)" fill="#1eb1fc"/>
-</svg>
-''',
-                                    ),
-                                  ),
-                                  Container(
-                                    // width: 87.36,
-                                    // height: 35,
-                                    height:
-                                        MediaQuery.of(context).size.height / 20,
-                                    width: MediaQuery.of(context).size.height /
-                                        8.1,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      color: const Color(0xFF1EB1FC)
-                                          .withOpacity(0.15),
-                                    ),
-                                    child: const Center(
-                                      child: AutoSizeText(
-                                        "Samsung",
-                                        maxLines: 1,
-                                        style: TextStyle(
-                                          color: Color(0xFF555555),
-                                          fontSize: 14.0,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 9.8),
-                                    child: SvgPicture.string(
-                                      '''<svg xmlns="http://www.w3.org/2000/svg" width="6.905" height="15" viewBox="0 0 6.905 15">
-  <path id="Vector" d="M1.314,0,0,1.762,3.382,7.5,0,13.238,1.314,15,6.905,7.5Z" transform="matrix(1, 0, 0, 1, 0, 0)" fill="#1eb1fc"/>
-</svg>
-''',
-                                    ),
-                                  ),
-                                  Container(
-                                    // width: 87.36,
-                                    // height: 35,
-                                    height:
-                                        MediaQuery.of(context).size.height / 20,
-                                    width: MediaQuery.of(context).size.height /
-                                        8.1,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      color: const Color(0xFF1EB1FC)
-                                          .withOpacity(0.15),
-                                    ),
-                                    child: const Center(
-                                      child: AutoSizeText(
-                                        "A9 Pro",
-                                        maxLines: 1,
-                                        style: TextStyle(
-                                          color: Color(0xFF555555),
-                                          fontSize: 14.0,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          SvgPicture.string(
-                            '''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="58" height="58" viewBox="0 0 58 58">
-  <defs>
-      <filter id="Rectangle_2" x="0" y="0" width="58" height="58" filterUnits="userSpaceOnUse">
-        <feOffset dy="3" input="SourceAlpha"/>
-        <feGaussianBlur stdDeviation="3" result="blur"/>
-        <feFlood flood-opacity="0.161"/>
-        <feComposite operator="in" in2="blur"/>
-        <feComposite in="SourceGraphic"/>
-      </filter>
-  </defs>
+                          if (addCategoryList.isNotEmpty)
+                            Wrap(
+                              direction: Axis.horizontal,
+                              alignment: WrapAlignment.start,
+                              //runSpacing: 5,
+                              spacing: 9.8,
+                              children: [
+                                InkWell(
+                                  customBorder: const CircleBorder(),
+                                  onTap: () {
+                                    setState(() {
+                                      addCategoryList.removeLast();
+                                      currentValue.removeLast();
+                                    });
+                                  },
+                                  child: SvgPicture.string(
+                                    '''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="58" height="58" viewBox="0 0 58 58">
+  
   <g id="Group_612" data-name="Group 612" transform="translate(-27.756 -387.572)">
       <g id="Group_46" data-name="Group 46" transform="translate(-61.297 40.925)">
         <g id="Message" transform="translate(98.053 352.647)">
@@ -546,27 +541,99 @@ class _AddPostState extends State<AddPost> {
 
 
 ''',
-                          ),
+                                  ),
+                                ),
+                                for (int i = 0; i < addCategoryList.length; i++)
+                                  //var category in addCategoryList
+                                  Wrap(
+                                    spacing: 9.8,
+                                    children: [
+                                      Container(
+                                        //2.5 - sizedbox changed
+                                        margin: const EdgeInsets.only(top: 8.5),
+
+                                        // width: 87.36,
+                                        // height: 35,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          color: (i == 0)
+                                              ? const Color(0xFF00B1FF)
+                                              : const Color(0xFFDDF3FF),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Wrap(
+                                            children: [
+                                              AutoSizeText(
+                                                '${addCategoryList[i][0]}',
+                                                maxLines: 1,
+                                                style: TextStyle(
+                                                  color: (i == 0)
+                                                      ? const Color(0xFFFFFFFF)
+                                                      : const Color(0xFF555555),
+                                                  fontSize: 14.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              AutoSizeText(
+                                                '${addCategoryList[i].substring(1)}',
+                                                maxLines: 1,
+                                                style: TextStyle(
+                                                  color: (i == 0)
+                                                      ? const Color(0xFFFFFFFF)
+                                                      : const Color(0xFF555555),
+                                                  fontSize: 14.0,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        //top - 12.5 sizedbox changed
+                                        padding:
+                                            const EdgeInsets.only(top: 16.5),
+                                        child: SvgPicture.string(
+                                          '''<svg xmlns="http://www.w3.org/2000/svg" width="6.905" height="15" viewBox="0 0 6.905 15">
+  <path id="Vector" d="M1.314,0,0,1.762,3.382,7.5,0,13.238,1.314,15,6.905,7.5Z" transform="matrix(1, 0, 0, 1, 0, 0)" fill="#1eb1fc"/>
+</svg>
+''',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                              ],
+                            ),
+                          const SizedBox(height: 24),
+                          Wrap(
+                            direction: Axis.horizontal,
+                            runSpacing: 10.0,
+                            spacing: 10.0,
+                            children: buildWrap(entryList),
+                          )
                         ],
                       ),
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 33,
                 ),
                 const Divider(color: Colors.black),
-                SizedBox(
+                const SizedBox(
                   height: 39.5,
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                      right: 13.6,
+                      //13.6
+                      // - right - 26.1
+                      right: MediaQuery.of(context).size.width / 200,
                       left: MediaQuery.of(context).size.width / 23.1),
                   child: Row(
                     children: [
                       const AutoSizeText(
-                        "Barter/Exchange Features:",
+                        "Barter / Exchange Features:",
                         maxLines: 1,
                         style: TextStyle(
                           color: Color(0xFF000000),
@@ -576,16 +643,19 @@ class _AddPostState extends State<AddPost> {
                       ),
                       const Spacer(),
                       (isBarter == false)
-                          ? const AutoSizeText(
-                              "OFF",
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: Color(0xFF4F4F4F),
-                                fontSize: 14,
+                          ? const Padding(
+                              padding: EdgeInsets.only(left: 8.0),
+                              child: AutoSizeText(
+                                "OFF",
+                                maxLines: 1,
+                                style: TextStyle(
+                                  color: Color(0xFF4F4F4F),
+                                  fontSize: 14,
+                                ),
                               ),
                             )
                           : const AutoSizeText(
-                              "Yes",
+                              "ON",
                               maxLines: 1,
                               style: TextStyle(
                                 color: Color(0xFF4F4F4F),
@@ -613,7 +683,7 @@ class _AddPostState extends State<AddPost> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 16,
                             ),
                             AutoSizeText(
@@ -632,7 +702,7 @@ class _AddPostState extends State<AddPost> {
                                 fontSize: 14.0,
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 34,
                             ),
                           ],
@@ -641,286 +711,240 @@ class _AddPostState extends State<AddPost> {
                     : Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             height: 19.5,
                           ),
                           Padding(
                             padding: EdgeInsets.only(
-                                right: 13.6,
+                                right: MediaQuery.of(context).size.width / 23.1,
                                 left: MediaQuery.of(context).size.width / 23.1),
-                            child: AutoSizeText(
+                            child: const AutoSizeText(
                               "- Add what you are interested in to barter to",
                               maxLines: 1,
                               style: TextStyle(
-                                color: const Color(0xFF4F4F4F).withOpacity(0.6),
+                                color: Color(0xFF4F4F4F),
                                 fontSize: 14.0,
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 23,
                           ),
                           Center(
                             child: ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  splashFactory: InkRipple.splashFactory,
-                                  shadowColor: Colors.transparent,
-                                  primary: const Color(0xFFFC5D56),
-                                  onPrimary: const Color(0xFFFF0B00),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                  ),
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                splashFactory: InkRipple.splashFactory,
+                                shadowColor: const Color(0xFFEEEEEE),
+                                elevation: 3,
+                                primary: const Color(0xFFFC5D56),
+                                onPrimary: const Color(0xFFFF0B00),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
                                 ),
-                                child: const AutoSizeText(
-                                  "Add Barter Categories",
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                    color: Color(0xFFFFFFFF),
-                                    fontSize: 15,
-                                  ),
-                                )),
-                          ),
-                          SizedBox(
-                            height: 11.8,
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 12.7),
-                            child: Wrap(
-                              direction: Axis.horizontal,
-                              runSpacing: 5.0,
-                              spacing: 5.0,
-                              children: [
-                                SvgPicture.string(
-                                  '''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="119.588" height="63.5" viewBox="0 0 119.588 63.5">
-  <defs>
-    <filter id="Rectangle_51" x="16" y="17.5" width="103.588" height="46" filterUnits="userSpaceOnUse">
-      <feOffset dy="0.5" input="SourceAlpha"/>
-      <feGaussianBlur stdDeviation="1" result="blur"/>
-      <feFlood flood-color="#1eb1fc" flood-opacity="0.161"/>
-      <feComposite operator="in" in2="blur"/>
-      <feComposite in="SourceGraphic"/>
-    </filter>
-    <filter id="Rectangle_51-2" x="14.281" y="15.5" width="103.588" height="46" filterUnits="userSpaceOnUse">
-      <feOffset dy="0.5" input="SourceAlpha"/>
-      <feGaussianBlur stdDeviation="1" result="blur-2"/>
-      <feFlood flood-color="#1eb1fc" flood-opacity="0.161"/>
-      <feComposite operator="in" in2="blur-2"/>
-      <feComposite in="SourceGraphic"/>
-    </filter>
-    <filter id="Rectangle_51-3" x="13" y="13.5" width="103.588" height="46" filterUnits="userSpaceOnUse">
-      <feOffset dy="0.5" input="SourceAlpha"/>
-      <feGaussianBlur stdDeviation="1" result="blur-3"/>
-      <feFlood flood-color="#1eb1fc" flood-opacity="0.161"/>
-      <feComposite operator="in" in2="blur-3"/>
-      <feComposite in="SourceGraphic"/>
-    </filter>
-  </defs>
-  <g id="Group_794" data-name="Group 794" transform="translate(-53.589 -158.334)">
-    <g id="Group_790" data-name="Group 790" transform="translate(14.366 63.46)">
-      <g transform="matrix(1, 0, 0, 1, 39.22, 94.87)" filter="url(#Rectangle_51)">
-        <g id="Rectangle_51-4" data-name="Rectangle 51" transform="translate(19 20)" fill="none" stroke="#f7817d" stroke-width="0.7">
-          <rect width="97.588" height="40" rx="12" stroke="none"/>
-          <rect x="0.35" y="0.35" width="96.888" height="39.3" rx="11.65" fill="none"/>
-        </g>
-      </g>
-    </g>
-    <g id="Group_789" data-name="Group 789" transform="translate(-114.719 -6.5)">
-      <g id="Group_788" data-name="Group 788" transform="translate(127.366 67.96)">
-        <g transform="matrix(1, 0, 0, 1, 40.94, 96.87)" filter="url(#Rectangle_51-2)">
-          <g id="Rectangle_51-5" data-name="Rectangle 51" transform="translate(17.28 18)" fill="none" stroke="#f7817d" stroke-width="0.7">
-            <rect width="97.588" height="40" rx="12" stroke="none"/>
-            <rect x="0.35" y="0.35" width="96.888" height="39.3" rx="11.65" fill="none"/>
-          </g>
-        </g>
-      </g>
-    </g>
-    <g id="Group_711" data-name="Group 711" transform="translate(11.366 59.46)">
-      <g transform="matrix(1, 0, 0, 1, 42.22, 98.87)" filter="url(#Rectangle_51-3)">
-        <g id="Rectangle_51-6" data-name="Rectangle 51" transform="translate(16 16)" fill="#ffefef" stroke="#f7817d" stroke-width="0.7">
-          <rect width="97.588" height="40" rx="12" stroke="none"/>
-          <rect x="0.35" y="0.35" width="96.888" height="39.3" rx="11.65" fill="none"/>
-        </g>
-      </g>
-    </g>
-    <text id="Mobiles" fill= "black" transform="translate(87.383 200.834)" font-size="17" font-family="ArialMT, Arial"><tspan x="0" y="0">Mobiles</tspan></text>
-    <g id="Group_782" data-name="Group 782" transform="translate(9.818 -162.798)">
-      <path id="Icon_ionic-ios-remove-circle" data-name="Icon ionic-ios-remove-circle" d="M18.375,3.375a15,15,0,1,0,15,15A15,15,0,0,0,18.375,3.375Z" transform="translate(41.396 318.756)" fill="#fd473e" stroke="#fff" stroke-width="2"/>
-      <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M11.143,6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H11.143A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(53.771 328.881)" fill="#fff"/>
-    </g>
-  </g>
-</svg>
-
-''',
+                              ),
+                              child: const AutoSizeText(
+                                "Add Barter Categories",
+                                maxLines: 1,
+                                style: TextStyle(
+                                  color: Color(0xFFFFFFFF),
+                                  fontSize: 15,
                                 ),
-                                SvgPicture.string(
-                                  '''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="116.588" height="59.5" viewBox="0 0 116.588 59.5">
-  <defs>
-    <filter id="Rectangle_51" x="13" y="13.5" width="103.588" height="46" filterUnits="userSpaceOnUse">
-      <feOffset dy="0.5" input="SourceAlpha"/>
-      <feGaussianBlur stdDeviation="1" result="blur"/>
-      <feFlood flood-color="#1eb1fc" flood-opacity="0.161"/>
-      <feComposite operator="in" in2="blur"/>
-      <feComposite in="SourceGraphic"/>
-    </filter>
-  </defs>
-  <g id="Group_793" data-name="Group 793" transform="translate(-178.781 -162.334)">
-    <g id="Group_791" data-name="Group 791" transform="translate(136.558 63.46)">
-      <g transform="matrix(1, 0, 0, 1, 42.22, 98.87)" filter="url(#Rectangle_51)">
-        <g id="Rectangle_51-2" data-name="Rectangle 51" transform="translate(16 16)" fill="#ffefef">
-          <path d="M 85.58837890625 39.65000152587891 L 12.00000190734863 39.65000152587891 C 8.888164520263672 39.65000152587891 5.962602138519287 38.43818664550781 3.762202024459839 36.23780059814453 C 1.561814427375793 34.03739929199219 0.3500019609928131 31.11183738708496 0.3500019609928131 28 L 0.3500019609928131 12 C 0.3500019609928131 8.888175010681152 1.561814427375793 5.962600231170654 3.762202024459839 3.762212514877319 C 5.962602138519287 1.561812520027161 8.888176918029785 0.3499999940395355 12.00000190734863 0.3499999940395355 L 85.58837890625 0.3499999940395355 C 88.70020294189453 0.3499999940395355 91.62577819824219 1.561812520027161 93.82617950439453 3.762212514877319 C 96.02656555175781 5.962600231170654 97.23838043212891 8.888175010681152 97.23838043212891 12 L 97.23838043212891 28 C 97.23838043212891 31.11183738708496 96.02656555175781 34.03739929199219 93.82617950439453 36.23780059814453 C 91.62577819824219 38.43818664550781 88.70021820068359 39.65000152587891 85.58837890625 39.65000152587891 Z" stroke="none"/>
-          <path d="M 12 0.7000007629394531 C 8.981666564941406 0.7000007629394531 6.143974304199219 1.875400543212891 4.009689331054688 4.009689331054688 C 1.875404357910156 6.143974304199219 0.7000045776367188 8.981662750244141 0.7000045776367188 12 L 0.7000045776367188 28 C 0.7000045776367188 31.01833724975586 1.875404357910156 33.85601043701172 4.009689331054688 35.99029922485352 C 6.143974304199219 38.12459945678711 8.981666564941406 39.29999923706055 12 39.29999923706055 L 85.58837890625 39.29999923706055 C 88.60671234130859 39.29999923706055 91.44440460205078 38.12459945678711 93.57868957519531 35.99029922485352 C 95.71297454833984 33.85601043701172 96.88837432861328 31.01833724975586 96.88837432861328 28 L 96.88837432861328 12 C 96.88837432861328 8.981662750244141 95.71297454833984 6.143974304199219 93.57868957519531 4.009689331054688 C 91.44440460205078 1.875400543212891 88.60671234130859 0.7000007629394531 85.58837890625 0.7000007629394531 L 12 0.7000007629394531 M 12 0 L 85.58837890625 0 C 92.21580505371094 0 97.58837890625 5.372573852539062 97.58837890625 12 L 97.58837890625 28 C 97.58837890625 34.62741088867188 92.21580505371094 40 85.58837890625 40 L 12 40 C 5.372573852539062 40 0 34.62741088867188 0 28 L 0 12 C 0 5.372573852539062 5.372573852539062 0 12 0 Z" stroke="none" fill="#f7817d"/>
-        </g>
-      </g>
-    </g>
-    <text id="Apple" fill= "black" transform="translate(220.574 204.834)" font-size="17" font-family="ArialMT, Arial"><tspan x="0" y="0">Apple</tspan></text>
-    <g id="Group_792" data-name="Group 792" transform="translate(135.01 -158.798)">
-      <path id="Icon_ionic-ios-remove-circle" data-name="Icon ionic-ios-remove-circle" d="M18.375,3.375a15,15,0,1,0,15,15A15,15,0,0,0,18.375,3.375Z" transform="translate(41.396 318.756)" fill="#fd473e" stroke="#fff" stroke-width="2"/>
-      <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M11.143,6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H11.143A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(53.771 328.881)" fill="#fff"/>
-    </g>
-  </g>
-</svg>
-
-''',
-                                ),
-                                SvgPicture.string(
-                                  '''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="116.588" height="59.5" viewBox="0 0 116.588 59.5">
-  <defs>
-    <filter id="Rectangle_51" x="13" y="13.5" width="103.588" height="46" filterUnits="userSpaceOnUse">
-      <feOffset dy="0.5" input="SourceAlpha"/>
-      <feGaussianBlur stdDeviation="1" result="blur"/>
-      <feFlood flood-color="#1eb1fc" flood-opacity="0.161"/>
-      <feComposite operator="in" in2="blur"/>
-      <feComposite in="SourceGraphic"/>
-    </filter>
-  </defs>
-  <g id="Group_797" data-name="Group 797" transform="translate(-302.972 -158.334)">
-    <g id="Group_795" data-name="Group 795" transform="translate(260.749 59.46)">
-      <g transform="matrix(1, 0, 0, 1, 42.22, 98.87)" filter="url(#Rectangle_51)">
-        <g id="Rectangle_51-2" data-name="Rectangle 51" transform="translate(16 16)" fill="#ffefef" stroke="#f7817d" stroke-width="0.7">
-          <rect width="97.588" height="40" rx="12" stroke="none"/>
-          <rect x="0.35" y="0.35" width="96.888" height="39.3" rx="11.65" fill="none"/>
-        </g>
-      </g>
-    </g>
-    <text id="OPPO" fill= "black" transform="translate(343.266 200.834)" font-size="17" font-family="ArialMT, Arial"><tspan x="0" y="0">OPPO</tspan></text>
-    <g id="Group_796" data-name="Group 796" transform="translate(259.201 -162.798)">
-      <path id="Icon_ionic-ios-remove-circle" data-name="Icon ionic-ios-remove-circle" d="M18.375,3.375a15,15,0,1,0,15,15A15,15,0,0,0,18.375,3.375Z" transform="translate(41.396 318.756)" fill="#fd473e" stroke="#fff" stroke-width="2"/>
-      <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M11.143,6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H11.143A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(53.771 328.881)" fill="#fff"/>
-    </g>
-  </g>
-</svg>
-
-
-''',
-                                ),
-                                SvgPicture.string(
-                                  '''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="133.013" height="63.5" viewBox="0 0 133.013 63.5">
-  <defs>
-    <filter id="Rectangle_51" x="16" y="17.5" width="117.013" height="46" filterUnits="userSpaceOnUse">
-      <feOffset dy="0.5" input="SourceAlpha"/>
-      <feGaussianBlur stdDeviation="1" result="blur"/>
-      <feFlood flood-color="#1eb1fc" flood-opacity="0.161"/>
-      <feComposite operator="in" in2="blur"/>
-      <feComposite in="SourceGraphic"/>
-    </filter>
-    <filter id="Rectangle_51-2" x="14.281" y="15.5" width="117.013" height="46" filterUnits="userSpaceOnUse">
-      <feOffset dy="0.5" input="SourceAlpha"/>
-      <feGaussianBlur stdDeviation="1" result="blur-2"/>
-      <feFlood flood-color="#1eb1fc" flood-opacity="0.161"/>
-      <feComposite operator="in" in2="blur-2"/>
-      <feComposite in="SourceGraphic"/>
-    </filter>
-    <filter id="Rectangle_51-3" x="13" y="13.5" width="117.013" height="46" filterUnits="userSpaceOnUse">
-      <feOffset dy="0.5" input="SourceAlpha"/>
-      <feGaussianBlur stdDeviation="1" result="blur-3"/>
-      <feFlood flood-color="#1eb1fc" flood-opacity="0.161"/>
-      <feComposite operator="in" in2="blur-3"/>
-      <feComposite in="SourceGraphic"/>
-    </filter>
-  </defs>
-  <g id="Group_794" data-name="Group 794" transform="translate(-53.589 -158.334)">
-    <g id="Group_790" data-name="Group 790" transform="translate(72.589 178.334)">
-      <g transform="matrix(1, 0, 0, 1, -19, -20)" filter="url(#Rectangle_51)">
-        <g id="Rectangle_51-4" data-name="Rectangle 51" transform="translate(19 20)" fill="none" stroke="#f7817d" stroke-width="0.7">
-          <rect width="111.013" height="40" rx="12" stroke="none"/>
-          <rect x="0.35" y="0.35" width="110.313" height="39.3" rx="11.65" fill="none"/>
-        </g>
-      </g>
-    </g>
-    <g id="Group_789" data-name="Group 789" transform="translate(70.87 176.334)">
-      <g id="Group_788" data-name="Group 788" transform="translate(0)">
-        <g transform="matrix(1, 0, 0, 1, -17.28, -18)" filter="url(#Rectangle_51-2)">
-          <g id="Rectangle_51-5" data-name="Rectangle 51" transform="translate(17.28 18)" fill="none" stroke="#f7817d" stroke-width="0.7">
-            <rect width="111.013" height="40" rx="12" stroke="none"/>
-            <rect x="0.35" y="0.35" width="110.313" height="39.3" rx="11.65" fill="none"/>
-          </g>
-        </g>
-      </g>
-    </g>
-    <g id="Group_711" data-name="Group 711" transform="translate(69.589 174.334)">
-      <g transform="matrix(1, 0, 0, 1, -16, -16)" filter="url(#Rectangle_51-3)">
-        <g id="Rectangle_51-6" data-name="Rectangle 51" transform="translate(16 16)" fill="#ffefef" stroke="#f7817d" stroke-width="0.7">
-          <rect width="111.013" height="40" rx="12" stroke="none"/>
-          <rect x="0.35" y="0.35" width="110.313" height="39.3" rx="11.65" fill="none"/>
-        </g>
-      </g>
-    </g>
-    <text id="Panasonic" fill= "black" transform="translate(84.096 200.834)" font-size="17" font-family="ArialMT, Arial"><tspan x="0" y="0">Panasonic</tspan></text>
-    <g id="Group_782" data-name="Group 782" transform="translate(9.818 -162.798)">
-      <path id="Icon_ionic-ios-remove-circle" data-name="Icon ionic-ios-remove-circle" d="M18.375,3.375a15,15,0,1,0,15,15A15,15,0,0,0,18.375,3.375Z" transform="translate(41.396 318.756)" fill="#fd473e" stroke="#fff" stroke-width="2"/>
-      <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M11.143,6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H11.143A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(53.771 328.881)" fill="#fff"/>
-    </g>
-  </g>
-</svg>
-
-
-
-''',
-                                ),
-                                SvgPicture.string(
-                                  '''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="89.845" height="59.5" viewBox="0 0 89.845 59.5">
-  <defs>
-    <filter id="Rectangle_51" x="13" y="13.5" width="76.845" height="46" filterUnits="userSpaceOnUse">
-      <feOffset dy="0.5" input="SourceAlpha"/>
-      <feGaussianBlur stdDeviation="1" result="blur"/>
-      <feFlood flood-color="#1eb1fc" flood-opacity="0.161"/>
-      <feComposite operator="in" in2="blur"/>
-      <feComposite in="SourceGraphic"/>
-    </filter>
-  </defs>
-  <g id="Group_793" data-name="Group 793" transform="translate(-178.781 -162.334)">
-    <g id="Group_791" data-name="Group 791" transform="translate(136.558 63.46)">
-      <g transform="matrix(1, 0, 0, 1, 42.22, 98.87)" filter="url(#Rectangle_51)">
-        <g id="Rectangle_51-2" data-name="Rectangle 51" transform="translate(16 16)" fill="#ffefef">
-          <path d="M 62.13380813598633 39.65000152587891 L 8.711528778076172 39.65000152587891 C 4.100968360900879 39.65000152587891 0.3499984443187714 34.423828125 0.3499984443187714 28 L 0.3499984443187714 12 C 0.3499984443187714 5.576169967651367 4.100968360900879 0.3499999940395355 8.711528778076172 0.3499999940395355 L 62.13380813598633 0.3499999940395355 C 66.74436950683594 0.3499999940395355 70.49533843994141 5.576169967651367 70.49533843994141 12 L 70.49533843994141 28 C 70.49533843994141 34.423828125 66.74436950683594 39.65000152587891 62.13380813598633 39.65000152587891 Z" stroke="none"/>
-          <path d="M 8.711528778076172 0.7000007629394531 C 6.614700317382812 0.7000007629394531 4.628219604492188 1.845661163330078 3.118011474609375 3.925949096679688 C 1.558731079101562 6.073841094970703 0.6999969482421875 8.941259384155273 0.6999969482421875 12 L 0.6999969482421875 28 C 0.6999969482421875 31.05873870849609 1.558731079101562 33.9261589050293 3.118011474609375 36.07405090332031 C 4.628219604492188 38.15433883666992 6.614700317382812 39.29999923706055 8.711528778076172 39.29999923706055 L 62.13380813598633 39.29999923706055 C 64.23062896728516 39.29999923706055 66.21710968017578 38.15433120727539 67.72731781005859 36.07405090332031 C 69.28659820556641 33.9261589050293 70.14533996582031 31.05873870849609 70.14533996582031 28 L 70.14533996582031 12 C 70.14533996582031 8.941259384155273 69.28659820556641 6.073841094970703 67.72731781005859 3.925949096679688 C 66.21710968017578 1.845668792724609 64.23062896728516 0.7000007629394531 62.13380813598633 0.7000007629394531 L 8.711528778076172 0.7000007629394531 M 8.711528778076172 0 L 62.13380813598633 0 C 66.94504547119141 0 70.8453369140625 5.372581481933594 70.8453369140625 12 L 70.8453369140625 28 C 70.8453369140625 34.62741851806641 66.94504547119141 40 62.13380813598633 40 L 8.711528778076172 40 C 3.900276184082031 40 0 34.62741851806641 0 28 L 0 12 C 0 5.372581481933594 3.900276184082031 0 8.711528778076172 0 Z" stroke="none" fill="#f7817d"/>
-        </g>
-      </g>
-    </g>
-    <text id="HTC" fill="black" transform="translate(212.703 204.834)" font-size="17" font-family="ArialMT, Arial"><tspan x="0" y="0">HTC</tspan></text>
-    <g id="Group_792" data-name="Group 792" transform="translate(135.01 -158.798)">
-      <path id="Icon_ionic-ios-remove-circle" data-name="Icon ionic-ios-remove-circle" d="M18.375,3.375a15,15,0,1,0,15,15A15,15,0,0,0,18.375,3.375Z" transform="translate(41.396 318.756)" fill="#fd473e" stroke="#fff" stroke-width="2"/>
-      <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M11.143,6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H11.143A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(53.771 328.881)" fill="#fff"/>
-    </g>
-  </g>
-</svg>
-
-
-
-
-''',
-                                ),
-                              ],
+                              ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
+                            height: 11.8,
+                          ),
+                          // padding 12.7 added initially
+                          Wrap(
+                            direction: Axis.horizontal,
+                            runSpacing: 5.0,
+                            spacing: 5.0,
+                            children: [
+                              for (var barterCategoryItem in barterCategoryList)
+                                Stack(
+                                  children: [
+                                    if (barterCategoryItem == "Mobiles" ||
+                                        barterCategoryItem == "Panasonic")
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 4.0, left: 3.0),
+                                        child: Container(
+                                          margin: EdgeInsets.only(
+                                              top: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  27,
+                                              left: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  25),
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              18,
+                                          decoration: BoxDecoration(
+                                            color: const Color(0xFFFFEFEF),
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                            border: Border.all(
+                                                color: const Color(0xFFF7817D),
+                                                width: 1.5),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  //offset: Offset(0, 4),
+                                                  color: const Color(0xFF1EB1FC)
+                                                      .withOpacity(
+                                                          0.16), //edited
+                                                  spreadRadius: 0.5,
+                                                  blurRadius: 2 //edited
+                                                  ),
+                                            ],
+                                          ),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 16.0),
+                                                child: AutoSizeText(
+                                                  barterCategoryItem.toString(),
+                                                  maxLines: 1,
+                                                  style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 17.0,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    if (barterCategoryItem == "Mobiles" ||
+                                        barterCategoryItem == "Panasonic")
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 2.0, left: 1.3),
+                                        child: Container(
+                                          margin: EdgeInsets.only(
+                                              top: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  27,
+                                              left: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  25),
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              18,
+                                          decoration: BoxDecoration(
+                                            color: const Color(0xFFFFEFEF),
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                            border: Border.all(
+                                                color: const Color(0xFFF7817D),
+                                                width: 1.5),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  //offset: Offset(0, 4),
+                                                  color: const Color(0xFF1EB1FC)
+                                                      .withOpacity(
+                                                          0.16), //edited
+                                                  spreadRadius: 0.5,
+                                                  blurRadius: 2 //edited
+                                                  ),
+                                            ],
+                                          ),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 16.0),
+                                                child: AutoSizeText(
+                                                  barterCategoryItem.toString(),
+                                                  maxLines: 1,
+                                                  style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 17.0,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                          top: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              27,
+                                          left: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              25),
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              18,
+                                      decoration: BoxDecoration(
+                                          color: const Color(0xFFFFEFEF),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          border: Border.all(
+                                              color: const Color(0xFFF7817D),
+                                              width: 1.5)),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 16.0),
+                                            child: AutoSizeText(
+                                              barterCategoryItem.toString(),
+                                              maxLines: 1,
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 17.0,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+
+                                    SvgPicture.string(
+                                      '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <g id="Group_782" data-name="Group 782" transform="translate(-43.771 -321.131)">
+      <path id="Icon_ionic-ios-remove-circle" data-name="Icon ionic-ios-remove-circle" d="M18.375,3.375a15,15,0,1,0,15,15A15,15,0,0,0,18.375,3.375Z" transform="translate(41.396 318.756)" fill="#fd473e" stroke="#fff" stroke-width="2"/>
+      <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M11.143,6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H11.143A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(53.771 328.881)" fill="#fff"/>
+  </g>
+</svg>
+
+''',
+                                    ),
+                                    // size: MediaQuery.of(context).size.width / 15,
+                                  ],
+                                ),
+                            ],
+                          ),
+                          const SizedBox(
                             height: 30,
                           ),
                           Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 12.7),
+                            //12.7
+                            padding: EdgeInsets.symmetric(
+                                horizontal:
+                                    MediaQuery.of(context).size.width / 28.1),
                             child: AutoSizeText(
                               "- Describe the item/s you want to barter to:",
                               maxLines: 1,
@@ -930,12 +954,14 @@ class _AddPostState extends State<AddPost> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 23,
                           ),
                           Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 12.7),
+                            //12.7
+                            padding: EdgeInsets.symmetric(
+                                horizontal:
+                                    MediaQuery.of(context).size.width / 28.1),
                             child: TextField(
                               maxLines: null,
                               style: const TextStyle(
@@ -943,8 +969,10 @@ class _AddPostState extends State<AddPost> {
                                 fontWeight: FontWeight.w400,
                               ),
                               decoration: InputDecoration(
-                                labelText: "Description",
-                                hintText: "Barter Description",
+                                // labelText: "Description",
+                                hintMaxLines: 10,
+                                hintText:
+                                    "Barter Description: The more you write the better chances for AI to give accurate matching. ",
                                 filled: true,
                                 fillColor: const Color(0xFFF9F9F9),
                                 enabledBorder: OutlineInputBorder(
@@ -962,23 +990,26 @@ class _AddPostState extends State<AddPost> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 33,
                           ),
                         ],
                       ),
                 const Divider(color: Colors.black),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 14.8),
+                  //14.8
+                  padding: EdgeInsets.symmetric(
+                      horizontal: MediaQuery.of(context).size.width / 24.5),
                   child: Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 33,
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           const AutoSizeText(
-                            "Include Free Delivery?",
+                            "Delivery:",
                             maxLines: 1,
                             style: TextStyle(
                               color: Color(0xFF000000),
@@ -986,48 +1017,84 @@ class _AddPostState extends State<AddPost> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const Spacer(),
-                          (isDelivery == false)
-                              ? const AutoSizeText(
-                                  "NO",
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                    color: Color(0xFF4F4F4F),
-                                    fontSize: 14,
-                                  ),
-                                )
-                              : const AutoSizeText(
-                                  "Yes",
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                    color: Color(0xFF4F4F4F),
-                                    fontSize: 14,
-                                  ),
-                                ),
-                          Switch(
-                            value: isDelivery,
-                            onChanged: (value) {
-                              setState(() {
-                                isDelivery = value;
-                              });
-                            },
-                            activeTrackColor: const Color(0xFF00B1FF),
+                          Padding(
+                            //15.5
+                            padding: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width / 22.5),
+                            child: Container(
+                              height: 35,
+                              width: MediaQuery.of(context).size.width / 1.7,
+                              decoration: BoxDecoration(
+                                  color: const Color(0xFFF9F9F9),
+                                  borderRadius: BorderRadius.circular(12),
+                                  border: Border.all(
+                                      color: const Color(0xFFE5E5E5))),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  for (var item in deliveryList)
+                                    InkWell(
+                                      onTap: () {
+                                        if (item == "No") {
+                                          setState(() {
+                                            delivery = "No";
+                                          });
+                                        } else if (item == "Free") {
+                                          setState(() {
+                                            delivery = "Free";
+                                          });
+                                        } else if (item == "Paid") {
+                                          setState(() {
+                                            delivery = "Paid";
+                                          });
+                                        }
+                                      },
+                                      child: Container(
+                                        height: 35,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                5.149,
+                                        child: Center(
+                                          child: AutoSizeText(
+                                            item,
+                                            maxLines: 1,
+                                            style: TextStyle(
+                                              color: (delivery == item)
+                                                  ? const Color(0xFFFFFFFF)
+                                                  : const Color(0xFF555555),
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                        ),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          color: (delivery == item)
+                                              ? const Color(0xFF00B1FF)
+                                              : const Color(0xFFF9F9F9),
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 23,
-                      ),
-                      AutoSizeText(
-                        "Do you offer a free delivery with your item?",
-                        maxLines: 1,
-                        style: TextStyle(
-                          color: const Color(0xFF4F4F4F).withOpacity(0.6),
-                          fontSize: 12.0,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 33,
+                      // SizedBox(
+                      //   height: 23,
+                      // ),
+                      // AutoSizeText(
+                      //   "Do you offer a free delivery with your item?",
+                      //   maxLines: 1,
+                      //   style: TextStyle(
+                      //     color: const Color(0xFF4F4F4F).withOpacity(0.6),
+                      //     fontSize: 12.0,
+                      //   ),
+                      // ),
+                      const SizedBox(
+                        height: 60.6,
                       ),
                       Center(
                         child: ElevatedButton(
@@ -1053,8 +1120,8 @@ class _AddPostState extends State<AddPost> {
                               ),
                             )),
                       ),
-                      SizedBox(
-                        height: 66.5,
+                      const SizedBox(
+                        height: 93.7,
                       ),
                     ],
                   ),
@@ -1065,5 +1132,78 @@ class _AddPostState extends State<AddPost> {
         ),
       ),
     );
+  }
+
+  List<Widget> buildWrap(List<MapEntry<dynamic, dynamic>> entryList) {
+    final children = <Widget>[];
+    if (currentValue.isEmpty) {
+      for (int i = 0; i < entryList.length; i++) {
+        children.add(
+          InkWell(
+            onTap: () {
+              setState(() {
+                indexCount = i;
+                print("Number of apartments added on a specific date : " +
+                    entryList[indexCount].value.length.toString());
+
+                currentValue.add(entryList[i].key.toString());
+                addCategoryList.add(entryList[i].key.toString());
+                buildWrap(entryList);
+              });
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: const Color(0xFF1EB1FC).withOpacity(0.15),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: AutoSizeText(
+                  entryList[i].key.toString(),
+                  maxLines: 1,
+                  style: const TextStyle(
+                    color: Color(0xFF555555),
+                    fontSize: 14.0,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      }
+    } else {
+      for (int j = 0; j < entryList[indexCount].value.length; j++) {
+        children.add(
+          InkWell(
+            onTap: () {
+              print("Number of apartments added on a specific date : " +
+                  entryList[indexCount].value.length.toString());
+              setState(() {
+                currentValue.add(entryList[indexCount].value[j].toString());
+                addCategoryList.add(entryList[indexCount].value[j].toString());
+              });
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: const Color(0xFF1EB1FC).withOpacity(0.15),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: AutoSizeText(
+                  entryList[indexCount].value[j].toString(),
+                  maxLines: 1,
+                  style: const TextStyle(
+                    color: Color(0xFF555555),
+                    fontSize: 14.0,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      }
+    }
+    return children;
   }
 }
