@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:simple_shadow/simple_shadow.dart';
 
 class AddBarterCategories extends StatefulWidget {
   const AddBarterCategories({Key? key}) : super(key: key);
@@ -80,10 +81,13 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                     const SizedBox(
                       height: 23.0,
                     ),
-                    const Center(
+                    //padding: EdgeInsets.symmetric(
+                    //                           horizontal: MediaQuery.of(context).devicePixelRatio *
+                    //                               (20 / MediaQuery.of(context).devicePixelRatio)
+                    Center(
                       child: AutoSizeText(
                         "Selecting a category will add all of its sub categories",
-                        maxLines: 1,
+                        maxLines: 3,
                         style: TextStyle(
                           color: Color(0xFF5D5C5C),
                           fontSize: 14.0,
@@ -96,47 +100,66 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                     Padding(
                       //l - 32, r - 16.9
                       padding: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.width / 11.3,
-                          right: MediaQuery.of(context).size.width / 22),
+                          left: MediaQuery.of(context).devicePixelRatio *
+                              (68.5 / MediaQuery.of(context).devicePixelRatio)),
+                      //right: MediaQuery.of(context).size.width / 22),
                       child: Wrap(
                         direction: Axis.horizontal,
-                        runSpacing: 5.0,
-                        spacing: 5.0,
+                        runSpacing: MediaQuery.of(context).devicePixelRatio *
+                            (12 / MediaQuery.of(context).devicePixelRatio),
+                        spacing: MediaQuery.of(context).devicePixelRatio *
+                            (12.2 / MediaQuery.of(context).devicePixelRatio),
                         children: [
                           for (var barterCategoryItem in barterCategoryList)
                             Stack(
                               children: [
-                                if (barterCategoryItem == "Mobiles")
+                                if (barterCategoryItem == "Mobiles" ||
+                                    barterCategoryItem == "Panasonic")
                                   Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 4.0, left: 3.0),
+                                    padding: EdgeInsets.only(
+                                        top: MediaQuery.of(context)
+                                                .devicePixelRatio *
+                                            (4.0 /
+                                                MediaQuery.of(context)
+                                                    .devicePixelRatio),
+                                        left: MediaQuery.of(context)
+                                                .devicePixelRatio *
+                                            (3.0 /
+                                                MediaQuery.of(context)
+                                                    .devicePixelRatio)),
                                     child: Container(
                                       margin: EdgeInsets.only(
                                           top: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              27,
+                                                  .devicePixelRatio *
+                                              (15 /
+                                                  MediaQuery.of(context)
+                                                      .devicePixelRatio),
                                           left: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              25),
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              18,
+                                                  .devicePixelRatio *
+                                              (15 /
+                                                  MediaQuery.of(context)
+                                                      .devicePixelRatio)),
+                                      height: MediaQuery.of(context)
+                                              .devicePixelRatio *
+                                          (35 /
+                                              MediaQuery.of(context)
+                                                  .devicePixelRatio),
                                       decoration: BoxDecoration(
                                         color: const Color(0xFFFFEFEF),
                                         borderRadius: BorderRadius.circular(12),
                                         border: Border.all(
-                                            color: const Color(0xFFF7817D),
+                                            color:
+                                                (barterCategoryItem == "Apple")
+                                                    ? Color(0xFFFD473E)
+                                                    : Color(0xFFF7817D),
                                             width: 1.5),
-                                        boxShadow: [
+                                        boxShadow: <BoxShadow>[
                                           BoxShadow(
-                                              //offset: Offset(0, 4),
-                                              color: const Color(0xFF1EB1FC)
-                                                  .withOpacity(0.16), //edited
+                                              color: Color(0xFF1EB1FC)
+                                                  .withOpacity(0.16),
+                                              blurRadius: 2,
                                               spreadRadius: 0.5,
-                                              blurRadius: 2 //edited
-                                              ),
+                                              offset: Offset(0.0, 0.5))
                                         ],
                                       ),
                                       child: Column(
@@ -162,35 +185,50 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                 if (barterCategoryItem == "Mobiles" ||
                                     barterCategoryItem == "Panasonic")
                                   Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 2.0, left: 1.3),
+                                    padding: EdgeInsets.only(
+                                        top: MediaQuery.of(context)
+                                                .devicePixelRatio *
+                                            (2.0 /
+                                                MediaQuery.of(context)
+                                                    .devicePixelRatio),
+                                        left: MediaQuery.of(context)
+                                                .devicePixelRatio *
+                                            (1.3 /
+                                                MediaQuery.of(context)
+                                                    .devicePixelRatio)),
                                     child: Container(
                                       margin: EdgeInsets.only(
                                           top: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              27,
+                                                  .devicePixelRatio *
+                                              (15 /
+                                                  MediaQuery.of(context)
+                                                      .devicePixelRatio),
                                           left: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              25),
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              18,
+                                                  .devicePixelRatio *
+                                              (15 /
+                                                  MediaQuery.of(context)
+                                                      .devicePixelRatio)),
+                                      height: MediaQuery.of(context)
+                                              .devicePixelRatio *
+                                          (35 /
+                                              MediaQuery.of(context)
+                                                  .devicePixelRatio),
                                       decoration: BoxDecoration(
                                         color: const Color(0xFFFFEFEF),
                                         borderRadius: BorderRadius.circular(12),
                                         border: Border.all(
-                                            color: const Color(0xFFF7817D),
+                                            color:
+                                                (barterCategoryItem == "Apple")
+                                                    ? Color(0xFFFD473E)
+                                                    : Color(0xFFF7817D),
                                             width: 1.5),
-                                        boxShadow: [
+                                        boxShadow: <BoxShadow>[
                                           BoxShadow(
-                                              //offset: Offset(0, 4),
-                                              color: const Color(0xFF1EB1FC)
-                                                  .withOpacity(0.16), //edited
+                                              color: Color(0xFF1EB1FC)
+                                                  .withOpacity(0.16),
+                                              blurRadius: 2,
                                               spreadRadius: 0.5,
-                                              blurRadius: 2 //edited
-                                              ),
+                                              offset: Offset(0.0, 0.5))
                                         ],
                                       ),
                                       child: Column(
@@ -216,18 +254,38 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
 
                                 Container(
                                   margin: EdgeInsets.only(
-                                      top: MediaQuery.of(context).size.width /
-                                          27,
-                                      left: MediaQuery.of(context).size.width /
-                                          25),
+                                      top: MediaQuery.of(context)
+                                              .devicePixelRatio *
+                                          (15 /
+                                              MediaQuery.of(context)
+                                                  .devicePixelRatio),
+                                      left: MediaQuery.of(context)
+                                              .devicePixelRatio *
+                                          (15 /
+                                              MediaQuery.of(context)
+                                                  .devicePixelRatio)),
                                   height:
-                                      MediaQuery.of(context).size.height / 18,
+                                      MediaQuery.of(context).devicePixelRatio *
+                                          (35 /
+                                              MediaQuery.of(context)
+                                                  .devicePixelRatio),
                                   decoration: BoxDecoration(
-                                      color: const Color(0xFFFFEFEF),
-                                      borderRadius: BorderRadius.circular(12),
-                                      border: Border.all(
-                                          color: const Color(0xFFF7817D),
-                                          width: 1.5)),
+                                    color: const Color(0xFFFFEFEF),
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(
+                                        color: (barterCategoryItem == "Apple")
+                                            ? Color(0xFFFD473E)
+                                            : Color(0xFFF7817D),
+                                        width: 1.5),
+                                    boxShadow: <BoxShadow>[
+                                      BoxShadow(
+                                          color: Color(0xFF1EB1FC)
+                                              .withOpacity(0.16),
+                                          blurRadius: 2,
+                                          spreadRadius: 0.5,
+                                          offset: Offset(0.0, 0.5))
+                                    ],
+                                  ),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -264,51 +322,70 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                       ),
                     ),
                     const SizedBox(
-                      height: 35.8,
+                      height: 23,
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        SvgPicture.string(
-                          '''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="53" height="53" viewBox="0 0 53 53">
+                        Padding(
+                          //19.6
+                          padding: EdgeInsets.only(
+                            left: MediaQuery.of(context).devicePixelRatio *
+                                (7.5 / MediaQuery.of(context).devicePixelRatio),
+                          ),
+                          child: SimpleShadow(
+                            opacity: 0.16, // Default: 0.5
+                            color: Color(0xFF1EB1FC), // Default: Black
+                            offset: Offset(0, 3), // Default: Offset(2, 2)
+                            sigma: 6,
+                            child: SvgPicture.string(
+                              '''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="53" height="53" viewBox="0 0 53 53">
   <defs>
-      <filter id="Rectangle_51" x="0" y="0" width="53" height="53" filterUnits="userSpaceOnUse">
-        <feOffset dy="3" input="SourceAlpha"/>
-        <feGaussianBlur stdDeviation="3" result="blur"/>
-        <feFlood flood-color="#1eb1fc" flood-opacity="0.161"/>
-        <feComposite operator="in" in2="blur"/>
-        <feComposite in="SourceGraphic"/>
-      </filter>
+    <filter id="Rectangle_51" x="0" y="0" width="53" height="53" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#1eb1fc" flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
   </defs>
   <g id="Group_263" data-name="Group 263" transform="translate(-3.685 -152.027)">
-      <g id="Layer_2" data-name="Layer 2" transform="translate(28.39 168.018)">
-        <g id="invisible_box" data-name="invisible box">
-          <rect id="Rectangle_98" data-name="Rectangle 98" width="4" height="5" transform="translate(-0.41 0.224)" fill="none"/>
-        </g>
+    <g transform="matrix(1, 0, 0, 1, 3.68, 152.03)" filter="url(#Rectangle_51)">
+      <g id="Rectangle_51-2" data-name="Rectangle 51" transform="translate(9 6)" fill="#f0f0f0" stroke="#828282" stroke-width="0.2">
+        <rect width="35" height="35" rx="17.5" stroke="none"/>
+        <rect x="0.1" y="0.1" width="34.8" height="34.8" rx="17.4" fill="none"/>
       </g>
-      <g id="Group_808" data-name="Group 808">
-        <g transform="matrix(1, 0, 0, 1, 3.68, 152.03)" filter="url(#Rectangle_51)">
-          <g id="Rectangle_51-2" data-name="Rectangle 51" transform="translate(9 6)" fill="#f0f0f0" stroke="#828282" stroke-width="0.2">
-            <rect width="35" height="35" rx="17.5" stroke="none"/>
-            <rect x="0.1" y="0.1" width="34.8" height="34.8" rx="17.4" fill="none"/>
-          </g>
-        </g>
-        <path id="Path_679" data-name="Path 679" d="M15.69,10.322,9.314,16.751a1.018,1.018,0,0,0,0,1.5L15.69,24.68a1.125,1.125,0,0,0,1.447.107,1.018,1.018,0,0,0,.107-1.607l-4.607-4.607H23.994a1.072,1.072,0,0,0,0-2.143H12.636l4.607-4.607a1.018,1.018,0,0,0-.107-1.607,1.125,1.125,0,0,0-1.447.107Z" transform="translate(13.16 158.026)"/>
+    </g>
+    <g id="Layer_2" data-name="Layer 2" transform="translate(28.39 168.018)">
+      <g id="invisible_box" data-name="invisible box">
+        <rect id="Rectangle_98" data-name="Rectangle 98" width="4" height="5" transform="translate(-0.41 0.224)" fill="none"/>
       </g>
+      <g id="Q3_icons" data-name="Q3 icons" transform="translate(-6.246 0.009)">
+        <path id="Path_679" data-name="Path 679" d="M15.69,10.322,9.314,16.751a1.018,1.018,0,0,0,0,1.5L15.69,24.68a1.125,1.125,0,0,0,1.447.107,1.018,1.018,0,0,0,.107-1.607l-4.607-4.607H23.994a1.072,1.072,0,0,0,0-2.143H12.636l4.607-4.607a1.018,1.018,0,0,0-.107-1.607,1.125,1.125,0,0,0-1.447.107Z" transform="translate(-8.985 -10.001)"/>
+      </g>
+    </g>
   </g>
 </svg>
 
 
 
+
 ''',
+                            ),
+                          ),
                         ),
                         Container(
-                          // width: 87.36,
-                          // height: 35,
-                          // left - 12.8
                           margin: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width / 35),
-                          height: MediaQuery.of(context).size.height / 18,
-                          width: MediaQuery.of(context).size.width / 1.26,
+                              left: MediaQuery.of(context).devicePixelRatio *
+                                  (13.7 /
+                                      MediaQuery.of(context).devicePixelRatio),
+                              right: MediaQuery.of(context).devicePixelRatio *
+                                  (19.6 /
+                                      MediaQuery.of(context).devicePixelRatio)),
+                          height: MediaQuery.of(context).devicePixelRatio *
+                              (34.5 / MediaQuery.of(context).devicePixelRatio),
+                          width: MediaQuery.of(context).devicePixelRatio *
+                              (266.2 / MediaQuery.of(context).devicePixelRatio),
                           decoration: const BoxDecoration(
                             //borderRadius: BorderRadius.circular(12),
                             //color: const Color(0xFFF0F0F0),
@@ -325,8 +402,11 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                 alignment: Alignment.centerLeft,
                                 child: Padding(
                                   padding: EdgeInsets.only(
-                                      left: MediaQuery.of(context).size.width /
-                                          25),
+                                      left: MediaQuery.of(context)
+                                              .devicePixelRatio *
+                                          (11.3 /
+                                              MediaQuery.of(context)
+                                                  .devicePixelRatio)),
                                   child: SvgPicture.string(
                                     '''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="23.585" height="25" viewBox="0 0 23.585 25">
   <image id="Rectangle_148" data-name="Rectangle 148" width="23.585" height="25" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAA1CAYAAAADOrgJAAACx0lEQVRoBWNggAJrVx8vS1fflZbufs/oja3cfK9buvmU6jv5SMPcQxZt5epdTm/HY7PPys33rLlnkAxZnrBw9nbBZuiAibn5biDPI66+a5Ed7R2V8iwqp5KuGNl+ENvMI9CSZM9YuvnegBkE8sTBuz/ojnuXbEfJlxYuPqmkewQpc8fkVtLdE6CAm7/9LIpHzF39ikc9AkpeozFCYb4aTVrIGQlWYo0mLQqT1ZAttY6eOvPs1JY5KHjnwvZn7RkecLyw2H3t9R7PYnz4aqe7GXLKYqBX0jpy/s6zSzNTnl3r9qIavt7tsfdOr5ss2EP08MjhG6+fXZ4eRzUPIAfG9W6v07cnefLRJUbOrO2jiSdgHrrZ49lKF49cnhqL4pF3Z5Y9+3RjF9n43ellKOZd6fE8RnOPHLjz+dnVHl+4xQ+W5j77+/kRxRhkDixGrvV43qe5R0DFK9zCbq9nNPFIt9ezUY+Q0m8ZjRE8eQklj4wmLRLbV6NJazRp0WjwYTRpjSat0aSFf3RyNI+M5pHRPDKaR8juKY62fknpSKGrHS1+R4vf4VL8hqTk02QOke55BDQOnNPQ+6xu4iKq4gHxCPKgNrXYox4hqdRCWjBAbAzEZuQ/O3n2Ak4Mkkc2CzlG7syMIrs2Rx4zBpmDbC6DBdoSDmQH4GLHpufh9ATIgyB5ZL3IFoLYIEeAmhjkYnRPgMxkMHf3dkS2lBi2d1jss6buPpwYJI9sDrpH8PF3VDs/64wzewai8alDlwPPWtF6mdPBZk+iHHWwwfmZtaE6HIP46A7GxgfPj8AmFGm58GxyngdRDlqabwv3BMhD60rsidIHnrGCeYSWNGiODzTXhy00kcXOtLk987PVAnsmwlHnGYiPLI+NfaPX8wh4DpGWHkA2GzT7CpqFxeYYdDFiYwJk3tV2dxVke+jGBs2P45s/J1YOfZ4dAPzrAB65+LlFAAAAAElFTkSuQmCC"/>
@@ -339,8 +419,13 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                   ),
                                 ),
                               ),
-                              const Padding(
-                                padding: EdgeInsets.only(left: 8.0),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    left: MediaQuery.of(context)
+                                            .devicePixelRatio *
+                                        (5.7 /
+                                            MediaQuery.of(context)
+                                                .devicePixelRatio)),
                                 child: AutoSizeText(
                                   "Mobile",
                                   maxLines: 1,
@@ -351,7 +436,12 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
+                                padding: EdgeInsets.only(
+                                    left: MediaQuery.of(context)
+                                            .devicePixelRatio *
+                                        (9.7 /
+                                            MediaQuery.of(context)
+                                                .devicePixelRatio)),
                                 child: SvgPicture.string(
                                   '''<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="8.932" height="10" viewBox="0 0 8.932 10">
   <g id="invisible_box" data-name="invisible box" transform="translate(0.721)">
@@ -366,8 +456,13 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
 ''',
                                 ),
                               ),
-                              const Padding(
-                                padding: EdgeInsets.only(left: 8.0),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    left: MediaQuery.of(context)
+                                            .devicePixelRatio *
+                                        (9.7 /
+                                            MediaQuery.of(context)
+                                                .devicePixelRatio)),
                                 child: AutoSizeText(
                                   "HUAWEI",
                                   maxLines: 1,
@@ -378,7 +473,12 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
+                                padding: EdgeInsets.only(
+                                    left: MediaQuery.of(context)
+                                            .devicePixelRatio *
+                                        (4.7 /
+                                            MediaQuery.of(context)
+                                                .devicePixelRatio)),
                                 child: SvgPicture.string(
                                   '''<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="8.932" height="10" viewBox="0 0 8.932 10">
   <g id="invisible_box" data-name="invisible box" transform="translate(0.721)">
@@ -410,11 +510,26 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                               // height: 35,
                               // left - 67.36
                               margin: EdgeInsets.only(
-                                top: MediaQuery.of(context).size.width / 27,
-                                left: MediaQuery.of(context).size.width / 5.3,
-                              ),
-                              height: MediaQuery.of(context).size.height / 14.3,
-                              width: MediaQuery.of(context).size.width / 1.26,
+                                  top: MediaQuery.of(context).devicePixelRatio *
+                                      (15 /
+                                          MediaQuery.of(context)
+                                              .devicePixelRatio),
+                                  left:
+                                      MediaQuery.of(context).devicePixelRatio *
+                                          (83.3 /
+                                              MediaQuery.of(context)
+                                                  .devicePixelRatio),
+                                  right:
+                                      MediaQuery.of(context).devicePixelRatio *
+                                          (19.6 /
+                                              MediaQuery.of(context)
+                                                  .devicePixelRatio)),
+                              height: MediaQuery.of(context).devicePixelRatio *
+                                  (35 /
+                                      MediaQuery.of(context).devicePixelRatio),
+                              width: MediaQuery.of(context).devicePixelRatio *
+                                  (311.09 /
+                                      MediaQuery.of(context).devicePixelRatio),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
                                 color: const Color(0xFFFFEFEF),
@@ -428,9 +543,10 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                     child: Padding(
                                       padding: EdgeInsets.only(
                                           left: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              15),
+                                                  .devicePixelRatio *
+                                              (22 /
+                                                  MediaQuery.of(context)
+                                                      .devicePixelRatio)),
                                       child: const AutoSizeText(
                                         "Mate 40 Pro",
                                         maxLines: 1,
@@ -441,14 +557,16 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        right:
-                                            MediaQuery.of(context).size.width /
-                                                15),
-                                    child: Row(
-                                      children: [
-                                        SvgPicture.string(
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            right: MediaQuery.of(context)
+                                                    .devicePixelRatio *
+                                                (4 /
+                                                    MediaQuery.of(context)
+                                                        .devicePixelRatio)),
+                                        child: SvgPicture.string(
                                           '''<svg xmlns="http://www.w3.org/2000/svg" width="10.323" height="18" viewBox="0 0 10.323 18">
   <g id="Q3_icons" data-name="Q3 icons" transform="translate(10.323 18) rotate(180)">
     <path id="Path_679" data-name="Path 679" d="M8.046.385.4,8.1a1.222,1.222,0,0,0,0,1.8l7.651,7.715a1.35,1.35,0,0,0,1.736.129,1.222,1.222,0,0,0,.129-1.929L3.236,8.853c-3.361-4.431-2.656,4.924,0,0L9.911,2.185A1.222,1.222,0,0,0,9.782.256,1.35,1.35,0,0,0,8.046.385Z" transform="translate(0)" fill="#1eb1fc"/>
@@ -459,118 +577,48 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
 
 
 ''',
-                                        ),
-                                        SvgPicture.string(
-                                          '''<svg xmlns="http://www.w3.org/2000/svg" width="10.323" height="18" viewBox="0 0 10.323 18">
-  <g id="Q3_icons" data-name="Q3 icons" transform="translate(10.323 18) rotate(180)">
-    <path id="Path_679" data-name="Path 679" d="M8.046.385.4,8.1a1.222,1.222,0,0,0,0,1.8l7.651,7.715a1.35,1.35,0,0,0,1.736.129,1.222,1.222,0,0,0,.129-1.929L3.236,8.853c-3.361-4.431-2.656,4.924,0,0L9.911,2.185A1.222,1.222,0,0,0,9.782.256,1.35,1.35,0,0,0,8.046.385Z" transform="translate(0)" fill="#1eb1fc"/>
-  </g>
-</svg>
-
-
-
-
-''',
-                                        ),
-                                        SvgPicture.string(
-                                          '''<svg xmlns="http://www.w3.org/2000/svg" width="10.323" height="18" viewBox="0 0 10.323 18">
-  <g id="Q3_icons" data-name="Q3 icons" transform="translate(10.323 18) rotate(180)">
-    <path id="Path_679" data-name="Path 679" d="M8.046.385.4,8.1a1.222,1.222,0,0,0,0,1.8l7.651,7.715a1.35,1.35,0,0,0,1.736.129,1.222,1.222,0,0,0,.129-1.929L3.236,8.853c-3.361-4.431-2.656,4.924,0,0L9.911,2.185A1.222,1.222,0,0,0,9.782.256,1.35,1.35,0,0,0,8.046.385Z" transform="translate(0)" fill="#1eb1fc"/>
-  </g>
-</svg>
-
-
-
-''',
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              //52.36
-                              padding: EdgeInsets.only(
-                                  left:
-                                      MediaQuery.of(context).size.width / 6.8),
-                              child: SvgPicture.string(
-                                '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-  <g id="Group_807" data-name="Group 807" transform="translate(-50.712 -452.04)">
-      <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M11.143,6.964H7.286V3.107a.857.857,0,0,0-.857-.857H5.571a.857.857,0,0,0-.857.857V6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H4.714v3.857a.857.857,0,0,0,.857.857h.857a.857.857,0,0,0,.857-.857V9.536h3.857A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(60.712 459.79)" fill="#fff"/>
-      <g id="Group_805" data-name="Group 805" transform="translate(6.941 130.909)">
-        <path id="Icon_ionic-ios-remove-circle" data-name="Icon ionic-ios-remove-circle" d="M18.375,3.375a15,15,0,1,0,15,15A15,15,0,0,0,18.375,3.375Z" transform="translate(41.396 318.756)" fill="#00b1ff" stroke="#fff" stroke-width="2"/>
-        <path id="Icon_awesome-plus-2" data-name="Icon awesome-plus" d="M11.143,6.964H7.286V3.107a.857.857,0,0,0-.857-.857H5.571a.857.857,0,0,0-.857.857V6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H4.714v3.857a.857.857,0,0,0,.857.857h.857a.857.857,0,0,0,.857-.857V9.536h3.857A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(53.771 328.881)" fill="#fff"/>
-      </g>
-  </g>
-</svg>
-
-
-''',
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 10.2,
-                        ),
-                        Stack(
-                          children: [
-                            Container(
-                              // width: 87.36,
-                              // height: 35,
-                              //left - 67.36
-                              margin: EdgeInsets.only(
-                                  top: MediaQuery.of(context).size.width / 27,
-                                  left:
-                                      MediaQuery.of(context).size.width / 5.3),
-                              height: MediaQuery.of(context).size.height / 14.3,
-                              width: MediaQuery.of(context).size.width / 1.26,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: const Color(0xFFFFEFEF),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          left: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              15),
-                                      child: const AutoSizeText(
-                                        "Mate 30 Pro 5G",
-                                        maxLines: 1,
-                                        style: TextStyle(
-                                          color: Color(0xFF000000),
-                                          fontSize: 16.0,
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        right:
-                                            MediaQuery.of(context).size.width /
-                                                15),
-                                    child: Row(
-                                      children: [
-                                        SvgPicture.string(
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            right: MediaQuery.of(context)
+                                                    .devicePixelRatio *
+                                                (4 /
+                                                    MediaQuery.of(context)
+                                                        .devicePixelRatio)),
+                                        child: SvgPicture.string(
                                           '''<svg xmlns="http://www.w3.org/2000/svg" width="10.323" height="18" viewBox="0 0 10.323 18">
   <g id="Q3_icons" data-name="Q3 icons" transform="translate(10.323 18) rotate(180)">
-    <path id="Path_679" data-name="Path 679" d="M8.046.385.4,8.1a1.222,1.222,0,0,0,0,1.8l7.651,7.715a1.35,1.35,0,0,0,1.736.129,1.222,1.222,0,0,0,.129-1.929L3.236,8.853c-3.361-4.431-2.656,4.924,0,0L9.911,2.185A1.222,1.222,0,0,0,9.782.256,1.35,1.35,0,0,0,8.046.385Z" fill="#1eb1fc"/>
+    <path id="Path_679" data-name="Path 679" d="M8.046.385.4,8.1a1.222,1.222,0,0,0,0,1.8l7.651,7.715a1.35,1.35,0,0,0,1.736.129,1.222,1.222,0,0,0,.129-1.929L3.236,8.853c-3.361-4.431-2.656,4.924,0,0L9.911,2.185A1.222,1.222,0,0,0,9.782.256,1.35,1.35,0,0,0,8.046.385Z" transform="translate(0)" fill="#1eb1fc"/>
   </g>
 </svg>
 
 
+
+
 ''',
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            right: MediaQuery.of(context)
+                                                    .devicePixelRatio *
+                                                (13.4 /
+                                                    MediaQuery.of(context)
+                                                        .devicePixelRatio)),
+                                        child: SvgPicture.string(
+                                          '''<svg xmlns="http://www.w3.org/2000/svg" width="10.323" height="18" viewBox="0 0 10.323 18">
+  <g id="Q3_icons" data-name="Q3 icons" transform="translate(10.323 18) rotate(180)">
+    <path id="Path_679" data-name="Path 679" d="M8.046.385.4,8.1a1.222,1.222,0,0,0,0,1.8l7.651,7.715a1.35,1.35,0,0,0,1.736.129,1.222,1.222,0,0,0,.129-1.929L3.236,8.853c-3.361-4.431-2.656,4.924,0,0L9.911,2.185A1.222,1.222,0,0,0,9.782.256,1.35,1.35,0,0,0,8.046.385Z" transform="translate(0)" fill="#1eb1fc"/>
+  </g>
+</svg>
+
+
+
+''',
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
@@ -579,7 +627,10 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                               //52.36
                               padding: EdgeInsets.only(
                                   left:
-                                      MediaQuery.of(context).size.width / 6.8),
+                                      MediaQuery.of(context).devicePixelRatio *
+                                          (68.3 /
+                                              MediaQuery.of(context)
+                                                  .devicePixelRatio)),
                               child: SvgPicture.string(
                                 '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
   <g id="Group_807" data-name="Group 807" transform="translate(-50.712 -452.04)">
@@ -607,27 +658,45 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                               // height: 35,
                               // left - 67.36
                               margin: EdgeInsets.only(
-                                  top: MediaQuery.of(context).size.width / 27,
+                                  top: MediaQuery.of(context).devicePixelRatio *
+                                      (15 /
+                                          MediaQuery.of(context)
+                                              .devicePixelRatio),
                                   left:
-                                      MediaQuery.of(context).size.width / 5.3),
-                              height: MediaQuery.of(context).size.height / 14.3,
-                              width: MediaQuery.of(context).size.width / 1.26,
+                                      MediaQuery.of(context).devicePixelRatio *
+                                          (83.3 /
+                                              MediaQuery.of(context)
+                                                  .devicePixelRatio),
+                                  right:
+                                      MediaQuery.of(context).devicePixelRatio *
+                                          (19.6 /
+                                              MediaQuery.of(context)
+                                                  .devicePixelRatio)),
+                              height: MediaQuery.of(context).devicePixelRatio *
+                                  (35 /
+                                      MediaQuery.of(context).devicePixelRatio),
+                              width: MediaQuery.of(context).devicePixelRatio *
+                                  (311.09 /
+                                      MediaQuery.of(context).devicePixelRatio),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
                                 color: const Color(0xFFFFEFEF),
                               ),
                               child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Align(
                                     alignment: Alignment.centerLeft,
                                     child: Padding(
                                       padding: EdgeInsets.only(
                                           left: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              15),
+                                                  .devicePixelRatio *
+                                              (22 /
+                                                  MediaQuery.of(context)
+                                                      .devicePixelRatio)),
                                       child: const AutoSizeText(
-                                        "Mate 20 X (5G)",
+                                        "Mate 30 Pro 5G",
                                         maxLines: 1,
                                         style: TextStyle(
                                           color: Color(0xFF000000),
@@ -636,6 +705,29 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                       ),
                                     ),
                                   ),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            right: MediaQuery.of(context)
+                                                    .devicePixelRatio *
+                                                (13.4 /
+                                                    MediaQuery.of(context)
+                                                        .devicePixelRatio)),
+                                        child: SvgPicture.string(
+                                          '''<svg xmlns="http://www.w3.org/2000/svg" width="10.323" height="18" viewBox="0 0 10.323 18">
+  <g id="Q3_icons" data-name="Q3 icons" transform="translate(10.323 18) rotate(180)">
+    <path id="Path_679" data-name="Path 679" d="M8.046.385.4,8.1a1.222,1.222,0,0,0,0,1.8l7.651,7.715a1.35,1.35,0,0,0,1.736.129,1.222,1.222,0,0,0,.129-1.929L3.236,8.853c-3.361-4.431-2.656,4.924,0,0L9.911,2.185A1.222,1.222,0,0,0,9.782.256,1.35,1.35,0,0,0,8.046.385Z" transform="translate(0)" fill="#1eb1fc"/>
+  </g>
+</svg>
+
+
+
+''',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               ),
                             ),
@@ -643,7 +735,89 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                               //52.36
                               padding: EdgeInsets.only(
                                   left:
-                                      MediaQuery.of(context).size.width / 6.8),
+                                      MediaQuery.of(context).devicePixelRatio *
+                                          (68.3 /
+                                              MediaQuery.of(context)
+                                                  .devicePixelRatio)),
+                              child: SvgPicture.string(
+                                '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <g id="Group_807" data-name="Group 807" transform="translate(-50.712 -452.04)">
+      <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M11.143,6.964H7.286V3.107a.857.857,0,0,0-.857-.857H5.571a.857.857,0,0,0-.857.857V6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H4.714v3.857a.857.857,0,0,0,.857.857h.857a.857.857,0,0,0,.857-.857V9.536h3.857A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(60.712 459.79)" fill="#fff"/>
+      <g id="Group_805" data-name="Group 805" transform="translate(6.941 130.909)">
+        <path id="Icon_ionic-ios-remove-circle" data-name="Icon ionic-ios-remove-circle" d="M18.375,3.375a15,15,0,1,0,15,15A15,15,0,0,0,18.375,3.375Z" transform="translate(41.396 318.756)" fill="#00b1ff" stroke="#fff" stroke-width="2"/>
+        <path id="Icon_awesome-plus-2" data-name="Icon awesome-plus" d="M11.143,6.964H7.286V3.107a.857.857,0,0,0-.857-.857H5.571a.857.857,0,0,0-.857.857V6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H4.714v3.857a.857.857,0,0,0,.857.857h.857a.857.857,0,0,0,.857-.857V9.536h3.857A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(53.771 328.881)" fill="#fff"/>
+      </g>
+  </g>
+</svg>
+
+
+''',
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10.2,
+                        ),
+                        Stack(
+                          children: [
+                            Container(
+                              // width: 87.36,
+                              // height: 35,
+                              // left - 67.36
+                              margin: EdgeInsets.only(
+                                  top: MediaQuery.of(context).devicePixelRatio *
+                                      (15 /
+                                          MediaQuery.of(context)
+                                              .devicePixelRatio),
+                                  left:
+                                      MediaQuery.of(context).devicePixelRatio *
+                                          (83.3 /
+                                              MediaQuery.of(context)
+                                                  .devicePixelRatio),
+                                  right:
+                                      MediaQuery.of(context).devicePixelRatio *
+                                          (19.6 /
+                                              MediaQuery.of(context)
+                                                  .devicePixelRatio)),
+                              height: MediaQuery.of(context).devicePixelRatio *
+                                  (35 /
+                                      MediaQuery.of(context).devicePixelRatio),
+                              width: MediaQuery.of(context).devicePixelRatio *
+                                  (311.09 /
+                                      MediaQuery.of(context).devicePixelRatio),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: const Color(0xFFFFEFEF),
+                              ),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                      left: MediaQuery.of(context)
+                                              .devicePixelRatio *
+                                          (22 /
+                                              MediaQuery.of(context)
+                                                  .devicePixelRatio)),
+                                  child: const AutoSizeText(
+                                    "Mate 20 X (5G)",
+                                    maxLines: 1,
+                                    style: TextStyle(
+                                      color: Color(0xFF000000),
+                                      fontSize: 16.0,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              //52.36
+                              padding: EdgeInsets.only(
+                                  left:
+                                      MediaQuery.of(context).devicePixelRatio *
+                                          (68.3 /
+                                              MediaQuery.of(context)
+                                                  .devicePixelRatio)),
                               child: SvgPicture.string(
                                 '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
   <g id="Group_807" data-name="Group 807" transform="translate(-50.712 -452.04)">
@@ -667,8 +841,10 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                 ),
               ),
               Positioned(
-                bottom: 30.6,
-                right: 33,
+                bottom: MediaQuery.of(context).devicePixelRatio *
+                    (30.6 / MediaQuery.of(context).devicePixelRatio),
+                right: MediaQuery.of(context).devicePixelRatio *
+                    (33 / MediaQuery.of(context).devicePixelRatio),
                 child: SvgPicture.string(
                   '''<svg xmlns="http://www.w3.org/2000/svg" width="13" height="27" viewBox="0 0 13 27">
   <text id="_" data-name="􀆊" transform="translate(0 22)" fill="#00b1ff" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">􀆊</tspan></text>
