@@ -38,6 +38,7 @@ dependencies:
   flutter_svg: ^1.1.1+1
   sizer: ^2.0.15
   simple_shadow: ^0.3.0
+  pixel_perfect: ^1.1.1
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +64,10 @@ flutter:
     - family: SF-Pro
       fonts:
         - asset: assets/fonts/SF-Pro.ttf
+
+  assets:
+    - assets/new post.png
+    - assets/second post.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

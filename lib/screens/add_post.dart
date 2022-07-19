@@ -2,7 +2,6 @@ import 'dart:core';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
@@ -80,80 +79,96 @@ class _AddPostState extends State<AddPost> {
     "Testing": ["Bedspace", "Shared Room", "Studio", "1 Bedroom", "2 Bedrooms"]
   };
 
+  static const mockupHeight = 896;
+  static const mockupWidth = 414;
+
   @override
   Widget build(BuildContext context) {
+    var deviceWidth = MediaQuery.of(context).size.width;
+    var deviceScale = mockupWidth / deviceWidth;
+    var textScaleFactor = deviceWidth / mockupWidth;
     var entryList = itemCategoryMap.entries.toList();
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          systemOverlayStyle: const SystemUiOverlayStyle(
-            // Status bar color
-            statusBarColor: Color(0xFFFBFBFB),
-
-            // Status bar brightness
-            statusBarIconBrightness:
-                Brightness.dark, // For Android (dark icons)
-            statusBarBrightness: Brightness.light, // For iOS (dark icons)
-          ),
-          backgroundColor: const Color(0xFFFBFBFB),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: const AutoSizeText(
-                    "Back",
-                    style: TextStyle(
-                        color: Color(0xFF007AFF),
-                        fontSize: 17.0,
-                        fontFamily: "SF-Pro"),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(55 / mockupWidth * deviceWidth),
+          child: AppBar(
+            // systemOverlayStyle: const SystemUiOverlayStyle(
+            //   // Status bar color
+            //   statusBarColor: Color(0xFFFBFBFB),
+            //
+            //   // Status bar brightness
+            //   statusBarIconBrightness:
+            //       Brightness.dark, // For Android (dark icons)
+            //   statusBarBrightness: Brightness.light, // For iOS (dark icons)
+            // ),
+            backgroundColor: const Color(0xFFFBFBFB),
+            title: Padding(
+              padding: EdgeInsets.only(
+                top: 10.0 / mockupWidth * deviceWidth,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: AutoSizeText(
+                        "Back",
+                        textScaleFactor: textScaleFactor,
+                        style: TextStyle(
+                            color: Color(0xFF007AFF),
+                            fontSize: 17.0,
+                            fontFamily: "SF-Pro"),
+                      ),
+                    ),
                   ),
-                ),
+                  AutoSizeText(
+                    "New Post",
+                    textScaleFactor: textScaleFactor,
+                    style: TextStyle(
+                        color: Color(0xFF000000),
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'SF-Pro'),
+                  ),
+                  const Spacer(),
+                ],
               ),
-              const AutoSizeText(
-                "New Post",
-                style: TextStyle(
-                    color: Color(0xFF000000),
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: 'SF-Pro'),
-              ),
-              const Spacer(),
-            ],
+            ),
+            automaticallyImplyLeading: false,
+            shadowColor: const Color(0xFF707070),
+            elevation: 0.1,
           ),
-          automaticallyImplyLeading: false,
-          shadowColor: const Color(0xFF707070),
-          elevation: 0.1,
         ),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const SizedBox(
-                height: 23,
+              SizedBox(
+                height: 23 / mockupWidth * deviceWidth,
               ),
               Padding(
                 //20.3
                 padding: EdgeInsets.symmetric(
-                    horizontal: MediaQuery.of(context).devicePixelRatio *
-                        (32 / MediaQuery.of(context).devicePixelRatio)),
+                    horizontal: 32 / mockupWidth * deviceWidth),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const AutoSizeText(
-                      "Images of your product: 0/2",
+                    AutoSizeText(
+                      "Images of your product: 0/20",
+                      textScaleFactor: textScaleFactor,
                       style: TextStyle(
                         color: Color(0xFF000000),
                         fontSize: 18.0,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    const SizedBox(
-                      height: 15,
+                    SizedBox(
+                      height: 15 / mockupWidth * deviceWidth,
                     ),
                     Stack(
                       alignment: Alignment.center,
@@ -161,12 +176,9 @@ class _AddPostState extends State<AddPost> {
                         Padding(
                           // left 16.0
                           // right 8
-                          padding: EdgeInsets.symmetric(
-                            horizontal: MediaQuery.of(context)
-                                    .devicePixelRatio *
-                                (19.7 /
-                                    MediaQuery.of(context).devicePixelRatio),
-                          ),
+                          padding: EdgeInsets.only(
+                              left: 19.7 / mockupWidth * deviceWidth,
+                              right: 9.7 / mockupWidth * deviceWidth),
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(
@@ -174,26 +186,10 @@ class _AddPostState extends State<AddPost> {
                               children: [
                                 Container(
                                   margin: EdgeInsets.only(
-                                      top: MediaQuery.of(context)
-                                              .devicePixelRatio *
-                                          (10 /
-                                              MediaQuery.of(context)
-                                                  .devicePixelRatio),
-                                      right: MediaQuery.of(context)
-                                              .devicePixelRatio *
-                                          (25 /
-                                              MediaQuery.of(context)
-                                                  .devicePixelRatio)),
-                                  height:
-                                      MediaQuery.of(context).devicePixelRatio *
-                                          (80 /
-                                              MediaQuery.of(context)
-                                                  .devicePixelRatio),
-                                  width:
-                                      MediaQuery.of(context).devicePixelRatio *
-                                          (80 /
-                                              MediaQuery.of(context)
-                                                  .devicePixelRatio),
+                                      top: 10 / mockupWidth * deviceWidth,
+                                      right: 25 / mockupWidth * deviceWidth),
+                                  height: 80 / mockupWidth * deviceWidth,
+                                  width: 80 / mockupWidth * deviceWidth,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(15),
                                       border: Border.all(
@@ -203,15 +199,16 @@ class _AddPostState extends State<AddPost> {
                                       children: [
                                         Padding(
                                           padding: EdgeInsets.only(
-                                              top: MediaQuery.of(context)
-                                                      .devicePixelRatio *
-                                                  (8 /
-                                                      MediaQuery.of(context)
-                                                          .devicePixelRatio)),
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: SvgPicture.string(
-                                              '''<svg xmlns="http://www.w3.org/2000/svg" width="38.763" height="38.763" viewBox="0 0 38.763 38.763">
+                                              //11.7
+                                              top: 7.7 /
+                                                  mockupWidth *
+                                                  deviceWidth,
+                                              //7.1
+                                              bottom: 3.1 /
+                                                  mockupWidth *
+                                                  deviceWidth),
+                                          child: SvgPicture.string(
+                                            '''<svg xmlns="http://www.w3.org/2000/svg" width="38.763" height="38.763" viewBox="0 0 38.763 38.763">
   <g id="Group_539" data-name="Group 539" transform="translate(-329 -324.631)">
     <g id="Path_2492" data-name="Path 2492" transform="translate(329 324.631)" fill="#fff">
       <path d="M 19.38165473937988 37.26331329345703 C 14.60529518127441 37.26331329345703 10.11481475830078 35.40329360961914 6.737414836883545 32.02589416503906 C 3.360024690628052 28.64849472045898 1.500004768371582 24.15801429748535 1.500004768371582 19.38165473937988 C 1.500004768371582 14.60529518127441 3.360024690628052 10.11481475830078 6.737414836883545 6.737414836883545 C 10.11481475830078 3.360024690628052 14.60529518127441 1.500004768371582 19.38165473937988 1.500004768371582 C 24.15801429748535 1.500004768371582 28.64849472045898 3.360024690628052 32.02589416503906 6.737414836883545 C 35.40329360961914 10.11481475830078 37.26331329345703 14.60529518127441 37.26331329345703 19.38165473937988 C 37.26331329345703 24.15801429748535 35.40329360961914 28.64849472045898 32.02589416503906 32.02589416503906 C 28.64849472045898 35.40329360961914 24.15801429748535 37.26331329345703 19.38165473937988 37.26331329345703 Z" stroke="none"/>
@@ -222,12 +219,11 @@ class _AddPostState extends State<AddPost> {
 </svg>
 
 ''',
-                                            ),
-                                            //size: MediaQuery.of(context).size.width / 15,
                                           ),
                                         ),
-                                        const AutoSizeText(
+                                        AutoSizeText(
                                           "Add",
+                                          textScaleFactor: textScaleFactor,
                                           style: TextStyle(
                                             color: Color(0xFF555555),
                                             fontSize: 14.0,
@@ -241,47 +237,24 @@ class _AddPostState extends State<AddPost> {
                                   Container(
                                     //15
                                     margin: EdgeInsets.only(
-                                        right: MediaQuery.of(context)
-                                                .devicePixelRatio *
-                                            (15 /
-                                                MediaQuery.of(context)
-                                                    .devicePixelRatio)),
+                                        right: 15 / mockupWidth * deviceWidth),
                                     //w and h 90
-                                    height: MediaQuery.of(context)
-                                            .devicePixelRatio *
-                                        (90 /
-                                            MediaQuery.of(context)
-                                                .devicePixelRatio),
-                                    width: MediaQuery.of(context)
-                                            .devicePixelRatio *
-                                        (90 /
-                                            MediaQuery.of(context)
-                                                .devicePixelRatio),
+                                    height: 90 / mockupWidth * deviceWidth,
+                                    width: 90 / mockupWidth * deviceWidth,
                                     child: Stack(
                                       alignment: Alignment.topRight,
                                       children: [
                                         Container(
                                           margin: EdgeInsets.only(
-                                              top: MediaQuery.of(context)
-                                                      .devicePixelRatio *
-                                                  (10 /
-                                                      MediaQuery.of(context)
-                                                          .devicePixelRatio),
-                                              right: MediaQuery.of(context)
-                                                      .devicePixelRatio *
-                                                  (10 /
-                                                      MediaQuery.of(context)
-                                                          .devicePixelRatio)),
-                                          height: MediaQuery.of(context)
-                                                  .devicePixelRatio *
-                                              (80 /
-                                                  MediaQuery.of(context)
-                                                      .devicePixelRatio),
-                                          width: MediaQuery.of(context)
-                                                  .devicePixelRatio *
-                                              (80 /
-                                                  MediaQuery.of(context)
-                                                      .devicePixelRatio),
+                                              top: 10 /
+                                                  mockupWidth *
+                                                  deviceWidth,
+                                              right: 10 /
+                                                  mockupWidth *
+                                                  deviceWidth),
+                                          height:
+                                              80 / mockupWidth * deviceWidth,
+                                          width: 80 / mockupWidth * deviceWidth,
                                           foregroundDecoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(15),
@@ -338,8 +311,8 @@ class _AddPostState extends State<AddPost> {
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 23.1,
+                    SizedBox(
+                      height: 23.1 / mockupWidth * deviceWidth,
                     ),
                     TextField(
                       style: const TextStyle(
@@ -348,6 +321,9 @@ class _AddPostState extends State<AddPost> {
                       ),
                       decoration: InputDecoration(
                         hintText: "Samsung A9 Pro",
+                        hintStyle: TextStyle(
+                          fontSize: 14 / mockupWidth * deviceWidth,
+                        ),
                         filled: true,
                         fillColor: const Color(0xFFF9F9F9),
                         enabledBorder: OutlineInputBorder(
@@ -364,8 +340,8 @@ class _AddPostState extends State<AddPost> {
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 11.8,
+                    SizedBox(
+                      height: 11.8 / mockupWidth * deviceWidth,
                     ),
                     TextField(
                       maxLines: null,
@@ -377,6 +353,9 @@ class _AddPostState extends State<AddPost> {
                         hintMaxLines: 10,
                         hintText:
                             "Description: The more you write, the better the chances are at finding…",
+                        hintStyle: TextStyle(
+                          fontSize: 14 / mockupWidth * deviceWidth,
+                        ),
                         filled: true,
                         fillColor: const Color(0xFFF9F9F9),
                         enabledBorder: OutlineInputBorder(
@@ -393,8 +372,8 @@ class _AddPostState extends State<AddPost> {
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 11.8,
+                    SizedBox(
+                      height: 11.8 / mockupWidth * deviceWidth,
                     ),
                     Row(
                       children: [
@@ -414,6 +393,9 @@ class _AddPostState extends State<AddPost> {
                               //     child: Text(" Location: ")),
                               // isDense: true,
                               hintText: "Location: Type or Autolocate",
+                              hintStyle: TextStyle(
+                                fontSize: 14 / mockupWidth * deviceWidth,
+                              ),
                               //hintMaxLines: 10,
                               filled: true,
                               fillColor: const Color(0xFFF9F9F9),
@@ -433,21 +415,13 @@ class _AddPostState extends State<AddPost> {
                           ),
                         ),
                         SizedBox(
-                          width: MediaQuery.of(context).devicePixelRatio *
-                              (16 / MediaQuery.of(context).devicePixelRatio),
+                          width: 16 / mockupWidth * deviceWidth,
                         ),
                         ElevatedButton(
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
-                              fixedSize: Size(
-                                  MediaQuery.of(context).devicePixelRatio *
-                                      (100 /
-                                          MediaQuery.of(context)
-                                              .devicePixelRatio),
-                                  MediaQuery.of(context).devicePixelRatio *
-                                      (40 /
-                                          MediaQuery.of(context)
-                                              .devicePixelRatio)),
+                              fixedSize: Size(120 / mockupWidth * deviceWidth,
+                                  40 / mockupWidth * deviceWidth),
                               splashFactory: InkRipple.splashFactory,
                               shadowColor: Colors.transparent,
                               primary: const Color(0x000000ff),
@@ -457,8 +431,9 @@ class _AddPostState extends State<AddPost> {
                                   side: const BorderSide(
                                       color: Color(0xFF1EB1FC), width: 0.7)),
                             ),
-                            child: const AutoSizeText(
+                            child: Text(
                               "Auto Locate",
+                              textScaleFactor: textScaleFactor,
                               maxLines: 1,
                               style: TextStyle(
                                 color: Color(0xFF1EB1FC),
@@ -467,8 +442,8 @@ class _AddPostState extends State<AddPost> {
                             ))
                       ],
                     ),
-                    const SizedBox(
-                      height: 11.8,
+                    SizedBox(
+                      height: 11.8 / mockupWidth * deviceWidth,
                     ),
                     TextField(
                       style: const TextStyle(
@@ -476,15 +451,21 @@ class _AddPostState extends State<AddPost> {
                         fontWeight: FontWeight.w400,
                       ),
                       decoration: InputDecoration(
-                        prefixIcon: const Padding(
+                        prefixIcon: Padding(
                           padding: EdgeInsets.only(bottom: 3, left: 5),
-                          child: Text(" Price: "),
+                          child: Text(
+                            " Price: ",
+                            textScaleFactor: textScaleFactor,
+                          ),
                         ),
                         prefixIconConstraints:
                             const BoxConstraints(minWidth: 0, minHeight: 0),
-                        suffixIcon: const Padding(
+                        suffixIcon: Padding(
                           padding: EdgeInsets.only(bottom: 3, right: 34),
-                          child: Text(" AED"),
+                          child: Text(
+                            " AED",
+                            textScaleFactor: textScaleFactor,
+                          ),
                         ),
                         suffixIconConstraints:
                             const BoxConstraints(minWidth: 0, minHeight: 0),
@@ -499,6 +480,9 @@ class _AddPostState extends State<AddPost> {
                         // ),
                         // labelText: "Price",
                         hintText: "Enter Amount",
+                        hintStyle: TextStyle(
+                          fontSize: 14 / mockupWidth * deviceWidth,
+                        ),
                         filled: true,
                         fillColor: const Color(0xFFF9F9F9),
                         enabledBorder: OutlineInputBorder(
@@ -518,8 +502,8 @@ class _AddPostState extends State<AddPost> {
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 23,
+              SizedBox(
+                height: 23 / mockupWidth * deviceWidth,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -527,10 +511,10 @@ class _AddPostState extends State<AddPost> {
                   Padding(
                     //22.8
                     padding: EdgeInsets.symmetric(
-                        horizontal: MediaQuery.of(context).devicePixelRatio *
-                            (34.5 / MediaQuery.of(context).devicePixelRatio)),
-                    child: const AutoSizeText(
+                        horizontal: 34.5 / mockupWidth * deviceWidth),
+                    child: AutoSizeText(
                       "Select your item category:",
+                      textScaleFactor: textScaleFactor,
                       maxLines: 1,
                       style: TextStyle(
                         color: Color(0xFF000000),
@@ -539,14 +523,13 @@ class _AddPostState extends State<AddPost> {
                       ),
                     ),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     //22.4
-                    height: 22.4,
+                    height: 22.4 / mockupWidth * deviceWidth,
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(
-                        horizontal: MediaQuery.of(context).devicePixelRatio *
-                            (34.5 / MediaQuery.of(context).devicePixelRatio)),
+                        horizontal: 34.5 / mockupWidth * deviceWidth),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -554,11 +537,8 @@ class _AddPostState extends State<AddPost> {
                           Wrap(
                             direction: Axis.horizontal,
                             alignment: WrapAlignment.start,
-                            runSpacing: MediaQuery.of(context)
-                                    .devicePixelRatio *
-                                (5 / MediaQuery.of(context).devicePixelRatio),
-                            spacing: MediaQuery.of(context).devicePixelRatio *
-                                (9.8 / MediaQuery.of(context).devicePixelRatio),
+                            runSpacing: 5 / mockupWidth * deviceWidth,
+                            spacing: 9.8 / mockupWidth * deviceWidth,
                             children: [
                               InkWell(
                                 customBorder: const CircleBorder(),
@@ -575,7 +555,7 @@ class _AddPostState extends State<AddPost> {
                                   sigma: 6,
                                   child: SvgPicture.string(
                                     '''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="58" height="58" viewBox="0 0 58 58">
-  
+
   <g id="Group_612" data-name="Group 612" transform="translate(-27.756 -387.572)">
       <g id="Group_46" data-name="Group 46" transform="translate(-61.297 40.925)">
         <g id="Message" transform="translate(98.053 352.647)">
@@ -603,20 +583,12 @@ class _AddPostState extends State<AddPost> {
                               for (int i = 0; i < addCategoryList.length; i++)
                                 //var category in addCategoryList
                                 Wrap(
-                                  spacing:
-                                      MediaQuery.of(context).devicePixelRatio *
-                                          (9.8 /
-                                              MediaQuery.of(context)
-                                                  .devicePixelRatio),
+                                  spacing: 9.8 / mockupWidth * deviceWidth,
                                   children: [
                                     Container(
                                       //2.5 - sizedbox changed
                                       margin: EdgeInsets.only(
-                                          top: MediaQuery.of(context)
-                                                  .devicePixelRatio *
-                                              (8.5 /
-                                                  MediaQuery.of(context)
-                                                      .devicePixelRatio)),
+                                          top: 10 / mockupWidth * deviceWidth),
 
                                       // width: 87.36,
                                       // height: 35,
@@ -633,6 +605,7 @@ class _AddPostState extends State<AddPost> {
                                             AutoSizeText(
                                               '${addCategoryList[i][0]}',
                                               maxLines: 1,
+                                              textScaleFactor: textScaleFactor,
                                               style: TextStyle(
                                                 color: (i == 0)
                                                     ? const Color(0xFFFFFFFF)
@@ -643,6 +616,7 @@ class _AddPostState extends State<AddPost> {
                                             ),
                                             AutoSizeText(
                                               '${addCategoryList[i].substring(1)}',
+                                              textScaleFactor: textScaleFactor,
                                               maxLines: 1,
                                               style: TextStyle(
                                                 color: (i == 0)
@@ -658,11 +632,8 @@ class _AddPostState extends State<AddPost> {
                                     Padding(
                                       //top - 12.5 sizedbox changed
                                       padding: EdgeInsets.only(
-                                          top: MediaQuery.of(context)
-                                                  .devicePixelRatio *
-                                              (16.5 /
-                                                  MediaQuery.of(context)
-                                                      .devicePixelRatio)),
+                                          top:
+                                              18.0 / mockupWidth * deviceWidth),
                                       child: SvgPicture.string(
                                         '''<svg xmlns="http://www.w3.org/2000/svg" width="6.905" height="15" viewBox="0 0 6.905 15">
   <path id="Vector" d="M1.314,0,0,1.762,3.382,7.5,0,13.238,1.314,15,6.905,7.5Z" transform="matrix(1, 0, 0, 1, 0, 0)" fill="#1eb1fc"/>
@@ -678,45 +649,42 @@ class _AddPostState extends State<AddPost> {
                           const SizedBox(height: 24),
                         Wrap(
                           direction: Axis.horizontal,
-                          runSpacing: MediaQuery.of(context).devicePixelRatio *
-                              (10.0 / MediaQuery.of(context).devicePixelRatio),
-                          spacing: MediaQuery.of(context).devicePixelRatio *
-                              (10.0 / MediaQuery.of(context).devicePixelRatio),
-                          children: buildWrap(entryList),
+                          runSpacing: 10 / mockupWidth * deviceWidth,
+                          spacing: 10 / mockupWidth * deviceWidth,
+                          children: buildWrap(
+                              entryList, deviceWidth, textScaleFactor),
                         )
                       ],
                     ),
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 33,
+              SizedBox(
+                height: 33 / mockupWidth * deviceWidth,
               ),
               //Divider
               Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: MediaQuery.of(context).devicePixelRatio *
-                        (11.7 / MediaQuery.of(context).devicePixelRatio)),
+                    horizontal: 11.7 / mockupWidth * deviceWidth),
                 child: const Divider(
                   color: Color(0xFFC6C5C9),
                   thickness: 1,
                 ),
               ),
-              const SizedBox(
-                height: 33,
+              SizedBox(
+                height: 33 / mockupWidth * deviceWidth,
               ),
               Padding(
                 padding: EdgeInsets.only(
-                    //13.6
-                    // - right - 26.1
-                    right: MediaQuery.of(context).devicePixelRatio *
-                        (12.3 / MediaQuery.of(context).devicePixelRatio),
-                    left: MediaQuery.of(context).devicePixelRatio *
-                        (26.5 / MediaQuery.of(context).devicePixelRatio)),
+                    //l - 26.5
+                    //r - 12.3
+                    right: 23.5 / mockupWidth * deviceWidth,
+                    left: 27.8 / mockupWidth * deviceWidth),
                 child: Row(
                   children: [
-                    const AutoSizeText(
+                    AutoSizeText(
                       "Barter / Exchange Features:",
+                      textScaleFactor: textScaleFactor,
                       maxLines: 1,
                       style: TextStyle(
                         color: Color(0xFF000000),
@@ -728,13 +696,11 @@ class _AddPostState extends State<AddPost> {
                     (isBarter == false)
                         ? Padding(
                             padding: EdgeInsets.only(
-                                left: MediaQuery.of(context).devicePixelRatio *
-                                    (8 /
-                                        MediaQuery.of(context)
-                                            .devicePixelRatio)),
+                                left: 28 / mockupWidth * deviceWidth),
                             child: AutoSizeText(
                               "OFF",
                               maxLines: 1,
+                              textScaleFactor: textScaleFactor,
                               style: TextStyle(
                                 color: Color(0xFF4F4F4F),
                                 fontSize: 14,
@@ -743,12 +709,10 @@ class _AddPostState extends State<AddPost> {
                           )
                         : Padding(
                             padding: EdgeInsets.only(
-                                left: MediaQuery.of(context).devicePixelRatio *
-                                    (8.0 /
-                                        MediaQuery.of(context)
-                                            .devicePixelRatio)),
-                            child: const AutoSizeText(
+                                left: 28.0 / mockupWidth * deviceWidth),
+                            child: AutoSizeText(
                               "ON",
+                              textScaleFactor: textScaleFactor,
                               maxLines: 1,
                               style: TextStyle(
                                 color: Color(0xFF4F4F4F),
@@ -773,16 +737,16 @@ class _AddPostState extends State<AddPost> {
                   ? Padding(
                       padding: EdgeInsets.symmetric(
                           //right: 13.6,
-                          horizontal: MediaQuery.of(context).devicePixelRatio *
-                              (26.5 / MediaQuery.of(context).devicePixelRatio)),
+                          horizontal: 26.5 / mockupWidth * deviceWidth),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(
-                            height: 16,
+                          SizedBox(
+                            height: 16 / mockupWidth * deviceWidth,
                           ),
                           AutoSizeText(
                             "- Turn on: List your item to Barter / trade-in & for sale",
+                            textScaleFactor: textScaleFactor,
                             maxLines: 1,
                             style: TextStyle(
                               color: const Color(0xFF4F4F4F).withOpacity(0.6),
@@ -791,14 +755,15 @@ class _AddPostState extends State<AddPost> {
                           ),
                           AutoSizeText(
                             "- Turn off: Only for sale",
+                            textScaleFactor: textScaleFactor,
                             maxLines: 1,
                             style: TextStyle(
                               color: const Color(0xFF4F4F4F).withOpacity(0.6),
                               fontSize: 14.0,
                             ),
                           ),
-                          const SizedBox(
-                            height: 34,
+                          SizedBox(
+                            height: 34 / mockupWidth * deviceWidth,
                           ),
                         ],
                       ),
@@ -806,18 +771,16 @@ class _AddPostState extends State<AddPost> {
                   : Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
-                          height: 19.5,
+                        SizedBox(
+                          height: 19.5 / mockupWidth * deviceWidth,
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(
                               //right: MediaQuery.of(context).size.width / 23.1,
-                              horizontal: MediaQuery.of(context)
-                                      .devicePixelRatio *
-                                  (27.6 /
-                                      MediaQuery.of(context).devicePixelRatio)),
-                          child: const AutoSizeText(
+                              horizontal: 27.6 / mockupWidth * deviceWidth),
+                          child: AutoSizeText(
                             "- Add what you are interested in to barter to",
+                            textScaleFactor: textScaleFactor,
                             maxLines: 1,
                             style: TextStyle(
                               color: Color(0xFF4F4F4F),
@@ -825,22 +788,15 @@ class _AddPostState extends State<AddPost> {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 23,
+                        SizedBox(
+                          height: 23 / mockupWidth * deviceWidth,
                         ),
                         Center(
                           child: ElevatedButton(
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
-                              fixedSize: Size(
-                                  MediaQuery.of(context).devicePixelRatio *
-                                      (180 /
-                                          MediaQuery.of(context)
-                                              .devicePixelRatio),
-                                  MediaQuery.of(context).devicePixelRatio *
-                                      (40 /
-                                          MediaQuery.of(context)
-                                              .devicePixelRatio)),
+                              fixedSize: Size(180 / mockupWidth * deviceWidth,
+                                  40 / mockupWidth * deviceWidth),
                               splashFactory: InkRipple.splashFactory,
                               shadowColor: const Color(0xFFEEEEEE),
                               elevation: 3,
@@ -850,9 +806,10 @@ class _AddPostState extends State<AddPost> {
                                 borderRadius: BorderRadius.circular(15.0),
                               ),
                             ),
-                            child: const AutoSizeText(
+                            child: AutoSizeText(
                               "Add Barter Categories",
                               maxLines: 1,
+                              textScaleFactor: textScaleFactor,
                               style: TextStyle(
                                 color: Color(0xFFFFFFFF),
                                 fontSize: 15,
@@ -860,21 +817,17 @@ class _AddPostState extends State<AddPost> {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 11.8,
+                        SizedBox(
+                          height: 11.8 / mockupWidth * deviceWidth,
                         ),
                         // padding 12.7 added initially
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 24.4),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 24.4 / mockupWidth * deviceWidth),
                           child: Wrap(
                             direction: Axis.horizontal,
-                            runSpacing: MediaQuery.of(context)
-                                    .devicePixelRatio *
-                                (12.8 /
-                                    MediaQuery.of(context).devicePixelRatio),
-                            spacing: MediaQuery.of(context).devicePixelRatio *
-                                (12.2 /
-                                    MediaQuery.of(context).devicePixelRatio),
+                            runSpacing: 12.8 / mockupWidth * deviceWidth,
+                            spacing: 12.2 / mockupWidth * deviceWidth,
                             children: [
                               for (var barterCategoryItem in barterCategoryList)
                                 Stack(
@@ -883,33 +836,21 @@ class _AddPostState extends State<AddPost> {
                                         barterCategoryItem == "Panasonic")
                                       Padding(
                                         padding: EdgeInsets.only(
-                                            top: MediaQuery.of(context)
-                                                    .devicePixelRatio *
-                                                (4.0 /
-                                                    MediaQuery.of(context)
-                                                        .devicePixelRatio),
-                                            left: MediaQuery.of(context)
-                                                    .devicePixelRatio *
-                                                (3.0 /
-                                                    MediaQuery.of(context)
-                                                        .devicePixelRatio)),
+                                            top:
+                                                4.0 / mockupWidth * deviceWidth,
+                                            left: 3.0 /
+                                                mockupWidth *
+                                                deviceWidth),
                                         child: Container(
                                           margin: EdgeInsets.only(
-                                              top: MediaQuery.of(context)
-                                                      .devicePixelRatio *
-                                                  (15 /
-                                                      MediaQuery.of(context)
-                                                          .devicePixelRatio),
-                                              left: MediaQuery.of(context)
-                                                      .devicePixelRatio *
-                                                  (15 /
-                                                      MediaQuery.of(context)
-                                                          .devicePixelRatio)),
-                                          height: MediaQuery.of(context)
-                                                  .devicePixelRatio *
-                                              (35 /
-                                                  MediaQuery.of(context)
-                                                      .devicePixelRatio),
+                                              top: 15 /
+                                                  mockupWidth *
+                                                  deviceWidth,
+                                              left: 15 /
+                                                  mockupWidth *
+                                                  deviceWidth),
+                                          height:
+                                              35 / mockupWidth * deviceWidth,
                                           decoration: BoxDecoration(
                                             color: const Color(0xFFFFEFEF),
                                             borderRadius:
@@ -931,11 +872,14 @@ class _AddPostState extends State<AddPost> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 16.0),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 16.0 /
+                                                        mockupWidth *
+                                                        deviceWidth),
                                                 child: AutoSizeText(
                                                   barterCategoryItem.toString(),
+                                                  textScaleFactor:
+                                                      textScaleFactor,
                                                   maxLines: 1,
                                                   style: const TextStyle(
                                                     color: Colors.black,
@@ -947,37 +891,22 @@ class _AddPostState extends State<AddPost> {
                                           ),
                                         ),
                                       ),
+                                    //upto here
                                     if (barterCategoryItem == "Mobiles" ||
                                         barterCategoryItem == "Panasonic")
                                       Padding(
                                         padding: EdgeInsets.only(
-                                            top: MediaQuery.of(context)
-                                                    .devicePixelRatio *
-                                                (2.0 /
-                                                    MediaQuery.of(context)
-                                                        .devicePixelRatio),
-                                            left: MediaQuery.of(context)
-                                                    .devicePixelRatio *
-                                                (1.3 /
-                                                    MediaQuery.of(context)
-                                                        .devicePixelRatio)),
+                                          top: 2.0 / mockupWidth * deviceWidth,
+                                          left: 1.3 / mockupWidth * deviceWidth,
+                                        ),
                                         child: Container(
                                           margin: EdgeInsets.only(
-                                              top: MediaQuery.of(context)
-                                                      .devicePixelRatio *
-                                                  (15 /
-                                                      MediaQuery.of(context)
-                                                          .devicePixelRatio),
-                                              left: MediaQuery.of(context)
-                                                      .devicePixelRatio *
-                                                  (15 /
-                                                      MediaQuery.of(context)
-                                                          .devicePixelRatio)),
-                                          height: MediaQuery.of(context)
-                                                  .devicePixelRatio *
-                                              (35 /
-                                                  MediaQuery.of(context)
-                                                      .devicePixelRatio),
+                                            top: 15 / mockupWidth * deviceWidth,
+                                            left:
+                                                15 / mockupWidth * deviceWidth,
+                                          ),
+                                          height:
+                                              35 / mockupWidth * deviceWidth,
                                           decoration: BoxDecoration(
                                             color: const Color(0xFFFFEFEF),
                                             borderRadius:
@@ -999,11 +928,14 @@ class _AddPostState extends State<AddPost> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 16.0),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 16 /
+                                                        mockupWidth *
+                                                        deviceWidth),
                                                 child: AutoSizeText(
                                                   barterCategoryItem.toString(),
+                                                  textScaleFactor:
+                                                      textScaleFactor,
                                                   maxLines: 1,
                                                   style: const TextStyle(
                                                     color: Colors.black,
@@ -1018,21 +950,9 @@ class _AddPostState extends State<AddPost> {
 
                                     Container(
                                       margin: EdgeInsets.only(
-                                          top: MediaQuery.of(context)
-                                                  .devicePixelRatio *
-                                              (15 /
-                                                  MediaQuery.of(context)
-                                                      .devicePixelRatio),
-                                          left: MediaQuery.of(context)
-                                                  .devicePixelRatio *
-                                              (15 /
-                                                  MediaQuery.of(context)
-                                                      .devicePixelRatio)),
-                                      height: MediaQuery.of(context)
-                                              .devicePixelRatio *
-                                          (35 /
-                                              MediaQuery.of(context)
-                                                  .devicePixelRatio),
+                                          top: 15 / mockupWidth * deviceWidth,
+                                          left: 15 / mockupWidth * deviceWidth),
+                                      height: 35 / mockupWidth * deviceWidth,
                                       decoration: BoxDecoration(
                                         color: const Color(0xFFFFEFEF),
                                         borderRadius: BorderRadius.circular(12),
@@ -1053,11 +973,14 @@ class _AddPostState extends State<AddPost> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 16.0),
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 16.0 /
+                                                    mockupWidth *
+                                                    deviceWidth),
                                             child: AutoSizeText(
                                               barterCategoryItem.toString(),
                                               maxLines: 1,
+                                              textScaleFactor: textScaleFactor,
                                               style: const TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 17.0,
@@ -1084,34 +1007,30 @@ class _AddPostState extends State<AddPost> {
                             ],
                           ),
                         ),
-                        const SizedBox(
-                          height: 35,
+                        SizedBox(
+                          height: 35 / mockupWidth * deviceWidth,
                         ),
                         Padding(
                           //12.7
                           padding: EdgeInsets.only(
-                              left: MediaQuery.of(context).devicePixelRatio *
-                                  (27.6 /
-                                      MediaQuery.of(context).devicePixelRatio)),
+                              left: 27.6 / mockupWidth * deviceWidth),
                           child: AutoSizeText(
                             "- Describe the item/s you want to barter to:",
                             maxLines: 1,
+                            textScaleFactor: textScaleFactor,
                             style: TextStyle(
                               color: const Color(0xFF4F4F4F).withOpacity(0.6),
                               fontSize: 14.0,
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 23,
+                        SizedBox(
+                          height: 23 / mockupWidth * deviceWidth,
                         ),
                         Padding(
                           //12.7
                           padding: EdgeInsets.symmetric(
-                              horizontal: MediaQuery.of(context)
-                                      .devicePixelRatio *
-                                  (32 /
-                                      MediaQuery.of(context).devicePixelRatio)),
+                              horizontal: 32 / mockupWidth * deviceWidth),
                           child: TextField(
                             maxLines: null,
                             style: const TextStyle(
@@ -1123,6 +1042,9 @@ class _AddPostState extends State<AddPost> {
                               hintMaxLines: 10,
                               hintText:
                                   "Barter Description: The more you write the better chances for AI to give accurate matching. ",
+                              hintStyle: TextStyle(
+                                fontSize: 14 / mockupWidth * deviceWidth,
+                              ),
                               filled: true,
                               fillColor: const Color(0xFFF9F9F9),
                               enabledBorder: OutlineInputBorder(
@@ -1140,8 +1062,8 @@ class _AddPostState extends State<AddPost> {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 33,
+                        SizedBox(
+                          height: 33 / mockupWidth * deviceWidth,
                         ),
                       ],
                     ),
@@ -1149,32 +1071,31 @@ class _AddPostState extends State<AddPost> {
               //Divider
               Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: MediaQuery.of(context).devicePixelRatio *
-                        (11.7 / MediaQuery.of(context).devicePixelRatio)),
+                    horizontal: 11.7 / mockupWidth * deviceWidth),
                 child: const Divider(
                   color: Color(0xFFC6C5C9),
                   thickness: 1,
                 ),
               ),
-              const SizedBox(
-                height: 33,
+              SizedBox(
+                height: 33 / mockupWidth * deviceWidth,
               ),
               Padding(
                 //14.8
                 padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).devicePixelRatio *
-                        (27.8 / MediaQuery.of(context).devicePixelRatio),
+                    left: 26.5 / mockupWidth * deviceWidth,
                     //32
-                    right: MediaQuery.of(context).devicePixelRatio *
-                        (11 / MediaQuery.of(context).devicePixelRatio)),
+                    //11
+                    right: 32 / mockupWidth * deviceWidth),
                 child: Column(
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const AutoSizeText(
+                        AutoSizeText(
                           "Delivery:",
                           maxLines: 1,
+                          textScaleFactor: textScaleFactor,
                           style: TextStyle(
                             color: Color(0xFF000000),
                             fontSize: 18,
@@ -1184,15 +1105,12 @@ class _AddPostState extends State<AddPost> {
                         Padding(
                           //15.5
                           padding: EdgeInsets.only(
-                              left: MediaQuery.of(context).devicePixelRatio *
-                                  (15.5 /
-                                      MediaQuery.of(context).devicePixelRatio)),
+                              left: 38.5 / mockupWidth * deviceWidth),
                           child: Container(
-                            height: MediaQuery.of(context).devicePixelRatio *
-                                (35 / MediaQuery.of(context).devicePixelRatio),
+                            height: 35 / mockupWidth * deviceWidth,
                             //240
-                            width: MediaQuery.of(context).devicePixelRatio *
-                                (236 / MediaQuery.of(context).devicePixelRatio),
+                            //236
+                            width: 240 / mockupWidth * deviceWidth,
                             decoration: BoxDecoration(
                                 color: const Color(0xFFF9F9F9),
                                 borderRadius: BorderRadius.circular(12),
@@ -1219,21 +1137,15 @@ class _AddPostState extends State<AddPost> {
                                       }
                                     },
                                     child: Container(
-                                      height: MediaQuery.of(context)
-                                              .devicePixelRatio *
-                                          (35 /
-                                              MediaQuery.of(context)
-                                                  .devicePixelRatio),
+                                      height: 35 / mockupWidth * deviceWidth,
                                       //80
-                                      width: MediaQuery.of(context)
-                                              .devicePixelRatio *
-                                          (78 /
-                                              MediaQuery.of(context)
-                                                  .devicePixelRatio),
+                                      //78
+                                      width: 79.23 / mockupWidth * deviceWidth,
                                       child: Center(
                                         child: AutoSizeText(
                                           item,
                                           maxLines: 1,
+                                          textScaleFactor: textScaleFactor,
                                           style: TextStyle(
                                             color: (delivery == item)
                                                 ? const Color(0xFFFFFFFF)
@@ -1267,22 +1179,15 @@ class _AddPostState extends State<AddPost> {
                     //     fontSize: 12.0,
                     //   ),
                     // ),
-                    const SizedBox(
-                      height: 42,
+                    SizedBox(
+                      height: 42 / mockupWidth * deviceWidth,
                     ),
                     Center(
                       child: ElevatedButton(
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
-                            fixedSize: Size(
-                                MediaQuery.of(context).devicePixelRatio *
-                                    (273 /
-                                        MediaQuery.of(context)
-                                            .devicePixelRatio),
-                                MediaQuery.of(context).devicePixelRatio *
-                                    (40 /
-                                        MediaQuery.of(context)
-                                            .devicePixelRatio)),
+                            fixedSize: Size(273 / mockupWidth * deviceWidth,
+                                40 / mockupWidth * deviceWidth),
                             splashFactory: InkRipple.splashFactory,
                             shadowColor: Colors.transparent,
                             primary: const Color(0xFF00B1FF),
@@ -1291,17 +1196,18 @@ class _AddPostState extends State<AddPost> {
                               borderRadius: BorderRadius.circular(15.0),
                             ),
                           ),
-                          child: const AutoSizeText(
+                          child: AutoSizeText(
                             "Post",
                             maxLines: 1,
+                            textScaleFactor: textScaleFactor,
                             style: TextStyle(
                               color: Color(0xFFFFFFFF),
                               fontSize: 20,
                             ),
                           )),
                     ),
-                    const SizedBox(
-                      height: 85.1,
+                    SizedBox(
+                      height: 85.1 / mockupWidth * deviceWidth,
                     ),
                   ],
                 ),
@@ -1313,7 +1219,8 @@ class _AddPostState extends State<AddPost> {
     );
   }
 
-  List<Widget> buildWrap(List<MapEntry<dynamic, dynamic>> entryList) {
+  List<Widget> buildWrap(List<MapEntry<dynamic, dynamic>> entryList,
+      double deviceWidth, double textScaleFactor) {
     final children = <Widget>[];
     if (currentValue.isEmpty) {
       for (int i = 0; i < entryList.length; i++) {
@@ -1322,12 +1229,11 @@ class _AddPostState extends State<AddPost> {
             onTap: () {
               setState(() {
                 indexCount = i;
-                print("Number of apartments added on a specific date : " +
-                    entryList[indexCount].value.length.toString());
+                print("Number" + entryList[indexCount].value.length.toString());
 
                 currentValue.add(entryList[i].key.toString());
                 addCategoryList.add(entryList[i].key.toString());
-                buildWrap(entryList);
+                buildWrap(entryList, deviceWidth, textScaleFactor);
               });
             },
             child: Container(
@@ -1336,9 +1242,9 @@ class _AddPostState extends State<AddPost> {
                 color: const Color(0xFF1EB1FC).withOpacity(0.15),
               ),
               child: Padding(
-                padding: EdgeInsets.all(MediaQuery.of(context).devicePixelRatio *
-                    (8.0 / MediaQuery.of(context).devicePixelRatio)),
+                padding: EdgeInsets.all(8.0 / mockupWidth * deviceWidth),
                 child: RichText(
+                  textScaleFactor: textScaleFactor,
                   text: TextSpan(
                     // Note: Styles for TextSpans must be explicitly defined.
                     // Child text spans will inherit styles from parent
@@ -1366,8 +1272,7 @@ class _AddPostState extends State<AddPost> {
         children.add(
           InkWell(
             onTap: () {
-              print("Number of apartments added on a specific date : " +
-                  entryList[indexCount].value.length.toString());
+              print("Number: " + entryList[indexCount].value.length.toString());
               setState(() {
                 currentValue.add(entryList[indexCount].value[j].toString());
                 addCategoryList.add(entryList[indexCount].value[j].toString());
@@ -1379,9 +1284,9 @@ class _AddPostState extends State<AddPost> {
                 color: const Color(0xFF1EB1FC).withOpacity(0.15),
               ),
               child: Padding(
-                padding: EdgeInsets.all(MediaQuery.of(context).devicePixelRatio *
-                    (8.0 / MediaQuery.of(context).devicePixelRatio)),
+                padding: EdgeInsets.all(8.0 / mockupWidth * deviceWidth),
                 child: RichText(
+                  textScaleFactor: textScaleFactor,
                   text: TextSpan(
                     // Note: Styles for TextSpans must be explicitly defined.
                     // Child text spans will inherit styles from parent
