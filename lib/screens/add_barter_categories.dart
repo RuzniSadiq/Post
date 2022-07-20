@@ -42,7 +42,7 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                 AutoSizeText(
                   "Barter Categories (0/10)",
                   textScaleFactor: textScaleFactor,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Color(0xFF000000),
                     fontSize: 20.0,
                     fontWeight: FontWeight.w600,
@@ -65,7 +65,7 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                       "Done",
                       textScaleFactor: textScaleFactor,
                       maxLines: 1,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFFFFFFFF),
                         fontSize: 15,
                       ),
@@ -98,7 +98,7 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                         "Selecting a category will add all of its sub categories",
                         textScaleFactor: textScaleFactor,
                         maxLines: 3,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color(0xFF5D5C5C),
                           fontSize: 14.0,
                         ),
@@ -138,16 +138,16 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                         border: Border.all(
                                             color:
                                                 (barterCategoryItem == "Apple")
-                                                    ? Color(0xFFFD473E)
-                                                    : Color(0xFFF7817D),
+                                                    ? const Color(0xFFFD473E)
+                                                    : const Color(0xFFF7817D),
                                             width: 1.5),
                                         boxShadow: <BoxShadow>[
                                           BoxShadow(
-                                              color: Color(0xFF1EB1FC)
+                                              color: const Color(0xFF1EB1FC)
                                                   .withOpacity(0.16),
                                               blurRadius: 2,
                                               spreadRadius: 0.5,
-                                              offset: Offset(0.0, 0.5))
+                                              offset: const Offset(0.0, 0.5))
                                         ],
                                       ),
                                       child: Column(
@@ -190,16 +190,16 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                         border: Border.all(
                                             color:
                                                 (barterCategoryItem == "Apple")
-                                                    ? Color(0xFFFD473E)
-                                                    : Color(0xFFF7817D),
+                                                    ? const Color(0xFFFD473E)
+                                                    : const Color(0xFFF7817D),
                                             width: 1.5),
                                         boxShadow: <BoxShadow>[
                                           BoxShadow(
-                                              color: Color(0xFF1EB1FC)
+                                              color: const Color(0xFF1EB1FC)
                                                   .withOpacity(0.16),
                                               blurRadius: 2,
                                               spreadRadius: 0.5,
-                                              offset: Offset(0.0, 0.5))
+                                              offset: const Offset(0.0, 0.5))
                                         ],
                                       ),
                                       child: Column(
@@ -236,16 +236,16 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                     borderRadius: BorderRadius.circular(12),
                                     border: Border.all(
                                         color: (barterCategoryItem == "Apple")
-                                            ? Color(0xFFFD473E)
-                                            : Color(0xFFF7817D),
+                                            ? const Color(0xFFFD473E)
+                                            : const Color(0xFFF7817D),
                                         width: 1.5),
                                     boxShadow: <BoxShadow>[
                                       BoxShadow(
-                                          color: Color(0xFF1EB1FC)
+                                          color: const Color(0xFF1EB1FC)
                                               .withOpacity(0.16),
                                           blurRadius: 2,
                                           spreadRadius: 0.5,
-                                          offset: Offset(0.0, 0.5))
+                                          offset: const Offset(0.0, 0.5))
                                     ],
                                   ),
                                   child: Column(
@@ -270,8 +270,11 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                   ),
                                 ),
 
-                                SvgPicture.string(
-                                  '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                                SizedBox(
+                                  width: 32 / mockupWidth * deviceWidth,
+                                  height: 32 / mockupWidth * deviceWidth,
+                                  child: SvgPicture.string(
+                                    '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
   <g id="Group_782" data-name="Group 782" transform="translate(-43.771 -321.131)">
       <path id="Icon_ionic-ios-remove-circle" data-name="Icon ionic-ios-remove-circle" d="M18.375,3.375a15,15,0,1,0,15,15A15,15,0,0,0,18.375,3.375Z" transform="translate(41.396 318.756)" fill="#fd473e" stroke="#fff" stroke-width="2"/>
       <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M11.143,6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H11.143A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(53.771 328.881)" fill="#fff"/>
@@ -279,6 +282,7 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
 </svg>
 
 ''',
+                                  ),
                                 ),
                                 // size: MediaQuery.of(context).size.width / 15,
                               ],
@@ -299,13 +303,19 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                 left: 19.6 / mockupWidth * deviceWidth,
                                 //13.7
                                 right: 13.7 / mockupWidth * deviceWidth),
-                            child: SimpleShadow(
-                              opacity: 0.16, // Default: 0.5
-                              color: Color(0xFF1EB1FC), // Default: Black
-                              offset: Offset(0, 3), // Default: Offset(2, 2)
-                              sigma: 6,
-                              child: SvgPicture.string(
-                                '''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="53" height="53" viewBox="0 0 53 53">
+                            child: InkWell(
+                              onTap: () {},
+                              customBorder: const CircleBorder(),
+                              child: SimpleShadow(
+                                opacity: 0.16, // Default: 0.5
+                                color: const Color(0xFF1EB1FC), // Default: Black
+                                offset: const Offset(0, 3), // Default: Offset(2, 2)
+                                sigma: 6,
+                                child: SizedBox(
+                                  width: 53 / mockupWidth * deviceWidth,
+                                  height: 53 / mockupWidth * deviceWidth,
+                                  child: SvgPicture.string(
+                                    '''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="53" height="53" viewBox="0 0 53 53">
   <defs>
     <filter id="Rectangle_51" x="0" y="0" width="53" height="53" filterUnits="userSpaceOnUse">
       <feOffset dy="3" input="SourceAlpha"/>
@@ -337,6 +347,8 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
 
 
 ''',
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -364,8 +376,11 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                 child: Padding(
                                   padding: EdgeInsets.only(
                                       left: 11.3 / mockupWidth * deviceWidth),
-                                  child: SvgPicture.string(
-                                    '''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="23.585" height="25" viewBox="0 0 23.585 25">
+                                  child: SizedBox(
+                                    width: 23.585 / mockupWidth * deviceWidth,
+                                    height: 25 / mockupWidth * deviceWidth,
+                                    child: SvgPicture.string(
+                                      '''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="23.585" height="25" viewBox="0 0 23.585 25">
   <image id="Rectangle_148" data-name="Rectangle 148" width="23.585" height="25" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAA1CAYAAAADOrgJAAACx0lEQVRoBWNggAJrVx8vS1fflZbufs/oja3cfK9buvmU6jv5SMPcQxZt5epdTm/HY7PPys33rLlnkAxZnrBw9nbBZuiAibn5biDPI66+a5Ed7R2V8iwqp5KuGNl+ENvMI9CSZM9YuvnegBkE8sTBuz/ojnuXbEfJlxYuPqmkewQpc8fkVtLdE6CAm7/9LIpHzF39ikc9AkpeozFCYb4aTVrIGQlWYo0mLQqT1ZAttY6eOvPs1JY5KHjnwvZn7RkecLyw2H3t9R7PYnz4aqe7GXLKYqBX0jpy/s6zSzNTnl3r9qIavt7tsfdOr5ss2EP08MjhG6+fXZ4eRzUPIAfG9W6v07cnefLRJUbOrO2jiSdgHrrZ49lKF49cnhqL4pF3Z5Y9+3RjF9n43ellKOZd6fE8RnOPHLjz+dnVHl+4xQ+W5j77+/kRxRhkDixGrvV43qe5R0DFK9zCbq9nNPFIt9ezUY+Q0m8ZjRE8eQklj4wmLRLbV6NJazRp0WjwYTRpjSat0aSFf3RyNI+M5pHRPDKaR8juKY62fknpSKGrHS1+R4vf4VL8hqTk02QOke55BDQOnNPQ+6xu4iKq4gHxCPKgNrXYox4hqdRCWjBAbAzEZuQ/O3n2Ak4Mkkc2CzlG7syMIrs2Rx4zBpmDbC6DBdoSDmQH4GLHpufh9ATIgyB5ZL3IFoLYIEeAmhjkYnRPgMxkMHf3dkS2lBi2d1jss6buPpwYJI9sDrpH8PF3VDs/64wzewai8alDlwPPWtF6mdPBZk+iHHWwwfmZtaE6HIP46A7GxgfPj8AmFGm58GxyngdRDlqabwv3BMhD60rsidIHnrGCeYSWNGiODzTXhy00kcXOtLk987PVAnsmwlHnGYiPLI+NfaPX8wh4DpGWHkA2GzT7CpqFxeYYdDFiYwJk3tV2dxVke+jGBs2P45s/J1YOfZ4dAPzrAB65+LlFAAAAAElFTkSuQmCC"/>
 </svg>
 
@@ -373,6 +388,7 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
 
 
 ''',
+                                    ),
                                   ),
                                 ),
                               ),
@@ -383,7 +399,7 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                   "Mobile",
                                   textScaleFactor: textScaleFactor,
                                   maxLines: 1,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Color(0xFF000000),
                                     fontSize: 11.0,
                                   ),
@@ -392,8 +408,11 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                               Padding(
                                 padding: EdgeInsets.only(
                                     left: 9.7 / mockupWidth * deviceWidth),
-                                child: SvgPicture.string(
-                                  '''<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="8.932" height="10" viewBox="0 0 8.932 10">
+                                child: SizedBox(
+                                  width: 8.932 / mockupWidth * deviceWidth,
+                                  height: 10 / mockupWidth * deviceWidth,
+                                  child: SvgPicture.string(
+                                    '''<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="8.932" height="10" viewBox="0 0 8.932 10">
   <g id="invisible_box" data-name="invisible box" transform="translate(0.721)">
       <rect id="Rectangle_96" data-name="Rectangle 96" width="7.491" height="10" fill="none"/>
   </g>
@@ -404,6 +423,7 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
 
 
 ''',
+                                  ),
                                 ),
                               ),
                               Padding(
@@ -413,7 +433,7 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                   "HUAWEI",
                                   maxLines: 1,
                                   textScaleFactor: textScaleFactor,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Color(0xFF000000),
                                     fontSize: 11.0,
                                   ),
@@ -422,8 +442,11 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                               Padding(
                                 padding: EdgeInsets.only(
                                     left: 4.7 / mockupWidth * deviceWidth),
-                                child: SvgPicture.string(
-                                  '''<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="8.932" height="10" viewBox="0 0 8.932 10">
+                                child: SizedBox(
+                                  width: 8.932 / mockupWidth * deviceWidth,
+                                  height: 10 / mockupWidth * deviceWidth,
+                                  child: SvgPicture.string(
+                                    '''<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="8.932" height="10" viewBox="0 0 8.932 10">
   <g id="invisible_box" data-name="invisible box" transform="translate(0.721)">
       <rect id="Rectangle_96" data-name="Rectangle 96" width="7.491" height="10" fill="none"/>
   </g>
@@ -434,6 +457,7 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
 
 
 ''',
+                                  ),
                                 ),
                               ),
                             ],
@@ -476,7 +500,7 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                         "Mate 40 Pro",
                                         textScaleFactor: textScaleFactor,
                                         maxLines: 1,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           color: Color(0xFF000000),
                                           fontSize: 16.0,
                                         ),
@@ -489,8 +513,14 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                         padding: EdgeInsets.only(
                                             right:
                                                 4 / mockupWidth * deviceWidth),
-                                        child: SvgPicture.string(
-                                          '''<svg xmlns="http://www.w3.org/2000/svg" width="10.323" height="18" viewBox="0 0 10.323 18">
+                                        child: SizedBox(
+                                          width: 10.323 /
+                                              mockupWidth *
+                                              deviceWidth,
+                                          height:
+                                              18 / mockupWidth * deviceWidth,
+                                          child: SvgPicture.string(
+                                            '''<svg xmlns="http://www.w3.org/2000/svg" width="10.323" height="18" viewBox="0 0 10.323 18">
   <g id="Q3_icons" data-name="Q3 icons" transform="translate(10.323 18) rotate(180)">
     <path id="Path_679" data-name="Path 679" d="M8.046.385.4,8.1a1.222,1.222,0,0,0,0,1.8l7.651,7.715a1.35,1.35,0,0,0,1.736.129,1.222,1.222,0,0,0,.129-1.929L3.236,8.853c-3.361-4.431-2.656,4.924,0,0L9.911,2.185A1.222,1.222,0,0,0,9.782.256,1.35,1.35,0,0,0,8.046.385Z" transform="translate(0)" fill="#1eb1fc"/>
   </g>
@@ -500,14 +530,21 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
 
 
 ''',
+                                          ),
                                         ),
                                       ),
                                       Padding(
                                         padding: EdgeInsets.only(
                                             right:
                                                 4 / mockupWidth * deviceWidth),
-                                        child: SvgPicture.string(
-                                          '''<svg xmlns="http://www.w3.org/2000/svg" width="10.323" height="18" viewBox="0 0 10.323 18">
+                                        child: SizedBox(
+                                          width: 10.323 /
+                                              mockupWidth *
+                                              deviceWidth,
+                                          height:
+                                              18 / mockupWidth * deviceWidth,
+                                          child: SvgPicture.string(
+                                            '''<svg xmlns="http://www.w3.org/2000/svg" width="10.323" height="18" viewBox="0 0 10.323 18">
   <g id="Q3_icons" data-name="Q3 icons" transform="translate(10.323 18) rotate(180)">
     <path id="Path_679" data-name="Path 679" d="M8.046.385.4,8.1a1.222,1.222,0,0,0,0,1.8l7.651,7.715a1.35,1.35,0,0,0,1.736.129,1.222,1.222,0,0,0,.129-1.929L3.236,8.853c-3.361-4.431-2.656,4.924,0,0L9.911,2.185A1.222,1.222,0,0,0,9.782.256,1.35,1.35,0,0,0,8.046.385Z" transform="translate(0)" fill="#1eb1fc"/>
   </g>
@@ -517,6 +554,7 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
 
 
 ''',
+                                          ),
                                         ),
                                       ),
                                       Padding(
@@ -524,8 +562,14 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                             right: 13.4 /
                                                 mockupWidth *
                                                 deviceWidth),
-                                        child: SvgPicture.string(
-                                          '''<svg xmlns="http://www.w3.org/2000/svg" width="10.323" height="18" viewBox="0 0 10.323 18">
+                                        child: SizedBox(
+                                          width: 10.323 /
+                                              mockupWidth *
+                                              deviceWidth,
+                                          height:
+                                              18 / mockupWidth * deviceWidth,
+                                          child: SvgPicture.string(
+                                            '''<svg xmlns="http://www.w3.org/2000/svg" width="10.323" height="18" viewBox="0 0 10.323 18">
   <g id="Q3_icons" data-name="Q3 icons" transform="translate(10.323 18) rotate(180)">
     <path id="Path_679" data-name="Path 679" d="M8.046.385.4,8.1a1.222,1.222,0,0,0,0,1.8l7.651,7.715a1.35,1.35,0,0,0,1.736.129,1.222,1.222,0,0,0,.129-1.929L3.236,8.853c-3.361-4.431-2.656,4.924,0,0L9.911,2.185A1.222,1.222,0,0,0,9.782.256,1.35,1.35,0,0,0,8.046.385Z" transform="translate(0)" fill="#1eb1fc"/>
   </g>
@@ -534,6 +578,7 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
 
 
 ''',
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -545,8 +590,11 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                               //52.36
                               padding: EdgeInsets.only(
                                   left: 68.3 / mockupWidth * deviceWidth),
-                              child: SvgPicture.string(
-                                '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                              child: SizedBox(
+                                width: 32 / mockupWidth * deviceWidth,
+                                height: 32 / mockupWidth * deviceWidth,
+                                child: SvgPicture.string(
+                                  '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
   <g id="Group_807" data-name="Group 807" transform="translate(-50.712 -452.04)">
       <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M11.143,6.964H7.286V3.107a.857.857,0,0,0-.857-.857H5.571a.857.857,0,0,0-.857.857V6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H4.714v3.857a.857.857,0,0,0,.857.857h.857a.857.857,0,0,0,.857-.857V9.536h3.857A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(60.712 459.79)" fill="#fff"/>
       <g id="Group_805" data-name="Group 805" transform="translate(6.941 130.909)">
@@ -558,6 +606,7 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
 
 
 ''',
+                                ),
                               ),
                             ),
                           ],
@@ -595,7 +644,7 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                         "Mate 30 Pro 5G",
                                         maxLines: 1,
                                         textScaleFactor: textScaleFactor,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           color: Color(0xFF000000),
                                           fontSize: 16.0,
                                         ),
@@ -609,8 +658,14 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                             right: 13.4 /
                                                 mockupWidth *
                                                 deviceWidth),
-                                        child: SvgPicture.string(
-                                          '''<svg xmlns="http://www.w3.org/2000/svg" width="10.323" height="18" viewBox="0 0 10.323 18">
+                                        child: SizedBox(
+                                          width: 10.323 /
+                                              mockupWidth *
+                                              deviceWidth,
+                                          height:
+                                              18 / mockupWidth * deviceWidth,
+                                          child: SvgPicture.string(
+                                            '''<svg xmlns="http://www.w3.org/2000/svg" width="10.323" height="18" viewBox="0 0 10.323 18">
   <g id="Q3_icons" data-name="Q3 icons" transform="translate(10.323 18) rotate(180)">
     <path id="Path_679" data-name="Path 679" d="M8.046.385.4,8.1a1.222,1.222,0,0,0,0,1.8l7.651,7.715a1.35,1.35,0,0,0,1.736.129,1.222,1.222,0,0,0,.129-1.929L3.236,8.853c-3.361-4.431-2.656,4.924,0,0L9.911,2.185A1.222,1.222,0,0,0,9.782.256,1.35,1.35,0,0,0,8.046.385Z" transform="translate(0)" fill="#1eb1fc"/>
   </g>
@@ -619,6 +674,7 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
 
 
 ''',
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -630,8 +686,11 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                               //52.36
                               padding: EdgeInsets.only(
                                   left: 68.3 / mockupWidth * deviceWidth),
-                              child: SvgPicture.string(
-                                '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                              child: SizedBox(
+                                width: 32 / mockupWidth * deviceWidth,
+                                height: 32 / mockupWidth * deviceWidth,
+                                child: SvgPicture.string(
+                                  '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
   <g id="Group_807" data-name="Group 807" transform="translate(-50.712 -452.04)">
       <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M11.143,6.964H7.286V3.107a.857.857,0,0,0-.857-.857H5.571a.857.857,0,0,0-.857.857V6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H4.714v3.857a.857.857,0,0,0,.857.857h.857a.857.857,0,0,0,.857-.857V9.536h3.857A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(60.712 459.79)" fill="#fff"/>
       <g id="Group_805" data-name="Group 805" transform="translate(6.941 130.909)">
@@ -643,6 +702,7 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
 
 
 ''',
+                                ),
                               ),
                             ),
                           ],
@@ -676,7 +736,7 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                     "Mate 20 X (5G)",
                                     maxLines: 1,
                                     textScaleFactor: textScaleFactor,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Color(0xFF000000),
                                       fontSize: 16.0,
                                     ),
@@ -688,8 +748,11 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                               //52.36
                               padding: EdgeInsets.only(
                                   left: 68.3 / mockupWidth * deviceWidth),
-                              child: SvgPicture.string(
-                                '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                              child: SizedBox(
+                                width: 32 / mockupWidth * deviceWidth,
+                                height: 32 / mockupWidth * deviceWidth,
+                                child: SvgPicture.string(
+                                  '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
   <g id="Group_807" data-name="Group 807" transform="translate(-50.712 -452.04)">
       <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M11.143,6.964H7.286V3.107a.857.857,0,0,0-.857-.857H5.571a.857.857,0,0,0-.857.857V6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H4.714v3.857a.857.857,0,0,0,.857.857h.857a.857.857,0,0,0,.857-.857V9.536h3.857A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(60.712 459.79)" fill="#fff"/>
       <g id="Group_805" data-name="Group 805" transform="translate(6.941 130.909)">
@@ -701,6 +764,7 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
 
 
 ''',
+                                ),
                               ),
                             ),
                           ],
@@ -713,14 +777,18 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
               Positioned(
                 bottom: 30.6 / mockupWidth * deviceWidth,
                 right: 33 / mockupWidth * deviceWidth,
-                child: SvgPicture.string(
-                  '''<svg xmlns="http://www.w3.org/2000/svg" width="13" height="27" viewBox="0 0 13 27">
+                child: SizedBox(
+                  width: 13 / mockupWidth * deviceWidth,
+                  height: 27 / mockupWidth * deviceWidth,
+                  child: SvgPicture.string(
+                    '''<svg xmlns="http://www.w3.org/2000/svg" width="13" height="27" viewBox="0 0 13 27">
   <text id="_" data-name="􀆊" transform="translate(0 22)" fill="#00b1ff" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">􀆊</tspan></text>
 </svg>
 
 
 
 ''',
+                  ),
                 ),
               )
             ],

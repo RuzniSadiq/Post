@@ -118,7 +118,7 @@ class _AddPostState extends State<AddPost> {
                       child: AutoSizeText(
                         "Back",
                         textScaleFactor: textScaleFactor,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Color(0xFF007AFF),
                             fontSize: 17.0,
                             fontFamily: "SF-Pro"),
@@ -128,7 +128,7 @@ class _AddPostState extends State<AddPost> {
                   AutoSizeText(
                     "New Post",
                     textScaleFactor: textScaleFactor,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Color(0xFF000000),
                         fontSize: 25.0,
                         fontWeight: FontWeight.w600,
@@ -161,7 +161,7 @@ class _AddPostState extends State<AddPost> {
                     AutoSizeText(
                       "Images of your product: 0/20",
                       textScaleFactor: textScaleFactor,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFF000000),
                         fontSize: 18.0,
                         fontWeight: FontWeight.w600,
@@ -200,15 +200,22 @@ class _AddPostState extends State<AddPost> {
                                         Padding(
                                           padding: EdgeInsets.only(
                                               //11.7
-                                              top: 7.7 /
+                                              top: 11.7 /
                                                   mockupWidth *
                                                   deviceWidth,
                                               //7.1
-                                              bottom: 3.1 /
+                                              bottom: 7.1 /
                                                   mockupWidth *
                                                   deviceWidth),
-                                          child: SvgPicture.string(
-                                            '''<svg xmlns="http://www.w3.org/2000/svg" width="38.763" height="38.763" viewBox="0 0 38.763 38.763">
+                                          child: SizedBox(
+                                            width: 38.76 /
+                                                mockupWidth *
+                                                deviceWidth,
+                                            height: 38.76 /
+                                                mockupWidth *
+                                                deviceWidth,
+                                            child: SvgPicture.string(
+                                              '''<svg xmlns="http://www.w3.org/2000/svg" width="38.763" height="38.763" viewBox="0 0 38.763 38.763">
   <g id="Group_539" data-name="Group 539" transform="translate(-329 -324.631)">
     <g id="Path_2492" data-name="Path 2492" transform="translate(329 324.631)" fill="#fff">
       <path d="M 19.38165473937988 37.26331329345703 C 14.60529518127441 37.26331329345703 10.11481475830078 35.40329360961914 6.737414836883545 32.02589416503906 C 3.360024690628052 28.64849472045898 1.500004768371582 24.15801429748535 1.500004768371582 19.38165473937988 C 1.500004768371582 14.60529518127441 3.360024690628052 10.11481475830078 6.737414836883545 6.737414836883545 C 10.11481475830078 3.360024690628052 14.60529518127441 1.500004768371582 19.38165473937988 1.500004768371582 C 24.15801429748535 1.500004768371582 28.64849472045898 3.360024690628052 32.02589416503906 6.737414836883545 C 35.40329360961914 10.11481475830078 37.26331329345703 14.60529518127441 37.26331329345703 19.38165473937988 C 37.26331329345703 24.15801429748535 35.40329360961914 28.64849472045898 32.02589416503906 32.02589416503906 C 28.64849472045898 35.40329360961914 24.15801429748535 37.26331329345703 19.38165473937988 37.26331329345703 Z" stroke="none"/>
@@ -219,12 +226,13 @@ class _AddPostState extends State<AddPost> {
 </svg>
 
 ''',
+                                            ),
                                           ),
                                         ),
                                         AutoSizeText(
                                           "Add",
                                           textScaleFactor: textScaleFactor,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Color(0xFF555555),
                                             fontSize: 14.0,
                                           ),
@@ -266,10 +274,20 @@ class _AddPostState extends State<AddPost> {
                                             ),
                                           ),
                                         ),
-                                        Align(
-                                          alignment: Alignment.topRight,
-                                          child: SvgPicture.string(
-                                            '''<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              top:
+                                                  2 / mockupWidth * deviceWidth,
+                                              right: 3 /
+                                                  mockupWidth *
+                                                  deviceWidth),
+                                          child: SizedBox(
+                                            width:
+                                                20 / mockupWidth * deviceWidth,
+                                            height:
+                                                20 / mockupWidth * deviceWidth,
+                                            child: SvgPicture.string(
+                                              '''<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
   <g id="Group_703" data-name="Group 703" transform="translate(-333 -164.699)">
       <path id="Icon_ionic-ios-remove-circle" data-name="Icon ionic-ios-remove-circle" d="M13.375,3.375a10,10,0,1,0,10,10A10,10,0,0,0,13.375,3.375Z" transform="translate(329.625 161.324)" fill="#fff"/>
       <path id="Icon_ionic-ios-remove-circle-2" data-name="Icon ionic-ios-remove-circle" d="M13.375,3.375a10,10,0,1,0,10,10A10,10,0,0,0,13.375,3.375Zm4.351,10.769h-8.7a.745.745,0,0,1-.769-.769.737.737,0,0,1,.769-.769h8.7a.769.769,0,0,1,0,1.538Z" transform="translate(329.625 161.324)" fill="#fd473e"/>
@@ -277,6 +295,7 @@ class _AddPostState extends State<AddPost> {
 </svg>
 
 ''',
+                                            ),
                                           ),
                                         )
                                       ],
@@ -288,18 +307,25 @@ class _AddPostState extends State<AddPost> {
                         ),
                         Align(
                           alignment: Alignment.centerLeft,
-                          child: SvgPicture.string(
-                            '''<svg id="Q3_icons" data-name="Q3 icons" xmlns="http://www.w3.org/2000/svg" width="10.323" height="18" viewBox="0 0 10.323 18">
+                          child: SizedBox(
+                            width: 10.323 / mockupWidth * deviceWidth,
+                            height: 18 / mockupWidth * deviceWidth,
+                            child: SvgPicture.string(
+                              '''<svg id="Q3_icons" data-name="Q3 icons" xmlns="http://www.w3.org/2000/svg" width="10.323" height="18" viewBox="0 0 10.323 18">
   <path id="Path_679" data-name="Path 679" d="M17.031,10.386,9.38,18.1a1.222,1.222,0,0,0,0,1.8l7.651,7.715a1.35,1.35,0,0,0,1.736.129,1.222,1.222,0,0,0,.129-1.929L12.22,18.854c-3.361-4.431-2.656,4.924,0,0L18.9,12.186a1.222,1.222,0,0,0-.129-1.929,1.35,1.35,0,0,0-1.736.129Z" transform="translate(-8.985 -10.001)" fill="#1eb1fc"/>
 </svg>
 
 ''',
+                            ),
                           ),
                         ),
                         Align(
                           alignment: Alignment.centerRight,
-                          child: SvgPicture.string(
-                            '''<svg xmlns="http://www.w3.org/2000/svg" width="10.323" height="18" viewBox="0 0 10.323 18">
+                          child: SizedBox(
+                            width: 10.323 / mockupWidth * deviceWidth,
+                            height: 18 / mockupWidth * deviceWidth,
+                            child: SvgPicture.string(
+                              '''<svg xmlns="http://www.w3.org/2000/svg" width="10.323" height="18" viewBox="0 0 10.323 18">
   <g id="Q3_icons" data-name="Q3 icons" transform="translate(10.323 18) rotate(180)">
     <path id="Path_679" data-name="Path 679" d="M17.031,10.386,9.38,18.1a1.222,1.222,0,0,0,0,1.8l7.651,7.715a1.35,1.35,0,0,0,1.736.129,1.222,1.222,0,0,0,.129-1.929L12.22,18.854c-3.361-4.431-2.656,4.924,0,0L18.9,12.186a1.222,1.222,0,0,0-.129-1.929,1.35,1.35,0,0,0-1.736.129Z" transform="translate(-8.985 -10.001)" fill="#1eb1fc"/>
   </g>
@@ -307,6 +333,7 @@ class _AddPostState extends State<AddPost> {
 
 
 ''',
+                            ),
                           ),
                         ),
                       ],
@@ -435,7 +462,7 @@ class _AddPostState extends State<AddPost> {
                               "Auto Locate",
                               textScaleFactor: textScaleFactor,
                               maxLines: 1,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Color(0xFF1EB1FC),
                                 fontSize: 14,
                               ),
@@ -452,7 +479,7 @@ class _AddPostState extends State<AddPost> {
                       ),
                       decoration: InputDecoration(
                         prefixIcon: Padding(
-                          padding: EdgeInsets.only(bottom: 3, left: 5),
+                          padding: const EdgeInsets.only(bottom: 3, left: 5),
                           child: Text(
                             " Price: ",
                             textScaleFactor: textScaleFactor,
@@ -461,7 +488,7 @@ class _AddPostState extends State<AddPost> {
                         prefixIconConstraints:
                             const BoxConstraints(minWidth: 0, minHeight: 0),
                         suffixIcon: Padding(
-                          padding: EdgeInsets.only(bottom: 3, right: 34),
+                          padding: const EdgeInsets.only(bottom: 3, right: 34),
                           child: Text(
                             " AED",
                             textScaleFactor: textScaleFactor,
@@ -516,7 +543,7 @@ class _AddPostState extends State<AddPost> {
                       "Select your item category:",
                       textScaleFactor: textScaleFactor,
                       maxLines: 1,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFF000000),
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -527,34 +554,45 @@ class _AddPostState extends State<AddPost> {
                     //22.4
                     height: 22.4 / mockupWidth * deviceWidth,
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 34.5 / mockupWidth * deviceWidth),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        if (addCategoryList.isNotEmpty)
-                          Wrap(
-                            direction: Axis.horizontal,
-                            alignment: WrapAlignment.start,
-                            runSpacing: 5 / mockupWidth * deviceWidth,
-                            spacing: 9.8 / mockupWidth * deviceWidth,
-                            children: [
-                              InkWell(
-                                customBorder: const CircleBorder(),
-                                onTap: () {
-                                  setState(() {
-                                    addCategoryList.removeLast();
-                                    currentValue.removeLast();
-                                  });
-                                },
-                                child: SimpleShadow(
-                                  opacity: 0.16, // Default: 0.5
-                                  color: Color(0xFF000000), // Default: Black
-                                  offset: Offset(0, 3), // Default: Offset(2, 2)
-                                  sigma: 6,
-                                  child: SvgPicture.string(
-                                    '''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="58" height="58" viewBox="0 0 58 58">
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (addCategoryList.isNotEmpty)
+                        Wrap(
+                          direction: Axis.horizontal,
+                          // crossAxisAlignment: WrapCrossAlignment.start,
+                          // alignment: WrapAlignment.start,
+                          // runSpacing: 10 / mockupWidth * deviceWidth,
+                          // spacing: 10 / mockupWidth * deviceWidth,
+                          children: [
+                            Stack(
+                              children: [
+                                //initial paddin above
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                    left: 26.5 / mockupWidth * deviceWidth,
+                                  ),
+                                  child: InkWell(
+                                    customBorder: const CircleBorder(),
+                                    onTap: () {
+                                      setState(() {
+                                        addCategoryList.removeLast();
+                                        currentValue.removeLast();
+                                      });
+                                    },
+                                    child: SimpleShadow(
+                                      opacity: 0.16, // Default: 0.5
+                                      color:
+                                          const Color(0xFF000000), // Default: Black
+                                      offset:
+                                          const Offset(0, 3), // Default: Offset(2, 2)
+                                      sigma: 6,
+                                      child: Container(
+                                        width: 58 / mockupWidth * deviceWidth,
+                                        height: 58 / mockupWidth * deviceWidth,
+                                        color: Colors.transparent,
+                                        child: SvgPicture.string(
+                                          '''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="58" height="58" viewBox="0 0 58 58">
 
   <g id="Group_612" data-name="Group 612" transform="translate(-27.756 -387.572)">
       <g id="Group_46" data-name="Group 46" transform="translate(-61.297 40.925)">
@@ -577,85 +615,132 @@ class _AddPostState extends State<AddPost> {
 
 
 ''',
-                                  ),
-                                ),
-                              ),
-                              for (int i = 0; i < addCategoryList.length; i++)
-                                //var category in addCategoryList
-                                Wrap(
-                                  spacing: 9.8 / mockupWidth * deviceWidth,
-                                  children: [
-                                    Container(
-                                      //2.5 - sizedbox changed
-                                      margin: EdgeInsets.only(
-                                          top: 10 / mockupWidth * deviceWidth),
-
-                                      // width: 87.36,
-                                      // height: 35,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(12),
-                                        color: (i == 0)
-                                            ? const Color(0xFF00B1FF)
-                                            : const Color(0xFFDDF3FF),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Wrap(
-                                          children: [
-                                            AutoSizeText(
-                                              '${addCategoryList[i][0]}',
-                                              maxLines: 1,
-                                              textScaleFactor: textScaleFactor,
-                                              style: TextStyle(
-                                                color: (i == 0)
-                                                    ? const Color(0xFFFFFFFF)
-                                                    : const Color(0xFF555555),
-                                                fontSize: 14.0,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            AutoSizeText(
-                                              '${addCategoryList[i].substring(1)}',
-                                              textScaleFactor: textScaleFactor,
-                                              maxLines: 1,
-                                              style: TextStyle(
-                                                color: (i == 0)
-                                                    ? const Color(0xFFFFFFFF)
-                                                    : const Color(0xFF555555),
-                                                fontSize: 14.0,
-                                              ),
-                                            ),
-                                          ],
                                         ),
                                       ),
                                     ),
-                                    Padding(
-                                      //top - 12.5 sizedbox changed
-                                      padding: EdgeInsets.only(
-                                          top:
-                                              18.0 / mockupWidth * deviceWidth),
-                                      child: SvgPicture.string(
-                                        '''<svg xmlns="http://www.w3.org/2000/svg" width="6.905" height="15" viewBox="0 0 6.905 15">
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                    top: 10.0 / mockupWidth * deviceWidth,
+                                    left: 34.5 / mockupWidth * deviceWidth,
+                                  ),
+                                  child: Wrap(
+                                    direction: Axis.horizontal,
+                                    alignment: WrapAlignment.start,
+                                    runSpacing: 10 / mockupWidth * deviceWidth,
+                                    spacing: 10 / mockupWidth * deviceWidth,
+                                    children: [
+                                      for (int i = 0;
+                                          i < addCategoryList.length;
+                                          i++) ...[
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              left: (i == 0)
+                                                  ? 49.8 /
+                                                      mockupWidth *
+                                                      deviceWidth
+                                                  : 0.0),
+                                          child: Container(
+                                            // width: 87.36,
+                                            // height: 35,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                              color: (i == 0)
+                                                  ? const Color(0xFF00B1FF)
+                                                  : const Color(0xFFDDF3FF),
+                                            ),
+                                            child: Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 19.4 /
+                                                        mockupWidth *
+                                                        deviceWidth,
+                                                    right: 19.9 /
+                                                        mockupWidth *
+                                                        deviceWidth,
+                                                    top: 8.4 /
+                                                        mockupWidth *
+                                                        deviceWidth,
+                                                    bottom: 7.6 /
+                                                        mockupWidth *
+                                                        deviceWidth),
+                                                child: RichText(
+                                                  textScaleFactor:
+                                                      textScaleFactor,
+                                                  text: TextSpan(
+                                                    // Note: Styles for TextSpans must be explicitly defined.
+                                                    // Child text spans will inherit styles from parent
+                                                    style: TextStyle(
+                                                      color: (i == 0)
+                                                          ? const Color(
+                                                              0xFFFFFFFF)
+                                                          : const Color(
+                                                              0xFF555555),
+                                                      fontSize: 14.0,
+                                                    ),
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '${addCategoryList[i][0]}',
+                                                          style: const TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold)),
+                                                      TextSpan(
+                                                        text:
+                                                            '${addCategoryList[i].substring(1)}',
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )),
+                                          ),
+                                        ),
+                                        if (i != addCategoryList.length - 1)
+                                          Padding(
+                                            //top - 12.5 sizedbox changed
+                                            padding: EdgeInsets.only(
+                                                top: 8.0 /
+                                                    mockupWidth *
+                                                    deviceWidth),
+                                            child: SizedBox(
+                                              width: 6.905 /
+                                                  mockupWidth *
+                                                  deviceWidth,
+                                              height: 15 /
+                                                  mockupWidth *
+                                                  deviceWidth,
+                                              child: SvgPicture.string(
+                                                '''<svg xmlns="http://www.w3.org/2000/svg" width="6.905" height="15" viewBox="0 0 6.905 15">
   <path id="Vector" d="M1.314,0,0,1.762,3.382,7.5,0,13.238,1.314,15,6.905,7.5Z" transform="matrix(1, 0, 0, 1, 0, 0)" fill="#1eb1fc"/>
 </svg>
 ''',
-                                      ),
-                                    ),
-                                  ],
+                                              ),
+                                            ),
+                                          ),
+                                      ]
+                                    ],
+                                  ),
                                 ),
-                            ],
-                          ),
-                        if (addCategoryList.isNotEmpty)
-                          const SizedBox(height: 24),
-                        Wrap(
+                              ],
+                            ),
+                          ],
+                        ),
+                      if (addCategoryList.isNotEmpty)
+                        SizedBox(height: 24 / mockupWidth * deviceWidth),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 34.5 / mockupWidth * deviceWidth,
+                        ),
+                        child: Wrap(
                           direction: Axis.horizontal,
                           runSpacing: 10 / mockupWidth * deviceWidth,
                           spacing: 10 / mockupWidth * deviceWidth,
                           children: buildWrap(
                               entryList, deviceWidth, textScaleFactor),
-                        )
-                      ],
-                    ),
+                        ),
+                      )
+                    ],
                   ),
                 ],
               ),
@@ -686,7 +771,7 @@ class _AddPostState extends State<AddPost> {
                       "Barter / Exchange Features:",
                       textScaleFactor: textScaleFactor,
                       maxLines: 1,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFF000000),
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -701,7 +786,7 @@ class _AddPostState extends State<AddPost> {
                               "OFF",
                               maxLines: 1,
                               textScaleFactor: textScaleFactor,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Color(0xFF4F4F4F),
                                 fontSize: 14,
                               ),
@@ -714,7 +799,7 @@ class _AddPostState extends State<AddPost> {
                               "ON",
                               textScaleFactor: textScaleFactor,
                               maxLines: 1,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Color(0xFF4F4F4F),
                                 fontSize: 14,
                               ),
@@ -782,7 +867,7 @@ class _AddPostState extends State<AddPost> {
                             "- Add what you are interested in to barter to",
                             textScaleFactor: textScaleFactor,
                             maxLines: 1,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Color(0xFF4F4F4F),
                               fontSize: 14.0,
                             ),
@@ -810,7 +895,7 @@ class _AddPostState extends State<AddPost> {
                               "Add Barter Categories",
                               maxLines: 1,
                               textScaleFactor: textScaleFactor,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Color(0xFFFFFFFF),
                                 fontSize: 15,
                               ),
@@ -860,11 +945,11 @@ class _AddPostState extends State<AddPost> {
                                                 width: 1.5),
                                             boxShadow: <BoxShadow>[
                                               BoxShadow(
-                                                  color: Color(0xFF1EB1FC)
+                                                  color: const Color(0xFF1EB1FC)
                                                       .withOpacity(0.16),
                                                   blurRadius: 2,
                                                   spreadRadius: 0.5,
-                                                  offset: Offset(0.0, 0.5))
+                                                  offset: const Offset(0.0, 0.5))
                                             ],
                                           ),
                                           child: Column(
@@ -916,11 +1001,11 @@ class _AddPostState extends State<AddPost> {
                                                 width: 1.5),
                                             boxShadow: <BoxShadow>[
                                               BoxShadow(
-                                                  color: Color(0xFF1EB1FC)
+                                                  color: const Color(0xFF1EB1FC)
                                                       .withOpacity(0.16),
                                                   blurRadius: 2,
                                                   spreadRadius: 0.5,
-                                                  offset: Offset(0.0, 0.5))
+                                                  offset: const Offset(0.0, 0.5))
                                             ],
                                           ),
                                           child: Column(
@@ -961,11 +1046,11 @@ class _AddPostState extends State<AddPost> {
                                             width: 1.5),
                                         boxShadow: <BoxShadow>[
                                           BoxShadow(
-                                              color: Color(0xFF1EB1FC)
+                                              color: const Color(0xFF1EB1FC)
                                                   .withOpacity(0.16),
                                               blurRadius: 2,
                                               spreadRadius: 0.5,
-                                              offset: Offset(0.0, 0.5))
+                                              offset: const Offset(0.0, 0.5))
                                         ],
                                       ),
                                       child: Column(
@@ -991,8 +1076,11 @@ class _AddPostState extends State<AddPost> {
                                       ),
                                     ),
 
-                                    SvgPicture.string(
-                                      '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                                    SizedBox(
+                                      width: 32 / mockupWidth * deviceWidth,
+                                      height: 32 / mockupWidth * deviceWidth,
+                                      child: SvgPicture.string(
+                                        '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
   <g id="Group_782" data-name="Group 782" transform="translate(-43.771 -321.131)">
       <path id="Icon_ionic-ios-remove-circle" data-name="Icon ionic-ios-remove-circle" d="M18.375,3.375a15,15,0,1,0,15,15A15,15,0,0,0,18.375,3.375Z" transform="translate(41.396 318.756)" fill="#fd473e" stroke="#fff" stroke-width="2"/>
       <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M11.143,6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H11.143A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(53.771 328.881)" fill="#fff"/>
@@ -1000,6 +1088,7 @@ class _AddPostState extends State<AddPost> {
 </svg>
 
 ''',
+                                      ),
                                     ),
                                     // size: MediaQuery.of(context).size.width / 15,
                                   ],
@@ -1096,7 +1185,7 @@ class _AddPostState extends State<AddPost> {
                           "Delivery:",
                           maxLines: 1,
                           textScaleFactor: textScaleFactor,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Color(0xFF000000),
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -1200,7 +1289,7 @@ class _AddPostState extends State<AddPost> {
                             "Post",
                             maxLines: 1,
                             textScaleFactor: textScaleFactor,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Color(0xFFFFFFFF),
                               fontSize: 20,
                             ),
@@ -1254,10 +1343,10 @@ class _AddPostState extends State<AddPost> {
                     ),
                     children: <TextSpan>[
                       TextSpan(
-                          text: '${entryList[i].key.toString()[0]}',
+                          text: entryList[i].key.toString()[0],
                           style: const TextStyle(fontWeight: FontWeight.bold)),
                       TextSpan(
-                        text: '${entryList[i].key.toString().substring(1)}',
+                        text: entryList[i].key.toString().substring(1),
                       ),
                     ],
                   ),
@@ -1297,11 +1386,11 @@ class _AddPostState extends State<AddPost> {
                     children: <TextSpan>[
                       TextSpan(
                           text:
-                              '${entryList[indexCount].value[j].toString()[0]}',
+                              entryList[indexCount].value[j].toString()[0],
                           style: const TextStyle(fontWeight: FontWeight.bold)),
                       TextSpan(
                         text:
-                            '${entryList[indexCount].value[j].toString().substring(1)}',
+                            entryList[indexCount].value[j].toString().substring(1),
                       ),
                     ],
                   ),
