@@ -11,14 +11,24 @@ class AddBarterCategories extends StatefulWidget {
 }
 
 class _AddBarterCategoriesState extends State<AddBarterCategories> {
-  List barterCategoryList = ["Mobiles", "Apple", "OPPO"];
+  Map addedBarterCategoryList = {"Mobiles": 3, "Apple": 0, "OPPO": 0};
+  Map barterCategoryList = {
+    "Mate 40 Pro": 3,
+    "Mate 30 Pro 5G": 1,
+    "Mate 20 X (5G)": 0
+  };
 
   static const mockupHeight = 896;
   static const mockupWidth = 414;
 
   @override
   Widget build(BuildContext context) {
+    var entryList = barterCategoryList.entries.toList();
+    var addedBarterCategoryItemEntryList =
+        addedBarterCategoryList.entries.toList();
     var deviceWidth = MediaQuery.of(context).size.width;
+    var barterPaddingTop = 2.0;
+    var barterPaddingLeft = 1.3;
     var deviceScale = mockupWidth / deviceWidth;
     var textScaleFactor = deviceWidth / mockupWidth;
     return SafeArea(
@@ -118,15 +128,26 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                         runSpacing: 12 / mockupWidth * deviceWidth,
                         spacing: 12.2 / mockupWidth * deviceWidth,
                         children: [
-                          for (var barterCategoryItem in barterCategoryList)
+                          for (int i = 0;
+                              i < addedBarterCategoryItemEntryList.length;
+                              i++)
                             Stack(
                               children: [
-                                if (barterCategoryItem == "Mobiles" ||
-                                    barterCategoryItem == "Panasonic")
+                                for (int j = 0;
+                                    j <
+                                        addedBarterCategoryItemEntryList[i]
+                                            .value;
+                                    j++)
                                   Padding(
-                                    padding: EdgeInsets.only(
-                                        top: 4.0 / mockupWidth * deviceWidth,
-                                        left: 3.0 / mockupWidth * deviceWidth),
+                                    padding: (j == 0)
+                                        ? EdgeInsets.only(
+                                            top: 4 / mockupWidth * deviceWidth,
+                                            left: 3 / mockupWidth * deviceWidth)
+                                        : EdgeInsets.only(
+                                            top: 2 / mockupWidth * deviceWidth,
+                                            left: 1.3 /
+                                                mockupWidth *
+                                                deviceWidth),
                                     child: Container(
                                       margin: EdgeInsets.only(
                                           top: 15 / mockupWidth * deviceWidth,
@@ -137,7 +158,10 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                         borderRadius: BorderRadius.circular(12),
                                         border: Border.all(
                                             color:
-                                                (barterCategoryItem == "Apple")
+                                                (addedBarterCategoryItemEntryList[
+                                                                i]
+                                                            .key ==
+                                                        "Apple")
                                                     ? const Color(0xFFFD473E)
                                                     : const Color(0xFFF7817D),
                                             width: 1.5),
@@ -160,59 +184,10 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                                     mockupWidth *
                                                     deviceWidth),
                                             child: AutoSizeText(
-                                              barterCategoryItem.toString(),
-                                              maxLines: 1,
-                                              textScaleFactor: textScaleFactor,
-                                              style: const TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 17.0,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                if (barterCategoryItem == "Mobiles" ||
-                                    barterCategoryItem == "Panasonic")
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        top: 2.0 / mockupWidth * deviceWidth,
-                                        left: 1.3 / mockupWidth * deviceWidth),
-                                    child: Container(
-                                      margin: EdgeInsets.only(
-                                          top: 15 / mockupWidth * deviceWidth,
-                                          left: 15 / mockupWidth * deviceWidth),
-                                      height: 35 / mockupWidth * deviceWidth,
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xFFFFEFEF),
-                                        borderRadius: BorderRadius.circular(12),
-                                        border: Border.all(
-                                            color:
-                                                (barterCategoryItem == "Apple")
-                                                    ? const Color(0xFFFD473E)
-                                                    : const Color(0xFFF7817D),
-                                            width: 1.5),
-                                        boxShadow: <BoxShadow>[
-                                          BoxShadow(
-                                              color: const Color(0xFF1EB1FC)
-                                                  .withOpacity(0.16),
-                                              blurRadius: 2,
-                                              spreadRadius: 0.5,
-                                              offset: const Offset(0.0, 0.5))
-                                        ],
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 16.0 /
-                                                    mockupWidth *
-                                                    deviceWidth),
-                                            child: AutoSizeText(
-                                              barterCategoryItem.toString(),
+                                              addedBarterCategoryItemEntryList[
+                                                      i]
+                                                  .key
+                                                  .toString(),
                                               textScaleFactor: textScaleFactor,
                                               maxLines: 1,
                                               style: const TextStyle(
@@ -235,9 +210,12 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                     color: const Color(0xFFFFEFEF),
                                     borderRadius: BorderRadius.circular(12),
                                     border: Border.all(
-                                        color: (barterCategoryItem == "Apple")
-                                            ? const Color(0xFFFD473E)
-                                            : const Color(0xFFF7817D),
+                                        color:
+                                            (addedBarterCategoryItemEntryList[i]
+                                                        .key ==
+                                                    "Apple")
+                                                ? const Color(0xFFFD473E)
+                                                : const Color(0xFFF7817D),
                                         width: 1.5),
                                     boxShadow: <BoxShadow>[
                                       BoxShadow(
@@ -257,7 +235,9 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                                 mockupWidth *
                                                 deviceWidth),
                                         child: AutoSizeText(
-                                          barterCategoryItem.toString(),
+                                          addedBarterCategoryItemEntryList[i]
+                                              .key
+                                              .toString(),
                                           textScaleFactor: textScaleFactor,
                                           maxLines: 1,
                                           style: const TextStyle(
@@ -270,11 +250,27 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                                   ),
                                 ),
 
-                                SizedBox(
-                                  width: 32 / mockupWidth * deviceWidth,
-                                  height: 32 / mockupWidth * deviceWidth,
-                                  child: SvgPicture.string(
-                                    '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                                InkWell(
+                                  customBorder: const CircleBorder(),
+                                  onTap: () {
+                                    setState(() {
+                                      addedBarterCategoryList.remove(
+                                          addedBarterCategoryItemEntryList[i]
+                                              .key);
+                                      barterCategoryList[
+                                              addedBarterCategoryItemEntryList[
+                                                      i]
+                                                  .key
+                                                  .toString()] =
+                                          addedBarterCategoryItemEntryList[i]
+                                              .value;
+                                    });
+                                  },
+                                  child: SizedBox(
+                                    width: 32 / mockupWidth * deviceWidth,
+                                    height: 32 / mockupWidth * deviceWidth,
+                                    child: SvgPicture.string(
+                                      '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
   <g id="Group_782" data-name="Group 782" transform="translate(-43.771 -321.131)">
       <path id="Icon_ionic-ios-remove-circle" data-name="Icon ionic-ios-remove-circle" d="M18.375,3.375a15,15,0,1,0,15,15A15,15,0,0,0,18.375,3.375Z" transform="translate(41.396 318.756)" fill="#fd473e" stroke="#fff" stroke-width="2"/>
       <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M11.143,6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H11.143A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(53.771 328.881)" fill="#fff"/>
@@ -282,6 +278,7 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
 </svg>
 
 ''',
+                                    ),
                                   ),
                                 ),
                                 // size: MediaQuery.of(context).size.width / 15,
@@ -308,8 +305,10 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                               customBorder: const CircleBorder(),
                               child: SimpleShadow(
                                 opacity: 0.16, // Default: 0.5
-                                color: const Color(0xFF1EB1FC), // Default: Black
-                                offset: const Offset(0, 3), // Default: Offset(2, 2)
+                                color:
+                                    const Color(0xFF1EB1FC), // Default: Black
+                                offset:
+                                    const Offset(0, 3), // Default: Offset(2, 2)
                                 sigma: 6,
                                 child: SizedBox(
                                   width: 53 / mockupWidth * deviceWidth,
@@ -470,57 +469,70 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
                     ),
                     Column(
                       children: [
-                        Stack(
-                          children: [
-                            Container(
-                              // width: 87.36,
-                              // height: 35,
-                              // left - 67.36
-                              margin: EdgeInsets.only(
-                                  top: 15 / mockupWidth * deviceWidth,
-                                  left: 83.3 / mockupWidth * deviceWidth,
-                                  right: 19.6 / mockupWidth * deviceWidth),
-                              height: 35 / mockupWidth * deviceWidth,
-                              //311.09
-                              width: 310.7 / mockupWidth * deviceWidth,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: const Color(0xFFFFEFEF),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          left: 22 / mockupWidth * deviceWidth),
-                                      child: AutoSizeText(
-                                        "Mate 40 Pro",
-                                        textScaleFactor: textScaleFactor,
-                                        maxLines: 1,
-                                        style: const TextStyle(
-                                          color: Color(0xFF000000),
-                                          fontSize: 16.0,
+                        for (int i = 0; i < entryList.length; i++) ...[
+                          Stack(
+                            children: [
+                              Container(
+                                // width: 87.36,
+                                // height: 35,
+                                // left - 67.36
+                                margin: EdgeInsets.only(
+                                    top: 15 / mockupWidth * deviceWidth,
+                                    left: 83.3 / mockupWidth * deviceWidth,
+                                    right: 19.6 / mockupWidth * deviceWidth),
+                                height: 35 / mockupWidth * deviceWidth,
+                                //311.09
+                                width: 310.7 / mockupWidth * deviceWidth,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  color: const Color(0xFFFFEFEF),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                            left:
+                                                22 / mockupWidth * deviceWidth),
+                                        child: AutoSizeText(
+                                          "${entryList[i].key}",
+                                          textScaleFactor: textScaleFactor,
+                                          maxLines: 1,
+                                          style: const TextStyle(
+                                            color: Color(0xFF000000),
+                                            fontSize: 16.0,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            right:
-                                                4 / mockupWidth * deviceWidth),
-                                        child: SizedBox(
-                                          width: 10.323 /
-                                              mockupWidth *
-                                              deviceWidth,
-                                          height:
-                                              18 / mockupWidth * deviceWidth,
-                                          child: SvgPicture.string(
-                                            '''<svg xmlns="http://www.w3.org/2000/svg" width="10.323" height="18" viewBox="0 0 10.323 18">
+                                    Row(
+                                      children: [
+                                        for (int j = 0;
+                                            j < entryList[i].value;
+                                            j++)
+                                          Padding(
+                                            padding:
+                                                (j != entryList[i].value - 1)
+                                                    ? EdgeInsets.only(
+                                                        right: 4 /
+                                                            mockupWidth *
+                                                            deviceWidth)
+                                                    : EdgeInsets.only(
+                                                        right: 13.4 /
+                                                            mockupWidth *
+                                                            deviceWidth),
+                                            child: SizedBox(
+                                              width: 10.323 /
+                                                  mockupWidth *
+                                                  deviceWidth,
+                                              height: 18 /
+                                                  mockupWidth *
+                                                  deviceWidth,
+                                              child: SvgPicture.string(
+                                                '''<svg xmlns="http://www.w3.org/2000/svg" width="10.323" height="18" viewBox="0 0 10.323 18">
   <g id="Q3_icons" data-name="Q3 icons" transform="translate(10.323 18) rotate(180)">
     <path id="Path_679" data-name="Path 679" d="M8.046.385.4,8.1a1.222,1.222,0,0,0,0,1.8l7.651,7.715a1.35,1.35,0,0,0,1.736.129,1.222,1.222,0,0,0,.129-1.929L3.236,8.853c-3.361-4.431-2.656,4.924,0,0L9.911,2.185A1.222,1.222,0,0,0,9.782.256,1.35,1.35,0,0,0,8.046.385Z" transform="translate(0)" fill="#1eb1fc"/>
   </g>
@@ -530,71 +542,37 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
 
 
 ''',
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            right:
-                                                4 / mockupWidth * deviceWidth),
-                                        child: SizedBox(
-                                          width: 10.323 /
-                                              mockupWidth *
-                                              deviceWidth,
-                                          height:
-                                              18 / mockupWidth * deviceWidth,
-                                          child: SvgPicture.string(
-                                            '''<svg xmlns="http://www.w3.org/2000/svg" width="10.323" height="18" viewBox="0 0 10.323 18">
-  <g id="Q3_icons" data-name="Q3 icons" transform="translate(10.323 18) rotate(180)">
-    <path id="Path_679" data-name="Path 679" d="M8.046.385.4,8.1a1.222,1.222,0,0,0,0,1.8l7.651,7.715a1.35,1.35,0,0,0,1.736.129,1.222,1.222,0,0,0,.129-1.929L3.236,8.853c-3.361-4.431-2.656,4.924,0,0L9.911,2.185A1.222,1.222,0,0,0,9.782.256,1.35,1.35,0,0,0,8.046.385Z" transform="translate(0)" fill="#1eb1fc"/>
-  </g>
-</svg>
-
-
-
-
-''',
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            right: 13.4 /
-                                                mockupWidth *
-                                                deviceWidth),
-                                        child: SizedBox(
-                                          width: 10.323 /
-                                              mockupWidth *
-                                              deviceWidth,
-                                          height:
-                                              18 / mockupWidth * deviceWidth,
-                                          child: SvgPicture.string(
-                                            '''<svg xmlns="http://www.w3.org/2000/svg" width="10.323" height="18" viewBox="0 0 10.323 18">
-  <g id="Q3_icons" data-name="Q3 icons" transform="translate(10.323 18) rotate(180)">
-    <path id="Path_679" data-name="Path 679" d="M8.046.385.4,8.1a1.222,1.222,0,0,0,0,1.8l7.651,7.715a1.35,1.35,0,0,0,1.736.129,1.222,1.222,0,0,0,.129-1.929L3.236,8.853c-3.361-4.431-2.656,4.924,0,0L9.911,2.185A1.222,1.222,0,0,0,9.782.256,1.35,1.35,0,0,0,8.046.385Z" transform="translate(0)" fill="#1eb1fc"/>
-  </g>
-</svg>
-
-
-
-''',
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            Padding(
-                              //52.36
-                              padding: EdgeInsets.only(
-                                  left: 68.3 / mockupWidth * deviceWidth),
-                              child: SizedBox(
-                                width: 32 / mockupWidth * deviceWidth,
-                                height: 32 / mockupWidth * deviceWidth,
-                                child: SvgPicture.string(
-                                  '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                              Padding(
+                                //52.36
+                                padding: EdgeInsets.only(
+                                    left: 68.3 / mockupWidth * deviceWidth),
+                                child: InkWell(
+                                  customBorder: const CircleBorder(),
+                                  onTap: () {
+                                    setState(() {
+                                      // addedBarterCategoryList
+                                      //     .remove(entryList[i]);
+                                      // entryList.remove(entryList[i]);
+                                      barterCategoryList
+                                          .remove(entryList[i].key);
+                                      addedBarterCategoryList[entryList[i]
+                                          .key
+                                          .toString()] = entryList[i].value;
+                                    });
+                                  },
+                                  child: SizedBox(
+                                    width: 32 / mockupWidth * deviceWidth,
+                                    height: 32 / mockupWidth * deviceWidth,
+                                    child: SvgPicture.string(
+                                      '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
   <g id="Group_807" data-name="Group 807" transform="translate(-50.712 -452.04)">
       <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M11.143,6.964H7.286V3.107a.857.857,0,0,0-.857-.857H5.571a.857.857,0,0,0-.857.857V6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H4.714v3.857a.857.857,0,0,0,.857.857h.857a.857.857,0,0,0,.857-.857V9.536h3.857A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(60.712 459.79)" fill="#fff"/>
       <g id="Group_805" data-name="Group 805" transform="translate(6.941 130.909)">
@@ -606,169 +584,16 @@ class _AddBarterCategoriesState extends State<AddBarterCategories> {
 
 
 ''',
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10.2 / mockupWidth * deviceWidth,
-                        ),
-                        Stack(
-                          children: [
-                            Container(
-                              // width: 87.36,
-                              // height: 35,
-                              // left - 67.36
-                              margin: EdgeInsets.only(
-                                  top: 15 / mockupWidth * deviceWidth,
-                                  left: 83.3 / mockupWidth * deviceWidth,
-                                  right: 19.6 / mockupWidth * deviceWidth),
-                              height: 35 / mockupWidth * deviceWidth,
-                              //311.09
-                              width: 310.7 / mockupWidth * deviceWidth,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: const Color(0xFFFFEFEF),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          left: 22 / mockupWidth * deviceWidth),
-                                      child: AutoSizeText(
-                                        "Mate 30 Pro 5G",
-                                        maxLines: 1,
-                                        textScaleFactor: textScaleFactor,
-                                        style: const TextStyle(
-                                          color: Color(0xFF000000),
-                                          fontSize: 16.0,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            right: 13.4 /
-                                                mockupWidth *
-                                                deviceWidth),
-                                        child: SizedBox(
-                                          width: 10.323 /
-                                              mockupWidth *
-                                              deviceWidth,
-                                          height:
-                                              18 / mockupWidth * deviceWidth,
-                                          child: SvgPicture.string(
-                                            '''<svg xmlns="http://www.w3.org/2000/svg" width="10.323" height="18" viewBox="0 0 10.323 18">
-  <g id="Q3_icons" data-name="Q3 icons" transform="translate(10.323 18) rotate(180)">
-    <path id="Path_679" data-name="Path 679" d="M8.046.385.4,8.1a1.222,1.222,0,0,0,0,1.8l7.651,7.715a1.35,1.35,0,0,0,1.736.129,1.222,1.222,0,0,0,.129-1.929L3.236,8.853c-3.361-4.431-2.656,4.924,0,0L9.911,2.185A1.222,1.222,0,0,0,9.782.256,1.35,1.35,0,0,0,8.046.385Z" transform="translate(0)" fill="#1eb1fc"/>
-  </g>
-</svg>
-
-
-
-''',
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              //52.36
-                              padding: EdgeInsets.only(
-                                  left: 68.3 / mockupWidth * deviceWidth),
-                              child: SizedBox(
-                                width: 32 / mockupWidth * deviceWidth,
-                                height: 32 / mockupWidth * deviceWidth,
-                                child: SvgPicture.string(
-                                  '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-  <g id="Group_807" data-name="Group 807" transform="translate(-50.712 -452.04)">
-      <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M11.143,6.964H7.286V3.107a.857.857,0,0,0-.857-.857H5.571a.857.857,0,0,0-.857.857V6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H4.714v3.857a.857.857,0,0,0,.857.857h.857a.857.857,0,0,0,.857-.857V9.536h3.857A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(60.712 459.79)" fill="#fff"/>
-      <g id="Group_805" data-name="Group 805" transform="translate(6.941 130.909)">
-          <path id="Icon_ionic-ios-remove-circle" data-name="Icon ionic-ios-remove-circle" d="M18.375,3.375a15,15,0,1,0,15,15A15,15,0,0,0,18.375,3.375Z" transform="translate(41.396 318.756)" fill="#00b1ff" stroke="#fff" stroke-width="2"/>
-          <path id="Icon_awesome-plus-2" data-name="Icon awesome-plus" d="M11.143,6.964H7.286V3.107a.857.857,0,0,0-.857-.857H5.571a.857.857,0,0,0-.857.857V6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H4.714v3.857a.857.857,0,0,0,.857.857h.857a.857.857,0,0,0,.857-.857V9.536h3.857A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(53.771 328.881)" fill="#fff"/>
-      </g>
-  </g>
-</svg>
-
-
-''',
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 10.2,
-                        ),
-                        Stack(
-                          children: [
-                            Container(
-                              // width: 87.36,
-                              // height: 35,
-                              // left - 67.36
-                              margin: EdgeInsets.only(
-                                  top: 15 / mockupWidth * deviceWidth,
-                                  left: 83.3 / mockupWidth * deviceWidth,
-                                  right: 19.6 / mockupWidth * deviceWidth),
-                              height: 35 / mockupWidth * deviceWidth,
-                              //311.09
-                              width: 310.7 / mockupWidth * deviceWidth,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: const Color(0xFFFFEFEF),
-                              ),
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                      left: 22 / mockupWidth * deviceWidth),
-                                  child: AutoSizeText(
-                                    "Mate 20 X (5G)",
-                                    maxLines: 1,
-                                    textScaleFactor: textScaleFactor,
-                                    style: const TextStyle(
-                                      color: Color(0xFF000000),
-                                      fontSize: 16.0,
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              //52.36
-                              padding: EdgeInsets.only(
-                                  left: 68.3 / mockupWidth * deviceWidth),
-                              child: SizedBox(
-                                width: 32 / mockupWidth * deviceWidth,
-                                height: 32 / mockupWidth * deviceWidth,
-                                child: SvgPicture.string(
-                                  '''<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-  <g id="Group_807" data-name="Group 807" transform="translate(-50.712 -452.04)">
-      <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M11.143,6.964H7.286V3.107a.857.857,0,0,0-.857-.857H5.571a.857.857,0,0,0-.857.857V6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H4.714v3.857a.857.857,0,0,0,.857.857h.857a.857.857,0,0,0,.857-.857V9.536h3.857A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(60.712 459.79)" fill="#fff"/>
-      <g id="Group_805" data-name="Group 805" transform="translate(6.941 130.909)">
-          <path id="Icon_ionic-ios-remove-circle" data-name="Icon ionic-ios-remove-circle" d="M18.375,3.375a15,15,0,1,0,15,15A15,15,0,0,0,18.375,3.375Z" transform="translate(41.396 318.756)" fill="#00b1ff" stroke="#fff" stroke-width="2"/>
-          <path id="Icon_awesome-plus-2" data-name="Icon awesome-plus" d="M11.143,6.964H7.286V3.107a.857.857,0,0,0-.857-.857H5.571a.857.857,0,0,0-.857.857V6.964H.857A.857.857,0,0,0,0,7.821v.857a.857.857,0,0,0,.857.857H4.714v3.857a.857.857,0,0,0,.857.857h.857a.857.857,0,0,0,.857-.857V9.536h3.857A.857.857,0,0,0,12,8.679V7.821A.857.857,0,0,0,11.143,6.964Z" transform="translate(53.771 328.881)" fill="#fff"/>
-      </g>
-  </g>
-</svg>
-
-
-''',
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10.2 / mockupWidth * deviceWidth,
+                          ),
+                        ]
                       ],
                     ),
                   ],
